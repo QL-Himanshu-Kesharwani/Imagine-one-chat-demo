@@ -1,0 +1,55 @@
+Charge Central – End-to-End Charge Flow Reference
+
+1. Purpose of This Document
+This document explains the end-to-end charge flow in Charge Central. It is designed to:
+- Help humans understand how a charge moves from intake to release
+- Serve as foundational context for an AI bot
+- Reduce guesswork and downstream claim denials
+
+2. High-Level Charge Flow Overview
+Charge Intake / Load
+Charge Review & Validation
+Hold / Bucket Assignment
+Charge Correction & Completion
+Audit & Eligibility Checks
+Charge Release
+
+3. Charge Intake & Load
+Batch Number, Bucket, Filter define grouping and work queues.
+
+4. Patient & Visit Context
+Each charge is associated with Patient ID, Visit Number, Location, POS.
+
+5. Charge Detail Section
+Key fields:
+Procedure Code, Date of Service, Units, Provider IDs, Diagnosis, Modifiers, Department Code, POS.
+
+6. Validation Engine & Holds
+Validation Failed blocks release if any rule fails.
+
+7. Buckets & Status Control
+Examples: New, Validation Failed, Pending Review, Ready for Release.
+
+8. Tools & Actions
+Auto Fill, LCD Check, Eligibility, Charge Audit.
+
+9. Charge Release Logic
+Release only when all required fields pass and no holds exist.
+
+10. Configuration Areas
+Mapping Tables, Validation Rules, Bucket Configuration.
+
+11. Terminology
+Charge Readiness, Hold, Validation Failed, Bucket, Release.
+
+12. Bot Support
+The bot uses this as source of truth.
+
+13. Screen Fields & Indicators
+Status indicators and core fields affect readiness.
+
+14. Common Failure Scenarios
+Missing fields, mapping issues, hidden validation.
+
+15. Final Principle
+Charge Central is deterministic: data, mapping, validation rules determine release.
