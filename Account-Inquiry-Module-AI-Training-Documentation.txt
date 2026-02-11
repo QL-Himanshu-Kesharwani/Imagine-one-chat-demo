@@ -1,0 +1,4007 @@
+Account Inquiry Module - AI Training Documentation
+1. Feature Overview
+Purpose
+Account Inquiry is the central hub for accessing complete patient account
+information within the Revenue Cycle Management (RCM) workflow. It provides
+real-time visibility into patient demographics, insurance coverage, visit details,
+charge history, payment status, and outstanding balances.
+
+RCM Workflow Position
+Primary Access Point: First stop for billing inquiries, AR research, and
+patient account investigations
+● Workflow Stage: Post-registration through collections
+● Integration Points: Connects to Charge Entry, Payment Posting,
+Claims Management, Collections, and Patient Statements
+
+1
+
+2
+
+3
+
+4
+
+●
+
+Primary Users
+Billing Specialists
+● AR Follow-Up Representatives
+● Patient Account Representatives
+● Front Desk Staff (inquiry only)
+● Revenue Cycle Managers
+● Collections Agents
+● Customer Service Representatives
+●
+
+Key Business Value
+Single source of truth for account status
+● Reduces lookup time from multiple systems
+● Enables informed patient conversations
+● Supports denial management and appeals
+● Facilitates payment plan discussions
+● Provides audit trail for compliance
+●
+
+2. Navigation & Access
+Access Methods
+. Direct Search: Enter patient account number in search field (e.g.,
+"256010")
+. Patient Module: Navigate from Patient tab → Select patient →
+Account Inquiry
+. Claim Review: Access from claim line items
+. Payment Posting: Link from payment application screens
+
+Required Permissions
+View Access: All billing staff (read-only for demographics and
+charges)
+● Modify Access: Authorized billing specialists and supervisors
+● Financial Access: Users with patient balance visibility rights
+● Hold/Release: Supervisor-level permissions required
+●
+
+Data Dependencies
+Patient demographic record must exist
+Visit/encounter must be registered
+● Charges must be posted (for financial data)
+● Insurance information (for coverage display)
+● Authorization data (for procedure validation)
+●
+●
+
+3. Screen-Level Documentation
+3.1 Main Account Inquiry Screen
+Screen Name
+Account Inquiry - Patient Overview
+Description
+Primary interface displaying patient demographics, responsible party, visit
+summary, insurance coverage, and charge listing. Provides comprehensive
+account snapshot for billing and AR activities.
+Layout Sections
+LEFT PANEL - Patient Information
+
+Field Name
+
+Description
+
+Example
+
+Name
+
+Patient full
+name
+
+RODGERS,
+BOBBY R
+
+Patient
+Master
+
+No
+
+Address
+
+Patient
+mailing
+address
+
+8757 Red
+Oak Blvd,
+PO BOX 100
+
+Patient
+Master
+
+No
+
+City | State |
+Zip
+
+Location
+details
+
+Charlotte,
+NC
+28217-0001
+
+Patient
+Master
+
+No
+
+DOB
+
+Date of birth
+with age
+calculation
+
+1/1/1940
+(Age 86)
+
+Patient
+Master
+
+No
+
+Gender
+
+Patient
+gender
+
+M/F/X
+
+Patient
+Master
+
+No
+
+SSN
+
+Social
+Security
+Number
+
+XXXXX-1004
+(masked)
+
+Patient
+Master
+
+No
+
+Phone
+Number
+
+Primary
+contact
+number
+
+(704)553-10 Patient
+04
+Master
+
+No
+
+Cell Phone
+Number
+
+Mobile
+contact
+
+(704)553-10 Patient
+04
+Master
+
+No
+
+Email
+
+Patient email [patient
+address
+email]
+
+Patient
+Master
+
+No
+
+Special Rule
+
+Account
+handling
+notes
+
+Account
+Settings
+
+Yes
+
+(none)
+dropdown
+
+Source
+
+Editable
+
+Number
+
+contact
+
+04
+
+Master
+
+Email
+
+Patient email [patient
+address
+email]
+
+Patient
+Master
+
+No
+
+Special Rule
+
+Account
+handling
+notes
+
+Account
+Settings
+
+Yes
+
+(none)
+dropdown
+
+LEFT PANEL - Responsible Party Information
+
+Field Name
+
+Description
+
+Example
+
+Source
+
+Notes
+
+Name
+
+Guarantor/
+responsible
+party name
+
+RODGERS,
+BOBBY
+
+Guarantor
+File
+
+Cannot
+differ from
+patient in
+Medicare
+accounts
+
+Address
+
+Guarantor
+address
+
+8757 Red
+Oak Blvd
+
+Guarantor
+File
+
+Used for
+statement
+mailing
+
+City | State |
+Zip
+
+Guarantor
+location
+
+Charlotte,
+NC
+28217-0001
+
+Guarantor
+File
+
+Phone
+Number
+
+Guarantor
+phone
+
+(704)553-10 Guarantor
+04
+File
+
+Cell Phone
+Number
+
+Guarantor
+mobile
+
+(704)553-10 Guarantor
+04
+File
+
+CENTER PANEL - Status Summary
+
+Field Name
+
+Description
+
+Example
+
+Business Logic
+
+Visit Number
+
+Unique
+encounter
+identifier
+
+10981787
+
+Systemgenerated or
+imported
+
+Status
+
+Account status
+
+Open
+
+Open/Closed/On
+Hold/In
+Collections
+
+Ins. Last
+Payment
+
+Last insurance
+payment date
+
+5/3/0 10/11/2022
+
+From payment
+posting
+
+Ins. Balance
+
+Total insurance
+responsibility
+
+$1,124.05
+
+Sum of primary
++ secondary
+balances
+
+Pat. Last
+Payment
+
+Last patient
+payment date
+
+$1,124.05 7/20/2021
+
+From payment
+posting
+
+Pat. Balance
+
+Patient
+responsibility
+amount
+
+$0.00
+
+After insurance
+adjudication
+
+In Collections
+
+Amount sent to
+collections
+
+$0.00
+
+From collections
+module
+
+Collection WO
+
+Collection write- $0.00
+off amount
+
+Bad debt writeoffs
+
+Bad Debt WO
+
+Bad debt writeoff
+
+Uncollectible
+amounts
+
+$0.00
+
+amount
+In Collections
+
+Amount sent to
+collections
+
+$0.00
+
+From collections
+module
+
+Collection WO
+
+Collection write- $0.00
+off amount
+
+Bad debt writeoffs
+
+Bad Debt WO
+
+Bad debt writeoff
+
+$0.00
+
+Uncollectible
+amounts
+
+Total Balance
+
+Complete
+outstanding
+balance
+
+$1,124.05
+
+Ins Balance +
+Pat Balance
+
+RIGHT PANEL - Insurance Information
+
+Field Name
+
+Description
+
+Example
+
+Plan
+
+Insurance plan
+name
+
+73B - Insurance
+Plan 73B (6 COMM)
+
+Payer Master
+
+Carrier
+
+Insurance
+carrier
+
+6 - United
+Healthcare
+
+Payer Master
+
+Phone Number
+
+Payer contact
+number
+
+(704)553-1004
+
+Payer Master
+
+Fax Number
+
+Payer fax
+number
+
+(704)553-1004
+
+Payer Master
+
+Address
+
+Payer mailing
+address
+
+8757 Red Oak
+Blvd
+
+Payer Master
+
+City | State | Zip
+
+Payer location
+
+PO BOX 100,
+Charlotte, NC
+28217-0001
+
+Payer Master
+
+Policy Number
+
+Patient policy/
+member ID
+
+000L082080
+
+Patient
+Insurance File
+
+Group Number
+
+Employer group
+number
+
+652810
+
+Patient
+Insurance File
+
+Employer
+
+Patient
+employer name
+
+DUKE
+
+Patient
+Insurance File
+
+Authorization
+
+Prior
+authorization
+number
+
+Insured
+
+Subscriber
+name
+
+RODGERS,
+BOBBY R
+
+Patient
+Insurance File
+
+Primary Plan
+
+Primary
+insurance plan
+
+73B - Insurance
+Plan 73B (6 COMM)
+
+Insurance
+Hierarchy
+
+Primary Carrier
+
+Primary carrier
+name
+
+6 - United
+Healthcare
+
+Insurance
+Hierarchy
+
+RIGHT PANEL - Additional Information
+
+Source
+
+Authorization
+System
+
+Field Name
+Propensity to
+Pay Grade
+
+Description
+AI/predictive
+score for
+payment
+likelihood
+
+Example
+
+Purpose
+
+C - Moderate
+
+Collections
+prioritization
+
+RIGHT PANEL - Recent Notes
+
+Field Name
+
+Description
+
+Behavior
+
+User Only Toggle
+
+Filter to show only
+current user's notes
+
+ON/OFF switch
+
+Account Notes
+
+Recent account-level
+notes
+
+Display with
+timestamp and user
+
+Charge Notes
+
+Charge-specific notes
+
+Display with
+associated charge
+
+Note Display
+
+Text of recent activity
+
+Auto-refresh on page
+load
+
+RIGHT PANEL - Quick Notes
+
+Field Name
+
+Description
+
+Quick Notes Entry
+
+Free-text field for
+rapid note entry
+
+Purpose
+Ad-hoc
+documentation
+without full note form
+
+3.2 Account Charges Tab
+Screen Name
+Account Charges - Transaction Detail View
+Description
+Comprehensive listing of all charges, payments, adjustments, and balance
+details for the selected account. Primary workspace for charge-level research
+and transaction analysis.
+Filter Options
+
+Filter
+
+Description
+
+Values
+
+View Last Visit First
+
+Shows most recent
+visit at top
+
+Toggle ON/OFF
+
+Show Detail
+
+Expands charge
+details inline
+
+Toggle ON/OFF
+
+Charge Grid Columns
+
+Column Name
+
+Description
+
+Example
+
+Usage
+
+Status
+
+Charge
+processing
+status
+
+Active/Billed/
+Paid/Denied
+
+Visual indicator
+of charge state
+
+Visit Number
+
+Encounter
+identifier
+
+10981787
+
+Links to visit
+details
+
+Location
+
+Service location
+
+91 - Imagine
+Demo Location
+
+Where service
+was rendered
+
+Post Date
+
+Date charge was 7/2/2021
+posted
+
+Financial
+posting date
+
+status
+Visit Number
+
+Encounter
+identifier
+
+10981787
+
+Links to visit
+details
+
+Location
+
+Service location
+
+91 - Imagine
+Demo Location
+
+Where service
+was rendered
+
+Post Date
+
+Date charge was 7/2/2021
+posted
+
+Financial
+posting date
+
+Date Of Service
+
+Actual service
+date
+
+6/29/2021
+
+Clinical service
+date
+
+Procedure
+
+CPT/HCPCS
+code with
+description
+
+A9575 INJECTION,
+GADOTE
+
+Service
+rendered
+
+Modifier
+
+Procedure
+modifier codes
+
+26, 59, etc.
+
+Billing modifiers
+
+Order Number
+
+Ordering
+physician
+reference
+
+27258864_MTV Links to order
+entry
+
+Charge Amount
+
+Billed amount
+
+$120.00
+
+Gross charge
+
+Balance Amount
+
+Outstanding
+balance
+
+$78.00
+
+Amount not
+paid/adjusted
+
+Doctor
+
+Rendering
+provider
+
+111 CHAMBERS
+
+Provider NPI
+reference
+
+Expanded Charge Detail View
+When "Show Detail" is enabled, each charge expands to show:
+
+Section
+
+Fields
+
+Description
+
+Charge ID
+
+Unique charge
+identifier
+
+4724639
+
+Units
+
+Service quantity
+
+120.00
+
+Department
+
+Clinical department
+
+[Department Code]
+
+POS Code
+
+Place of Service
+
+11
+
+Diagnosis Code
+
+Primary diagnosis
+
+H90.5
+
+Referring Doctor
+
+Referring physician
+
+10063 - NUNEZ,
+NORBERT N
+
+Doctor 2
+
+Secondary physician
+
+0-,
+
+Other Doctor
+
+Tertiary physician
+
+0-,
+
+History Number
+
+Claim history
+reference
+
+000214038_MTV
+
+Authorization Number
+
+Prior auth number
+
+[Auth Number]
+
+Interpretation Date
+
+Date of interpretation
+
+6/29/2021
+
+Interpretation Location Where interpreted
+
+[Location]
+
+In Collections
+
+Collections amount
+
+$0.00
+
+Collection WO
+
+Collection write-off
+
+$0.00
+
+Bad Debt WO
+
+Bad debt write-off
+
+$0.00
+
+Batch Number
+
+Posting batch
+
+070102011503356_DL
+
+User Name
+
+User who posted
+
+sakshi.patil
+
+Interpretation Location Where interpreted
+
+[Location]
+
+In Collections
+
+Collections amount
+
+$0.00
+
+Collection WO
+
+Collection write-off
+
+$0.00
+
+Bad Debt WO
+
+Bad debt write-off
+
+$0.00
+
+Batch Number
+
+Posting batch
+
+070102011503356_DL
+
+User Name
+
+User who posted
+
+sakshi.patil
+
+Hold
+
+Hold status
+
+Yes/No
+
+On Hold
+
+Hold flag
+
+False
+
+Expiration Date
+
+Hold expiration
+
+1/1/1900
+
+Reason
+
+Hold reason
+
+[Reason Code]
+
+Tickler
+
+Follow-up action
+
+Denial
+
+Action
+
+Required action
+
+Appeal Letter
+
+Next Contact Date
+
+Follow-up date
+
+01/23/2026
+
+Insurance Payment
+
+Insurance paid amount $0.00
+
+Patient Payments
+
+Patient paid amount
+
+$0.00
+
+Bill Stage
+
+Current billing stage
+
+2-0 - Pending Primary
+Response
+
+Claim Status
+
+Clearinghouse status
+
+ACC - Accepted by
+Payer
+
+3.3 Right-Click Context Menu - Charge Actions
+Menu: Hold Operations
+
+Action
+
+Description
+
+Permission
+Required
+
+Impact
+
+Set To Mail
+Return
+
+Mark for mail
+return follow-up
+
+Billing Specialist
+
+Sets tickler for
+mail follow-up
+
+Set To Estate
+
+Mark account as Supervisor
+estate claim
+
+Changes
+account type,
+billing rules
+
+Release
+
+Remove hold
+from charge
+
+Allows charge to
+bill
+
+Billing Specialist
+
+Menu: Charge Actions (Right-Click on Charge Row)
+Primary Actions Menu
+
+Action
+
+Description
+
+When Used
+
+Result
+
+Edit
+
+Modify charge
+details
+
+Corrections
+needed
+
+Opens charge
+edit screen
+
+Change Visit
+
+Move charge to
+different visit
+
+Posted to wrong Reassigns
+encounter
+charge, updates
+visit balance
+
+View Charge
+Report
+
+Generate
+charge detail
+report
+
+Documentation
+needed
+
+PDF/print of
+charge details
+
+View Charge
+Details
+
+Open detailed
+charge view
+
+In-depth review
+
+Expanded detail
+modal
+
+3.4 Action Menu - Account-Level Operations
+Screen Name
+Action Menu - Sidebar Panel
+Description
+Comprehensive action menu providing access to all account-level operations,
+organized by functional category.
+Menu Structure
+Charge Action Section
+
+Action
+
+Description
+
+Copy Charge
+
+Duplicate
+existing charge
+
+Repeat
+procedures
+
+Billing Specialist
+
+Add Charge(s)
+
+Post new
+charges to
+account
+
+Late charges,
+corrections
+
+Billing Specialist
+
+Transfer
+Charge(s)
+
+Move charges
+between
+accounts
+
+Account
+consolidation
+
+Supervisor
+
+Set Charge
+Action/Next
+Contact
+
+Schedule
+follow-up on
+charge
+
+AR management Billing Specialist
+
+Assign to Tickler Assign to work
+Bucket
+queue
+
+When Used
+
+Work
+distribution
+
+Permission
+
+Billing Specialist
+
+Hold/UnHold Section
+
+Action
+
+Description
+
+Impact
+
+Permission
+
+Hold All
+
+Place all
+charges on hold
+
+Stops billing on
+entire account
+
+Supervisor
+
+Hold Selected
+
+Hold only
+selected
+charges
+
+Stops billing on
+selected items
+
+Billing Specialist
+
+UnHold All
+
+Release all
+holds
+
+Allows all
+charges to bill
+
+Supervisor
+
+UnHold
+Selected
+
+Release
+selected holds
+
+Allows selected
+charges to bill
+
+Billing Specialist
+
+Use Case
+
+Patient Follow-Up Section
+
+Action
+
+Description
+
+Output
+
+Budget Plan
+
+Create payment
+plan
+
+Payment
+agreement
+document
+
+Patient payment
+arrangements
+
+Undo Write-Off/
+Turnover
+
+Reverse writeoff or
+collections
+
+Restores
+balance to
+active AR
+
+Collection
+agency returns
+
+Create Instant
+Statement
+
+Generate
+statement on
+demand
+
+PDF statement
+
+Patient requests
+
+Update Patient
+
+Change billing
+
+Updates
+
+Manual stage
+
+Undo Write-Off/
+Turnover
+
+Reverse writeoff or
+collections
+
+Restores
+balance to
+active AR
+
+Collection
+agency returns
+
+Create Instant
+Statement
+
+Generate
+statement on
+demand
+
+PDF statement
+
+Patient requests
+
+Update Patient
+Bill Stage
+
+Change billing
+stage
+
+Updates
+workflow status
+
+Manual stage
+advancement
+
+Turnover
+
+Send to
+collections
+
+Collections file
+export
+
+Bad debt
+management
+
+Grade History
+
+View payment
+propensity
+history
+
+Historical
+scoring
+
+Collections
+prioritization
+
+Payments Section
+
+Action
+
+Description
+
+When Used
+Contractual
+adjustments,
+write-offs
+
+Access
+
+Adjust
+Charge(s)
+
+Post
+adjustments to
+charges
+
+View Payments
+
+Display payment Payment
+history
+research
+
+All Users
+
+View Payment
+Summary
+
+Summarized
+payment report
+
+All Users
+
+High-level
+review
+
+Billing Specialist
+
+Letters Section
+
+Action
+Demand
+Statement
+
+Description
+Final notice
+before
+collections
+
+Template Type
+Collections
+letter
+
+Trigger
+Past due
+threshold
+
+Follow Up Letter Standard follow- AR follow-up
+up
+correspondence
+
+Configurable
+rules
+
+Group Appeal
+Letter
+
+Denial
+management
+
+Bulk appeal
+generation
+
+Appeal template
+
+Clearinghouse Section
+
+Action
+
+Description
+
+Integration
+
+Purpose
+
+Claim Status
+
+Check
+electronic claim
+status
+
+Clearinghouse
+API
+
+Real-time claim
+tracking
+
+Eligibility
+
+Verify insurance
+eligibility
+
+Real-time
+eligibility
+
+Coverage
+verification
+
+Print Section
+
+Action
+Print
+Imaging Section
+
+Description
+Print account
+details
+
+Output Format
+PDF/Physical
+
+Use Case
+Documentation,
+records
+
+Action
+
+Description
+
+Integration
+
+Purpose
+
+Search by
+Patient ID
+
+Find scanned
+documents by
+patient
+
+Document
+management
+
+Retrieve
+attached
+documents
+
+Search by
+Patient Name
+
+Find documents
+by name
+
+Document
+management
+
+Alternative
+search method
+
+Scan/Import
+Document
+
+Attach external
+documents
+
+Scanner/file
+upload
+
+Add EOBs,
+correspondence
+
+3.5 Additional Tabs
+Charge \ Payment History Tab
+Purpose: Chronological view of all financial transactions
+Contents:
+
+Payment postings with date, amount, payer, check number
+Adjustment entries with reason codes
+● Write-offs and reversals
+● Running balance calculation
+●
+●
+
+Account Notes Tab
+Purpose: Comprehensive account-level notes and communication log
+Contents:
+
+User-entered notes with timestamp and username
+● System-generated notes (e.g., claim submissions, responses)
+● Category tags (billing, clinical, administrative)
+● Search and filter capabilities
+●
+
+Insurance History Tab
+Purpose: Track insurance coverage changes over time
+Contents:
+
+Coverage effective dates
+Plan changes
+● Authorization history
+● Eligibility verification logs
+● Termination dates
+●
+●
+
+Follow Up Activity Tab
+Purpose: Track AR follow-up actions and outcomes
+Contents:
+
+Scheduled follow-up dates
+● Completed actions with results
+● Call logs and payer contact notes
+● Appeal submissions and outcomes
+● Work queue assignments
+●
+
+Associated Documents Tab
+Purpose: Link related documents to account
+Contents:
+
+Scanned EOBs
+Correspondence
+● Medical records excerpts
+●
+●
+
+Authorization letters
+● Patient-signed documents
+●
+
+ImaginePay Tab
+Purpose: Patient payment portal integration
+Contents:
+
+Online payment history
+● Payment plan setup
+● Patient portal access logs
+● Scheduled recurring payments
+●
+
+ImagineEngagement Tab
+Purpose: Patient communication tracking
+Contents:
+
+Statement delivery logs (mail, email, portal)
+Patient portal activity
+● Text/email communication history
+● Patient response tracking
+●
+●
+
+4. Functional Workflows
+Workflow 4.1: Search and Locate Patient Account
+User Goal: Find specific patient account for billing inquiry
+Steps:
+
+. Click in search field at top of Account Inquiry screen
+. Enter search criteria:
+○ Account number (e.g., "256010") - most direct
+○ Patient name (Last, First)
+○ Medical record number
+○ Social Security Number (last 4 digits)
+. Press Enter or click search icon
+. System returns matching account(s)
+. If multiple matches, select correct patient from list
+. Account details populate on screen
+System Behavior:
+
+Search is performed against Patient Master file
+● Partial name searches supported (e.g., "ROD" returns RODGERS)
+● Inactive accounts excluded by default (toggle setting available)
+● Most recent visit displays first
+●
+
+Common Issues:
+
+No results: Verify patient is registered in system
+Multiple results: Use additional identifiers (DOB, account number)
+● Slow search: Database indexing may be needed
+●
+●
+
+Workflow 4.2: Review Account Balance and Status
+User Goal: Understand total balance and who owes what
+Steps:
+
+. Locate patient account (see Workflow 4.1)
+
+. Review Status Summary panel (center screen)
+. Identify key balance components:
+○ Total Balance: Overall amount due
+○ Ins. Balance: Amount insurance owes
+○ Pat. Balance: Amount patient owes
+. Check Status field for account state (Open/Closed/On Hold)
+. Review last payment dates to assess activity
+. Check Collections fields for bad debt status
+Business Rules:
+
+Total Balance = Insurance Balance + Patient Balance
+● Insurance balance remains until EOB posts
+● Patient balance calculated after insurance adjudication
+● Status "On Hold" prevents claim submission
+● Collections amounts removed from active AR
+●
+
+Interpretation Guide:
+
+High Ins. Balance, $0 Pat. Balance: Awaiting insurance payment
+● $0 Ins. Balance, High Pat. Balance: Patient responsibility established
+● Balances with old "last payment" dates: Likely stuck in AR, needs
+follow-up
+● Collections WO or Bad Debt WO > $0: Account has bad debt history
+●
+
+Workflow 4.3: View Charge Details
+User Goal: Investigate specific charges on account
+Steps:
+
+. Navigate to Account Charges tab (default view)
+. Enable Show Detail toggle to expand charge information
+. Locate charge of interest in grid
+. Review expanded charge details including:
+○ Procedure code and description
+○ Units and charge amount
+○ Diagnosis code
+○ Provider information
+○ Authorization details
+○ Billing status and stage
+. Check Bill Stage for claim status (e.g., "Pending Primary Response")
+. Review Claim Status for clearinghouse confirmation
+System Behavior:
+
+Charges sort by service date (most recent first) by default
+● Detail panel expands inline below charge row
+● Historical data preserved even after payment
+● Modifier codes display with procedure
+●
+
+Key Fields for AR Research:
+●
+
+Bill Stage: Shows where charge is in billing cycle
+○ "1-0" = Not yet billed
+○ "2-0" = Sent to primary insurance
+
+"3-0" = Primary paid, secondary billed
+○ "Denial" = Denied by payer
+● Claim Status: Electronic submission status
+○ "ACC" = Accepted by payer
+○ "REJ" = Rejected, needs correction
+● Tickler/Action: Follow-up task assigned
+○
+
+Workflow 4.4: Check Claim Status
+User Goal: Determine if claim was received by insurance
+Steps:
+
+. Locate charge in Account Charges tab
+. Expand charge detail (Show Detail ON)
+. Check History Number field (claim ID)
+. Review Claim Status field for electronic status
+. Note Bill Stage for workflow position
+. If status unclear, right-click charge → Clearinghouse → Claim Status
+. System queries clearinghouse for real-time status
+. Review returned claim status and payer response
+Claim Status Values:
+
+ACC - Accepted by Payer: Claim received and accepted
+REJ - Rejected: Claim has errors, needs correction
+● PEND - Pending: In clearinghouse queue
+● DENY - Denied: Payer denied payment
+● (blank): Not yet submitted electronically
+●
+●
+
+Follow-Up Actions:
+
+Accepted: Monitor for payment within payer timeframe
+Rejected: Review error codes, correct, resubmit
+● Denied: Review denial reason, determine appeal vs adjustment
+● Pending: Check back in 24-48 hours
+●
+●
+
+Workflow 4.5: Review Payment History
+User Goal: See all payments applied to account
+Steps:
+
+. Click Charge \ Payment History tab
+. Review chronological transaction list showing:
+○ Payment date
+○ Payer (insurance or patient)
+○ Amount paid
+○ Check/reference number
+○ Applied charges
+. Identify payment source (insurance vs patient)
+. Verify payment amounts match EOB or patient receipt
+. Check for adjustments, write-offs, or reversals
+System Behavior:
+●
+
+Payments display in reverse chronological order (newest first)
+
+Each payment shows allocation to specific charges
+● Adjustments appear as separate line items
+● Running balance calculated after each transaction
+●
+
+Alternative Access:
+●
+●
+
+Action Menu → Payments → View Payments (detailed report)
+Action Menu → Payments → View Payment Summary (high-level)
+
+Workflow 4.6: Place or Release Charge Hold
+User Goal: Prevent charge from billing or release hold
+Place Hold - Single Charge:
+
+. Right-click on specific charge
+. Select appropriate hold action:
+○ Set To Mail Return: Hold for mail follow-up
+○ Set To Estate: Mark as estate claim
+. System places hold on charge
+. Charge On Hold field updates to "True"
+. Expiration Date can be set for automatic release
+. Reason field documents hold purpose
+Place Hold - Multiple Charges:
+
+. Select multiple charges (Ctrl+Click or Shift+Click)
+. Action Menu → Hold/UnHold → Hold Selected
+. All selected charges placed on hold
+Place Hold - Entire Account:
+
+. Action Menu → Hold/UnHold → Hold All
+. All current and future charges held
+Release Hold:
+
+. Select held charge(s)
+. Right-click → Release OR
+. Action Menu → Hold/UnHold → UnHold Selected
+. System removes hold
+. Charges eligible for billing in next batch
+Business Rules:
+
+Held charges cannot be included in claims
+● Hold does not affect already-submitted claims
+● Hold expiration automatically releases if date set
+● Hold reason required for audit compliance
+●
+
+Workflow 4.7: Add Follow-Up Action or Tickler
+User Goal: Schedule follow-up task on account or charge
+Steps:
+
+. Right-click on charge requiring follow-up OR
+. Action Menu → Set Charge Action/Next Contact
+. Complete follow-up form:
+○ Tickler: Select action type (Denial, Appeal Letter, Call Payer, etc.)
+○ Action: Specific task (Appeal Letter, Rebill, Write Off, etc.)
+
+Next Contact Date: When to follow up
+○ Reason: Why follow-up needed
+. Assign to work queue (optional):
+○ Action Menu → Assign to Tickler Bucket
+○ Select user or team bucket
+. Save follow-up assignment
+. Tickler appears in Follow Up Activity tab
+. User receives work queue assignment
+○
+
+System Behavior:
+
+Next Contact Date triggers in worklist on specified date
+● Tickler Bucket assignment sends to team queue
+● Multiple ticklers can exist on same charge
+● Completed ticklers marked "Done" with timestamp
+●
+
+Common Tickler Types:
+
+Denial: Claim denied, research needed
+● Appeal Letter: Formal appeal to be sent
+● Call Payer: Phone follow-up required
+● Rebill: Resubmit claim
+● Patient Contact: Reach out to patient
+● Authorization: Obtain prior auth
+●
+
+Workflow 4.8: Post Adjustment or Write-Off
+User Goal: Adjust charge balance or write off uncollectible amount
+Steps:
+
+. Action Menu → Payments → Adjust Charge(s)
+. Select charge(s) to adjust
+. Choose adjustment type:
+○ Contractual Adjustment: Insurance contract write-off
+○ Courtesy Adjustment: Provider write-off
+○ Small Balance Write-Off: Balance below threshold
+○ Bad Debt Write-Off: Uncollectible amount
+. Enter adjustment amount
+. Select adjustment reason code (required)
+. Add adjustment note (optional but recommended)
+. Post adjustment
+. System updates:
+○ Charge balance reduced by adjustment amount
+○ Account balance recalculated
+○ Transaction appears in Payment History
+Business Rules:
+
+Adjustments cannot exceed remaining charge balance
+Reason codes required for audit compliance
+● Bad debt write-offs require supervisor approval
+● Contractual adjustments based on payer contract
+● Write-offs remove balance from AR reports
+●
+●
+
+Adjustment vs Write-Off:
+
+Adjustment: Expected reduction per contract or policy
+● Write-Off: Uncollectible or below-threshold balance removal
+●
+
+Workflow 4.9: Generate Patient Statement
+User Goal: Create statement for patient mailing or portal
+Steps:
+
+. Action Menu → Patient Follow-Up → Create Instant Statement
+. System generates statement including:
+○ Patient and guarantor information
+○ Account balance summary
+○ Itemized charges and payments
+○ Insurance payments and adjustments
+○ Amount due from patient
+. Choose delivery method:
+○ Print immediately
+○ Queue for batch printing
+○ Email to patient
+○ Post to patient portal
+. Statement logs in Associated Documents tab
+. Delivery confirmation in ImagineEngagement tab
+System Behavior:
+
+Statement reflects current account status at generation time
+● Only patient-responsibility charges included
+● Insurance-pending balances marked as such
+● Payment instructions and return envelope details included
+● Statement aging calculated (30/60/90/120+ days)
+●
+
+Business Rules:
+
+Accounts on hold do not generate in batch statements
+Minimum balance threshold may suppress statement
+● Payment plan accounts receive modified statement
+● Collections accounts excluded from patient statements
+●
+●
+
+Workflow 4.10: Verify Insurance Eligibility
+User Goal: Confirm patient has active insurance coverage
+Steps:
+
+. Action Menu → Clearinghouse → Eligibility
+. System queries payer in real-time
+. Review eligibility response:
+○ Active/Inactive Status
+○ Coverage effective dates
+○ Benefit details (copay, deductible, coinsurance)
+○ Plan limitations
+. Response displays in popup or separate tab
+. System logs eligibility check in Insurance History tab
+
+. Update insurance information if discrepancies found
+System Behavior:
+
+Eligibility checks performed via clearinghouse integration
+● Real-time response typically within 3-5 seconds
+● Response stored for 30 days (configurable)
+● Manual re-check available anytime
+● Automatic checks can be scheduled (e.g., day before service)
+●
+
+Response Interpretation:
+
+Active: Coverage confirmed, proceed with service
+● Inactive: Coverage terminated, patient responsibility
+● No Response: Payer system unavailable, retry later
+● Invalid Member ID: Verify policy number with patient
+●
+
+5. Field Dictionary - Comprehensive Reference
+Patient Demographics
+Field
+Name
+
+Descri
+ption
+
+Examp
+le
+
+Name
+
+Patient
+legal
+full
+name
+
+Addres
+s
+
+Data
+Type
+
+Max
+Length
+
+Sourc
+e
+Syste
+m
+
+Requir Validat
+ed
+ion
+Rules
+
+RODG String
+ERS,
+BOBBY
+R
+
+100
+
+Patient
+Master
+
+Yes
+
+Format
+: LAST,
+FIRST
+MI
+
+Street
+addres
+s
+
+8757
+Red
+Oak
+Blvd
+
+String
+
+200
+
+Patient
+Master
+
+Yes
+
+Cannot
+be PO
+Box for
+Medica
+re
+
+City
+
+City
+name
+
+Charlot String
+te
+
+50
+
+Patient
+Master
+
+Yes
+
+Valid
+USPS
+city
+
+State
+
+Twoletter
+state
+code
+
+NC
+
+String
+
+2
+
+Patient
+Master
+
+Yes
+
+Valid
+US
+state
+code
+
+Zip
+
+Zip or
+zip+4
+
+28217- String
+0001
+
+10
+
+Patient
+Master
+
+Yes
+
+Format
+:
+12345
+or
+123451234
+
+DOB
+
+Date of 1/1/194
+birth
+0
+
+Date
+
+-
+
+Patient
+Master
+
+Yes
+
+Cannot
+be
+future
+date
+
+Age
+
+Calcula 86
+
+Integer
+
+-
+
+System No
+
+Auto-
+
+or
+123451234
+DOB
+
+Date of 1/1/194
+birth
+0
+
+Date
+
+-
+
+Patient
+Master
+
+Yes
+
+Cannot
+be
+future
+date
+
+Age
+
+Calcula 86
+ted
+age
+
+Integer
+
+-
+
+System No
+Calcula
+ted
+
+Autocalcula
+ted
+from
+DOB
+
+String
+
+1
+
+Patient
+Master
+
+Yes
+
+M=Mal
+e,
+F=Fem
+ale,
+X=Oth
+er
+
+Social XXXString
+Securit XX-100
+y
+4
+Numbe
+r
+
+11
+
+Patient
+Master
+
+Conditi Maske
+onal
+d
+display
+, full
+storag
+e
+
+Gender Patient
+gender
+
+SSN
+
+M/F/X
+
+Phone Primar
+Numbe y
+r
+phone
+
+(704)5 String
+53-100
+4
+
+20
+
+Patient
+Master
+
+Yes
+
+Format
+:
+(XXX)X
+XXXXXX
+
+Cell
+Mobile
+Phone phone
+Numbe
+r
+
+(704)5 String
+53-100
+4
+
+20
+
+Patient
+Master
+
+No
+
+Format
+:
+(XXX)X
+XXXXXX
+
+Email
+
+patient String
+@exam
+ple.co
+m
+
+100
+
+Patient
+Master
+
+No
+
+Valid
+email
+format
+
+Accou No
+nt
+Setting
+s
+
+Affects
+billing/
+collecti
+ons
+
+Source
+
+Business
+Logic
+
+Email
+addres
+s
+
+Special Accou (none)
+Rule
+nt
+handlin
+g rule
+
+Dropdo wn
+
+Visit/Account Status
+
+Field
+Name
+
+Descripti
+on
+
+Example
+
+Data
+Type
+
+Visit
+Number
+
+Unique
+encounter
+ID
+
+10981787
+
+Integer
+
+Visit
+Master
+
+Systemgenerated
+sequential
+
+Field
+Name
+
+Descripti
+on
+
+Example
+
+Data
+Type
+
+Visit
+Number
+
+Unique
+encounter
+ID
+
+10981787
+
+Integer
+
+Visit
+Master
+
+Systemgenerated
+sequential
+
+Status
+
+Account
+status
+
+Open
+
+String
+
+Visit
+Master
+
+Open/
+Closed/On
+Hold/In
+Collection
+s
+
+Ins. Last
+Payment
+
+Last
+insurance
+payment
+date
+
+10/11/202
+2
+
+Date
+
+Payment
+File
+
+Max(paym
+ent date)
+where
+payer=ins
+urance
+
+Ins.
+Balance
+
+Insurance $1,124.05
+responsibi
+lity
+
+Decimal(1
+0,2)
+
+Calculate
+d
+
+Sum(char
+ge
+amount insurance
+payments
+insurance
+adjustmen
+ts)
+
+Pat. Last
+Payment
+
+Last
+patient
+payment
+date
+
+Date
+
+Payment
+File
+
+Max(paym
+ent date)
+where
+payer=pat
+ient
+
+Pat.
+Balance
+
+Patient
+$0.00
+responsibi
+lity
+
+Decimal(1
+0,2)
+
+Calculate
+d
+
+Sum(char
+ge
+amount total
+payments
+adjustmen
+ts) where
+patient
+responsibl
+e
+
+In
+Collection
+s
+
+Collection
+s amount
+
+$0.00
+
+Decimal(1
+0,2)
+
+Collection
+s File
+
+Amount
+sent to
+agency
+
+Collection
+WO
+
+Collection
+write-off
+
+$0.00
+
+Decimal(1
+0,2)
+
+Adjustme
+nt File
+
+Sum(adju
+stments)
+where
+type=Coll
+ection WO
+
+7/20/2021
+
+Source
+
+Business
+Logic
+
+In
+Collection
+s
+
+Collection
+s amount
+
+$0.00
+
+Decimal(1
+0,2)
+
+Collection
+s File
+
+Amount
+sent to
+agency
+
+Collection
+WO
+
+Collection
+write-off
+
+$0.00
+
+Decimal(1
+0,2)
+
+Adjustme
+nt File
+
+Sum(adju
+stments)
+where
+type=Coll
+ection WO
+
+Bad Debt
+WO
+
+Bad debt
+write-off
+
+$0.00
+
+Decimal(1
+0,2)
+
+Adjustme
+nt File
+
+Sum(adju
+stments)
+where
+type=Bad
+Debt
+
+Total
+Balance
+
+Complete
+outstandi
+ng
+
+$1,124.05
+
+Decimal(1
+0,2)
+
+Calculate
+d
+
+Insurance
+Balance +
+Patient
+Balance
+
+Example
+
+Data
+Type
+
+Source
+
+Notes
+
+Insurance Information
+
+Field
+Name
+
+Descripti
+on
+
+Plan
+
+Insurance 73B plan name Insurance
+and ID
+Plan 73B
+(6 COMM)
+
+String
+
+Payer
+Master
+
+Includes
+plan ID
+and
+carrier ID
+
+Carrier
+
+Insurance
+carrier
+name
+
+6 - United
+Healthcar
+e
+
+String
+
+Payer
+Master
+
+Payer
+organizati
+on
+
+Policy
+Number
+
+Member/
+policy ID
+
+000L0820 String
+80
+
+Patient
+Insurance
+
+As
+appears
+on card
+
+Group
+Number
+
+Employer
+group
+number
+
+652810
+
+String
+
+Patient
+Insurance
+
+Employer
+plan
+identifier
+
+Employer
+
+Patient
+employer
+
+DUKE
+
+String
+
+Patient
+Insurance
+
+For group
+plans
+
+Authorizat Prior
+ion
+authorizat
+ion
+number
+
+AUTH123
+456
+
+String
+
+Authorizat Required
+ion File
+for certain
+procedure
+s
+
+Insured
+
+Subscribe
+r name
+
+RODGERS String
+, BOBBY R
+
+Patient
+Insurance
+
+May differ
+from
+patient
+
+Primary
+Plan
+
+Primary
+coverage
+plan
+
+73B Insurance
+Plan 73B
+
+String
+
+Insurance
+Hierarchy
+
+Coordinati
+on of
+benefits
+
+Primary
+Carrier
+
+Primary
+payer
+
+6 - United
+Healthcar
+
+String
+
+Insurance
+Hierarchy
+
+First payer
+in COB
+
+Insured
+
+Subscribe
+r name
+
+RODGERS String
+, BOBBY R
+
+Patient
+Insurance
+
+May differ
+from
+patient
+
+Primary
+Plan
+
+Primary
+coverage
+plan
+
+73B Insurance
+Plan 73B
+
+String
+
+Insurance
+Hierarchy
+
+Coordinati
+on of
+benefits
+
+Primary
+Carrier
+
+Primary
+payer
+
+6 - United
+Healthcar
+e
+
+String
+
+Insurance
+Hierarchy
+
+First payer
+in COB
+
+Source
+
+Required
+
+Charge Detail Fields
+
+Field
+Name
+
+Descripti
+on
+
+Example
+
+Data
+Type
+
+Charge ID
+
+Unique
+charge
+identifier
+
+4724639
+
+Integer
+
+Charge
+Master
+
+Yes
+
+Units
+
+Service
+quantity
+
+120.00
+
+Decimal(1
+0,2)
+
+Charge
+Entry
+
+Yes
+
+Departme
+nt
+
+Clinical
+departme
+nt
+
+01 Radiology
+
+String
+
+Departme
+nt Master
+
+Yes
+
+POS Code Place of
+service
+
+11
+
+String
+
+Charge
+Entry
+
+Yes
+
+Diagnosis
+Code
+
+ICD-10
+diagnosis
+
+H90.5
+
+String
+
+Charge
+Entry
+
+Yes
+
+History
+Number
+
+Claim
+tracking
+ID
+
+00021403 String
+8_MTV
+
+Claim File
+
+No
+
+Authorizat Prior auth
+ion
+number
+Number
+
+AUTH987
+654
+
+String
+
+Authorizat Condition
+ion File
+al
+
+Interpreta
+tion Date
+
+Reading
+date
+
+6/29/2021
+
+Date
+
+Charge
+Entry
+
+For
+diagnostic
+s
+
+Interpreta
+tion
+Location
+
+Reading
+location
+
+91 Imagine
+Demo
+Location
+
+String
+
+Location
+Master
+
+For
+diagnostic
+s
+
+Batch
+Number
+
+Posting
+batch ID
+
+07010201
+1503356_
+DL
+
+String
+
+Batch File
+
+Yes
+
+User
+Name
+
+Posting
+user
+
+sakshi.pat
+il
+
+String
+
+User File
+
+Yes
+
+Hold
+
+Hold
+indicator
+
+True/False Boolean
+
+Charge
+File
+
+No
+
+On Hold
+
+Active
+hold flag
+
+False
+
+Boolean
+
+Charge
+File
+
+No
+
+Expiration
+
+Hold
+
+1/1/1900
+
+Date
+
+Charge
+
+No
+
+Name
+
+user
+
+il
+
+Hold
+
+Hold
+indicator
+
+True/False Boolean
+
+Charge
+File
+
+No
+
+On Hold
+
+Active
+hold flag
+
+False
+
+Boolean
+
+Charge
+File
+
+No
+
+Expiration
+Date
+
+Hold
+release
+date
+
+1/1/1900
+
+Date
+
+Charge
+File
+
+No
+
+Reason
+
+Hold/
+action
+reason
+
+Authorizat String
+ion
+pending
+
+Reason
+Code
+Master
+
+Condition
+al
+
+Tickler
+
+Follow-up
+action
+type
+
+Denial
+
+String
+
+Tickler
+Master
+
+No
+
+Action
+
+Required
+action
+
+Appeal
+Letter
+
+String
+
+Action
+Master
+
+No
+
+Next
+Contact
+Date
+
+Follow-up
+date
+
+01/23/202
+6
+
+Date
+
+Follow-Up No
+File
+
+Insurance
+Payment
+
+Ins. paid
+amount
+
+$0.00
+
+Decimal(1
+0,2)
+
+Payment
+File
+
+Calculate
+d
+
+Patient
+Payments
+
+Pat. paid
+amount
+
+$0.00
+
+Decimal(1
+0,2)
+
+Payment
+File
+
+Calculate
+d
+
+Bill Stage
+
+Billing
+workflow
+stage
+
+2-0 Pending
+Primary
+Response
+
+String
+
+Billing
+Stage
+Master
+
+Yes
+
+Claim
+Status
+
+Electronic
+claim
+status
+
+ACC Accepted
+by Payer
+
+String
+
+Clearingh
+ouse
+Response
+
+No
+
+6. Business Rules
+Balance Calculation Rules
+. Total Balance Calculation
+○ Total Balance = Charge Amount - Total Payments - Total
+Adjustments
+○ Recalculated in real-time on any financial transaction
+○ Includes all payers (primary, secondary, tertiary, patient)
+. Insurance Balance Determination
+○ Insurance Balance = Charge Amount - Insurance Payments Insurance Adjustments - Transfers to Patient
+○ Remains until EOB posts or claim is finalized
+○ May include estimated contractual adjustments
+. Patient Balance Determination
+○ Patient Balance = Charge Amount - All Payments - All Adjustments
+○ Only shows after insurance adjudication complete
+○ Includes copay, coinsurance, deductible, and non-covered
+
+○
+
+amounts
+. Balance Transfer Rules
+○ Insurance-to-patient transfer occurs when:
+◆ Insurance denies as patient responsibility
+◆ Deductible or coinsurance applies
+◆ Service is non-covered benefit
+○ Transfer creates adjustment and offsetting patient charge
+○ Must have valid denial or EOB reason code
+
+Claim Status and Bill Stage Rules
+. Bill Stage Progression
+○ Stage 1-0 (Not Billed): Charge posted, not yet on claim
+○ Stage 2-0 (Primary Billing): Sent to primary insurance
+○ Stage 2-5 (Primary Partial Payment): Partial payment received
+○ Stage 3-0 (Secondary Billing): Sent to secondary after primary
+pays
+○ Stage 4-0 (Tertiary Billing): Sent to tertiary payer
+○ Stage 5-0 (Patient Billing): Patient responsibility established
+○ Stage 9 (Denial/Hold): Denied or held from billing
+. Auto-Advancement Rules
+○ Bill stage advances automatically on payment posting (if
+configured)
+○ Denial changes stage to "9" and sets tickler
+○ Full payment closes charge and advances stage to "Complete"
+○ Partial payment may or may not advance (configurable)
+. Claim Submission Rules
+○ Charges on hold cannot be billed
+○ Authorization required for procedures flagged in procedure master
+○ Diagnosis code must be valid for procedure
+○ Primary insurance must be active on date of service
+○ Timely filing deadline not yet passed
+
+Hold and Release Rules
+. Hold Behavior
+○ Held charges excluded from batch claim generation
+○ Hold does not affect already-submitted claims
+○ Expiration date triggers automatic release if configured
+○ Multiple holds on same charge: most restrictive applies
+. Automatic Hold Triggers
+○ Missing authorization (if procedure requires)
+○ Invalid insurance (eligibility check failed)
+○ Duplicate charge detection
+○ Timely filing deadline approaching (warning hold)
+○ Account in dispute
+. Release Requirements
+○ All hold reasons must be resolved
+
+User with appropriate permissions performs release
+○ Charge must still meet billing criteria after release
+○ Released charges eligible for next billing batch
+○
+
+Payment and Adjustment Rules
+. Payment Allocation
+○ Payments allocate to oldest charges first (FIFO) unless specified
+○ Payment cannot exceed charge balance
+○ Overpayments create credit balance
+○ Credits apply to next service or refund to payer
+. Adjustment Reason Codes
+○ Contractual adjustments require valid payer contract
+○ Courtesy adjustments require provider authorization
+○ Write-offs require supervisor approval above threshold
+○ All adjustments must have reason code for audit
+. Write-Off Thresholds
+○ Small balance write-off: typically $5.00 or less
+○ Large balance write-off: requires manager approval
+○ Bad debt: must meet aging criteria (e.g., 120+ days)
+○ Collections write-off: requires collections agency confirmation
+
+Insurance Coordination Rules
+. Coordination of Benefits (COB)
+○ Primary insurance billed first
+○ Secondary billed only after primary EOB received
+○ Tertiary billed only after secondary EOB received
+○ Each claim includes prior payer's payment and adjustment
+. Eligibility Verification
+○ Real-time eligibility checked via clearinghouse
+○ Cached for 30 days (configurable)
+○ Re-verification required if insurance changes
+○ Failed verification triggers alert, may hold charge
+
+Statement and Collections Rules
+. Statement Generation
+○ Statements generate for accounts with patient balance > $0
+○ Minimum balance threshold may suppress (e.g., $10)
+○ Held accounts excluded from batch statements
+○ Payment plan accounts receive modified statement
+. Collections Criteria
+○ Account age exceeds threshold (e.g., 120 days)
+○ Minimum balance for collections (e.g., $25)
+○ Patient contact attempts documented
+○ Account not in dispute or payment plan
+○ Collections write-off removes from active AR
+. Bad Debt Determination
+○ Failed collections agency attempts
+
+Patient deceased with no estate
+○ Bankruptcy discharge
+○ Account deemed uncollectible by supervisor
+○
+
+7. User Questions the AI Should Answer
+Account Lookup Questions
+Q: How do I find a patient's account?
+A: Enter the patient's account number, name, or medical record number in the
+search field at the top of the Account Inquiry screen and press Enter. The
+system will return matching accounts. If searching by name, use format "Last,
+First" for best results. If multiple matches appear, select the correct patient
+from the list.
+Q: Why can't I find this patient?
+A: The patient may not be registered in the system, the account may be marked
+inactive, or there may be a spelling variation. Try searching with partial name,
+date of birth, or last 4 digits of SSN. Verify with registration if the patient
+should exist in the system.
+Q: What does the account number mean?
+A: The account number is a unique identifier assigned to each patient when
+they're registered. It's used throughout the system to link all visits, charges,
+and payments to the patient. This number doesn't change even if patient
+demographics are updated.
+
+Balance Questions
+Q: Why is there a balance if insurance paid?
+A: The balance could be patient responsibility (deductible, coinsurance, copay,
+or non-covered services). Check the Status Summary: if "Ins. Balance" is $0
+and "Pat. Balance" shows an amount, this is what the patient owes. Review the
+charge details and EOB to see why the patient is responsible.
+Q: What's the difference between Insurance Balance and Patient Balance?
+A: Insurance Balance is the amount owed by the insurance company (still
+awaiting payment or adjudication). Patient Balance is the amount the patient is
+responsible for paying (after insurance processing). Total Balance is the sum of
+both.
+Q: Why does the balance keep changing?
+A: Balances update in real-time as payments post, adjustments are made,
+insurance processes claims, or additional charges are added. Each financial
+transaction (payment, adjustment, new charge) recalculates the account
+balance.
+Q: How do I see what the patient actually owes?
+A: Look at the "Pat. Balance" field in the Status Summary panel. This shows
+current patient responsibility after insurance processing. For detailed
+breakdown, review the Account Charges tab to see which specific charges have
+patient balances.
+Q: What does "In Collections" mean?
+A: This amount has been sent to a collections agency for recovery. It's removed
+from your active AR balance and is being pursued by the external agency. The
+
+"Collection WO" or "Bad Debt WO" fields show amounts written off as
+uncollectible.
+
+Charge and Claim Questions
+Q: How do I know if a claim was sent to insurance?
+A: Check the Bill Stage field in the charge details. Stages starting with "2-"
+indicate the claim was sent to primary insurance. "3-" means sent to
+secondary, etc. Also check the Claim Status field for electronic submission
+confirmation (e.g., "ACC - Accepted by Payer").
+Q: What does "Pending Primary Response" mean?
+A: The claim has been sent to the primary insurance and you're waiting for
+them to process it and send payment or denial. This is a normal status between
+claim submission and receiving the EOB.
+Q: Why is this charge on hold?
+A: Right-click the charge and look at the Hold details, or expand the charge
+detail panel to see the "Reason" field. Common reasons include: missing
+authorization, invalid insurance, pending information, or manual hold for review.
+Release the hold once the issue is resolved.
+Q: How do I see the procedure description?
+A: In the Account Charges tab, the Procedure column shows both the CPT/
+HCPCS code and the description (e.g., "A9575 - INJECTION, GADOTE"). For
+more detail, expand the charge using the Show Detail toggle.
+Q: What's a duplicate charge and how do I find it?
+A: A duplicate charge is the same procedure billed twice for the same date of
+service. The system may auto-flag duplicates with a hold reason "DUPCH Duplicate Charge". Review the procedure code, date of service, and units to
+identify duplicates in the charge list.
+
+Payment Questions
+Q: Where can I see all payments made on this account?
+A: Click the "Charge \ Payment History" tab to see a chronological list of all
+payments, adjustments, and transactions. For a summarized view, go to Action
+Menu → Payments → View Payment Summary.
+Q: How do I know if a payment came from insurance or the patient?
+A: In the Payment History tab, the payer column shows who made the payment.
+Insurance payments will show the insurance carrier name; patient payments
+show "Patient" or the patient name. Check the payment source field for check
+numbers or payment method.
+Q: Why doesn't the payment match the charge amount?
+A: Insurance typically pays according to contracted rates, which are less than
+billed charges. The difference is written off as a contractual adjustment.
+Patients may pay partial amounts or have payment plans. Review the charge
+detail to see payments, adjustments, and remaining balance.
+
+Follow-Up and Tickler Questions
+Q: How do I set a reminder to follow up on this charge?
+A: Right-click the charge and select an appropriate hold action (e.g., "Set To
+
+Mail Return"), OR use Action Menu → Set Charge Action/Next Contact. Enter
+the tickler type, action, next contact date, and reason. The charge will appear
+in your work queue on the scheduled date.
+Q: What's the difference between Tickler and Action?
+A: Tickler is the broad category of follow-up (e.g., "Denial"), while Action is the
+specific task to perform (e.g., "Appeal Letter"). Together they define what
+needs to be done and why.
+Q: How do I assign this to someone else's work queue?
+A: After setting the follow-up, use Action Menu → Assign to Tickler Bucket,
+then select the user or team bucket you want to assign it to. The charge will
+appear in their work queue.
+
+Insurance and Eligibility Questions
+Q: How do I check if the patient's insurance is active?
+A: Go to Action Menu → Clearinghouse → Eligibility. The system will perform a
+real-time check with the payer and return coverage status, effective dates, and
+benefit information. Active coverage shows eligibility confirmed; inactive means
+coverage has terminated.
+Q: What if eligibility check fails or shows "No Response"?
+A: The payer's system may be temporarily unavailable. Wait a few minutes and
+try again. If it continues failing, verify the policy number and patient information
+are correct. You may need to call the payer directly for verification.
+Q: Where do I see the patient's insurance information?
+A: The Insurance Information panel on the right side of the screen shows plan
+name, carrier, policy number, group number, authorization, and subscriber
+details for the current visit.
+
+Statement and Collections Questions
+Q: How do I generate a statement for the patient?
+A: Action Menu → Patient Follow-Up → Create Instant Statement. This
+generates a statement you can print, email, or post to the patient portal
+immediately. Batch statements are also generated automatically based on your
+organization's schedule.
+Q: Why did this account go to collections?
+A: Accounts are sent to collections when they meet specific criteria: typically
+120+ days past due, minimum balance threshold, documented patient contact
+attempts, and not in a payment plan or dispute. Check the "In Collections" field
+and the Account Notes for collections history.
+Q: How do I set up a payment plan?
+A: Action Menu → Patient Follow-Up → Budget Plan. This opens the payment
+plan setup where you can enter the plan terms, monthly amount, and schedule.
+Once created, the account receives modified statements showing the plan.
+
+Action Menu Questions
+Q: What does "Transfer Charge" do?
+A: This moves a charge from one patient account to another. Use this when a
+charge was posted to the wrong patient account. This requires supervisor-level
+
+permissions and creates an audit trail of the transfer.
+Q: How do I write off a small balance?
+A: Action Menu → Payments → Adjust Charge(s). Select the charge, choose
+"Small Balance Write-Off" as the adjustment type, enter the amount, and select
+the appropriate reason code. Balances are typically written off if under $5-10
+per your organization's policy.
+Q: What's the difference between "Hold All" and "Hold Selected"?
+A: "Hold All" places every charge on the account on hold, preventing the entire
+account from billing. "Hold Selected" only holds the specific charges you've
+highlighted in the charge grid. Use "Hold Selected" when only certain charges
+need to be held.
+Q: Can I undo a write-off?
+A: Yes, use Action Menu → Patient Follow-Up → Undo Write-Off/Turnover. This
+reverses the write-off adjustment and restores the balance to active AR. This is
+commonly used when a collections agency returns an account or when a writeoff was posted in error.
+
+Status and Workflow Questions
+Q: What does "ACC - Accepted by Payer" mean?
+A: This is the clearinghouse response indicating the insurance company
+received and accepted the electronic claim. It means the claim passed initial
+edits and is in the payer's system for processing. This does not mean payment
+is approved—just that the claim was received.
+Q: Why does Bill Stage show "Denial" in red?
+A: The claim was denied by the payer. This is a critical status that requires
+action. Review the denial reason, determine if it's correctable, and either
+appeal or adjust based on your organization's policy. Set a tickler for follow-up.
+Q: What's the difference between Status "Open" and "Closed"?
+A: "Open" means the account has an outstanding balance and is active in the
+billing system. "Closed" means the balance is zero and no further billing is
+expected. Accounts can reopen if new charges post or adjustments create a
+balance.
+
+8. Edge Cases & Troubleshooting
+Data Mismatches
+Issue: Balance shown doesn't match detailed charge review
+Causes:
+
+Unapplied payments or credits
+● Pending adjustments not yet posted
+● System calculation timing (batch vs real-time)
+● Hidden charges (filtered out of view)
+●
+
+Resolution:
+
+. Disable all filters in charge grid
+. Run Account Balance Reconciliation report
+. Review Payment History for unapplied amounts
+. Check for credit balances
+
+. Contact system administrator if discrepancy persists
+Issue: Insurance shows as primary but claim billing to patient
+Causes:
+
+Insurance inactive on date of service
+● Eligibility verification failed
+● Insurance flagged as "Bill Patient"
+● Coverage terminated
+●
+
+Resolution:
+
+. Check Insurance Information panel for effective dates
+. Run eligibility verification
+. Review insurance priority in patient insurance file
+. Verify coverage was active on service date
+. Update insurance or rebill if appropriate
+Issue: Claim shows "Accepted" but no payment received after 45+ days
+Causes:
+
+Payer processing delays
+● Claim in payer review/audit
+● Payment lost in mail
+● Payment posted to different account
+● Claim denied but status not updated
+●
+
+Resolution:
+
+. Use Clearinghouse → Claim Status for real-time check
+. Call payer for claim status
+. Check if payment posted to different patient
+. Request payer reprocessing if claim lost
+. Document all contact in Account Notes
+
+Permission Issues
+Issue: User cannot release hold on charge
+Causes:
+
+Insufficient permission level
+● Hold type requires supervisor approval
+● Account in collections (locked)
+●
+
+Resolution:
+
+. Verify user has "Hold/Release" permission
+. Check hold type—some require supervisor
+. Escalate to supervisor for release
+. Contact system admin for permission review
+Issue: "Access Denied" when trying to adjust charge
+Causes:
+
+User lacks adjustment permissions
+● Adjustment amount exceeds user limit
+●
+
+●
+
+Charge status prevents adjustment (e.g., paid in full)
+
+Resolution:
+
+. Verify adjustment permissions in user profile
+. Check if amount exceeds authority limit
+. Request supervisor override if needed
+. Ensure charge is in adjustable status
+
+System Behavior Issues
+Issue: Charge not appearing in grid
+Causes:
+
+Filters active (e.g., date range, status)
+● Charge posted to different visit
+● Charge deleted or voided
+● Display limit reached (e.g., showing first 100 only)
+●
+
+Resolution:
+
+. Clear all filters (reset view)
+. Check "View Last Visit First" toggle
+. Search by charge ID directly
+. Verify charge wasn't voided in Charge Entry
+. Check if pagination is limiting display
+Issue: Balance not updating after payment posted
+Causes:
+
+Payment batch not finalized
+● System cache not refreshed
+● Payment unapplied (not linked to charge)
+● Payment voided or reversed
+●
+
+Resolution:
+
+. Refresh screen (F5 or close/reopen)
+. Verify payment batch is finalized
+. Check Payment History for payment status
+. Confirm payment allocated to correct charges
+. Contact system admin if balance calculation error
+
+Workflow Confusion
+Issue: Unsure what action to take on denied claim
+Causes:
+
+Denial reason unclear
+● No standard process defined
+● Multiple denial codes present
+●
+
+Resolution:
+
+. Review denial reason code in claim detail
+. Check payer contract for denial policy
+. Common actions:
+○ Correctable error → Fix and rebill
+
+Authorization issue → Obtain auth, appeal
+○ Timely filing → Appeal immediately
+○ Non-covered service → Transfer to patient or adjust
+. Set appropriate tickler for tracking
+. Consult billing supervisor if uncertain
+○
+
+Issue: Patient balance showing when insurance should be responsible
+Causes:
+
+Insurance denied as patient responsibility
+Deductible or coinsurance applied
+● Service not covered by plan
+● Incorrect COB (coordination of benefits)
+●
+●
+
+Resolution:
+
+. Review EOB for denial/adjustment reason
+. Verify insurance coverage for procedure
+. Check if deductible/coinsurance applies
+. Confirm insurance was primary on DOS
+. Appeal if insurance should cover, or bill patient if legitimate patient
+responsibility
+
+9. AI Interpretation Notes
+Critical Context for AI Response
+When answering user questions about Account Inquiry, the AI must always
+consider:
+
+. User Role Context: Billing specialists, AR reps, and supervisors have
+different permission levels and workflow needs
+. Timing Sensitivity: Many questions are time-sensitive (claim
+deadlines, payment follow-up)
+. Financial Impact: Balance and payment questions affect cash flow
+and patient satisfaction
+. Compliance Requirements: Billing rules, payer contracts, and
+regulations constrain actions
+. Workflow State: Where the account/charge is in the billing cycle
+determines appropriate next steps
+
+Terms That Should Not Be Confused
+Term
+
+Distinct From
+
+Critical Difference
+
+Account Number
+
+Visit Number
+
+Account = patient
+identifier (permanent);
+Visit = encounter ID
+(per visit)
+
+Insurance Balance
+
+Patient Balance
+
+Insurance = owed by
+payer; Patient = owed
+by patient
+
+Bill Stage
+
+Claim Status
+
+Bill Stage = internal
+workflow; Claim Status
+= clearinghouse/payer
+
+Insurance Balance
+
+Patient Balance
+
+Insurance = owed by
+payer; Patient = owed
+by patient
+
+Bill Stage
+
+Claim Status
+
+Bill Stage = internal
+workflow; Claim Status
+= clearinghouse/payer
+response
+
+Hold
+
+Denial
+
+Hold = manually
+placed stop; Denial =
+payer rejection
+
+Adjustment
+
+Payment
+
+Adjustment = balance
+reduction w/o cash;
+Payment = actual
+money received
+
+Write-Off
+
+Collection WO
+
+Write-Off = any
+balance removal;
+Collection WO =
+specific bad debt
+write-off
+
+Tickler
+
+Action
+
+Tickler = category;
+Action = specific task
+
+Authorization
+
+Authorization Number
+
+Authorization =
+approval process;
+Number = specific
+approval ID
+
+Responsible Party
+
+Guarantor
+
+Often same, but
+Responsible Party
+broader term
+
+Post Date
+
+Date of Service
+
+Post Date = when
+entered in system;
+DOS = when service
+occurred
+
+Synonyms Users May Use
+
+User May Say
+
+System Term
+
+AI Should Recognize
+As
+
+"Account is locked"
+
+Account On Hold
+
+Hold placed on
+account
+
+"Claim hasn't been
+sent"
+
+Bill Stage 1-0
+
+Not yet billed
+
+"Insurance hasn't paid
+yet"
+
+Pending Primary
+Response
+
+Claim submitted,
+awaiting payment
+
+"Patient portion"
+
+Patient Balance
+
+Patient responsibility
+
+"Write this off"
+
+Adjustment or WriteOff
+
+Balance reduction
+request
+
+"Set a reminder"
+
+Tickler or Follow-up
+
+Schedule future action
+
+"Check eligibility"
+
+Eligibility Verification
+
+Insurance coverage
+check
+
+"Patient portion"
+
+Patient Balance
+
+Patient responsibility
+
+"Write this off"
+
+Adjustment or WriteOff
+
+Balance reduction
+request
+
+"Set a reminder"
+
+Tickler or Follow-up
+
+Schedule future action
+
+"Check eligibility"
+
+Eligibility Verification
+
+Insurance coverage
+check
+
+"Send a statement"
+
+Generate Statement
+
+Create patient bill
+
+"Move this charge"
+
+Transfer Charge
+
+Reassign to different
+account
+
+"Why was this
+denied?"
+
+Denial Reason
+
+Claim rejection
+explanation
+
+"Take off hold"
+
+Release Hold
+
+Remove billing hold
+
+"Patient owes..."
+
+Patient Balance
+
+Patient-responsible
+amount
+
+Recommended Response Style
+Concise: Provide direct answers without excessive explanation unless user
+asks for detail
+Operational: Focus on "how to do it" and "what it means" for their work
+Helpful: Anticipate follow-up questions and address them proactively
+Structured: Use numbered steps for processes, bullets for lists, tables for
+comparisons
+Professional: Use RCM terminology correctly but explain when needed
+Context-Aware: Consider what the user is likely trying to accomplish
+Example Response Format:
+**Direct Answer**: [One-sentence answer to the question]
+**How to do it**:
+1. Step one
+2. Step two
+3. Step three
+**What it means**: [Business implication or context]
+**Common next steps**: [What user typically does after this]
+
+Response Prioritization
+When user question is ambiguous, prioritize:
+
+. Safety: Actions that don't risk compliance violations or data
+corruption
+. Common Use Cases: Most frequent workflows over edge cases
+. Reversibility: Suggest actions that can be undone if needed
+. Documentation: Emphasize noting actions in system
+. Escalation: When to involve supervisor vs. handling independently
+
+Error Prevention in Responses
+AI should:
+
+Never suggest adjusting or writing off without reason codes
+Always mention permission requirements for restricted actions
+● Warn about irreversible actions (e.g., certain write-offs)
+●
+●
+
+Remind about compliance implications (timely filing, etc.)
+● Suggest verification steps before major changes
+●
+
+Document Metadata
+Version: 1.0
+Created For: AI Training - Account Inquiry Module
+System: ImagineOne Software RCM Platform
+Last Updated: February 11, 2026
+Intended Audience: AI Systems, RCM Training Programs, Technical
+Documentation
+Document Type: Functional Specification & User Guide Hybrid
+END OF DOCUMENTATION
+
+
