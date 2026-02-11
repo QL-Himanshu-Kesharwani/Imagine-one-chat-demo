@@ -1,0 +1,290 @@
+﻿NON POST MODULE – AI-READY FEATURE DOCUMENTATION
+Product Context: Enterprise Revenue Cycle Management (RCM) Platform
+Module Name: Non Post
+Primary Domain: Charge Reconciliation / Exception Worklist Management
+Audience: AI Support Bot, RCM Users, Billing Operations Teams
+Version: Functional Documentation – AI Training Format
+
+1. MODULE OVERVIEW
+
+1.1 Definition
+The Non Post Module is an operational worklist used to manage charges that 
+have failed to post to the Patient Accounting System (PAS) or Billing System. 
+These charges exist in an exception state and require manual review, validation, 
+correction, and/or mapping before successful posting.
+1.2 Purpose
+The primary objective of the Non Post Module is to:
+● Identify charges that did not successfully post
+● Display related clinical/report data for review
+● Allow correction of patient identifiers or visit information
+● Facilitate reconciliation and validation
+● Enable reprocessing or deletion of invalid records
+
+1.3 Business Impact
+Effective management of Non-Post charges:
+● Prevents revenue leakage
+● Reduces DNFB (Discharged Not Final Billed) delays
+● Improves clean claim rate
+● Minimizes manual billing errors
+● Supports audit compliance
+
+1. USER ROLES & ACCESS
+
+2.1 Typical Users
+● Charge Entry Team
+● Billing Specialists
+● RCM Analysts
+● Revenue Integrity Team
+● Patient Accounting Supervisors
+
+2.2 Required Permissions
+Users must have permissions to:
+● View Non-Post worklist
+● Access patient reports
+● Edit charge metadata
+● Validate and update records
+● Delete (if role allows)
+
+1. HIGH-LEVEL WORKFLOW
+
+
+
+Step 1: User applies filters (Batch Number, Charge Filter, Mapping Pending)
+Step 2: System loads Non-Post charges into worklist
+Step 3: User selects a charge
+Step 4: System displays:
+- Charge details
+- Associated report
+- Possible patient matches
+Step 5: User validates or corrects Patient ID / Visit Number / Location
+Step 6: User clicks Validate or Update
+Step 7: System reattempts posting logic
+If successful → Charge moves out of Non Post
+If unsuccessful → Remains in Non Post with updated reason
+
+1. SCREEN STRUCTURE & UI COMPONENTS
+
+4.1 Top Filter Panel
+Fields:
+● Download Toggle
+● Batch Number (Dropdown – All / specific batch)
+● Charge Filter (Dropdown – All / filtered states)
+● Mapping Pending (Dropdown – All / Yes / No)
+● Load Button
+
+Function:
+Controls which Non-Post charges populate in the worklist grid.
+AI Response Logic:
+If user asks "Why don’t I see my charge?" → Guide to check Batch Number and 
+Mapping Pending filters.
+
+4.2 Charges Worklist Grid
+Columns:
+● Patient ID
+● Patient Name
+● Visit Number
+● Location
+
+Displays:
+Total number of Non-Post charges (e.g., “535 Charges”).
+Purpose:
+Provides a queue-based view of failed charges.
+Behavior:
+● Selecting a row loads corresponding report and charge info
+● Grid supports scrolling
+● Filter and gear icons allow column filtering and configuration
+
+Common Non-Post Scenarios Visible in Grid:
+● Patient ID = 0
+● Invalid Visit Number
+
+
+
+● Incorrect Location
+● Missing mapping
+
+4.3 Report Viewer Panel (Right Section)
+Displays clinical or diagnostic report tied to the charge.
+Typical Data Displayed:
+● Patient Name
+● DOB
+● Referring Physician
+● Reading Physician
+● Exam Reason
+● Report Text
+● Dictation timestamps
+
+Purpose:
+Allows billing user to visually verify patient and encounter data against system 
+record.
+AI Interpretation Rule:
+If report patient name differs from charge patient name → Suggest data 
+mismatch review.
+
+4.4 Charge Information Panel (Bottom Left)
+Fields:
+● Patient ID (Editable/Searchable)
+● Visit Number (Editable/Searchable)
+● Location (Editable/Searchable)
+● Reason (System-generated error message)
+
+Example Reason:
+“Patient Information Not Found in the System.”
+Purpose:
+Allows correction of failed matching fields.
+AI Response Logic:
+If Reason indicates patient not found → Suggest verifying:
+1. Correct MRN
+2. Correct Visit Number
+3. Correct Facility Location
+4. Patient exists in PAS
+
+4.5 Possible Matches Panel (Bottom Right)
+Columns:
+● Patient ID
+● Visit ID
+● Patient Name
+● Date of Birth
+● Visit Number
+● Location
+● Visit Date
+
+
+
+● History Number
+Purpose:
+Displays potential patient/visit matches based on partial data.
+Function:
+User selects correct match to auto-populate Charge Information fields.
+AI Guidance Rule:
+If user asks “How do I fix incorrect patient?” → Direct to Possible Matches 
+section.
+
+4.6 Action Buttons
+Validate
+● Re-checks data against system rules
+● Attempts posting logic
+● If valid → removes from Non Post
+
+Update
+● Saves edited data without full validation
+
+Delete
+● Removes charge permanently (if authorized)
+
+Patient Dropdown Menu Options:
+● Account Inquiry
+● Associated Documents
+● Patient Edit
+● Visit Edit
+● Visit List
+
+Close
+● Exits module
+
+1. SYSTEM ERROR TYPES (COMMON NON-POST REASONS)
+
+5.1 Patient Not Found
+Cause: Invalid Patient ID or MRN mismatch
+Resolution: Correct Patient ID or search Possible Matches
+5.2 Visit Not Found
+Cause: Invalid or closed Visit Number
+Resolution: Confirm correct encounter number
+5.3 Location Mismatch
+Cause: Charge tied to incorrect facility
+Resolution: Update Location field
+5.4 Mapping Pending
+Cause: CPT, Modality, or Financial Class mapping missing
+Resolution: Complete mapping in system configuration
+5.5 Interface Failure
+Cause: HL7 or charge interface transmission issue
+Resolution: Escalate to IT / Interface team
+
+1. VALIDATION LOGIC
+
+
+
+When Validate is clicked, system checks:
+1. Patient exists in Master Patient Index
+2. Visit exists and is active
+3. Location matches valid billing entity
+4. Required financial mappings exist
+5. No duplicate charge conditions
+
+If all conditions pass → Charge posts to Billing
+If any condition fails → Charge remains with updated Reason
+
+1. DATA RELATIONSHIPS
+
+Charge Record
+→ Linked to Report
+→ Linked to Patient
+→ Linked to Visit
+→ Linked to Location
+→ Linked to CPT/Procedure Mapping
+Non Post = Exception state of Charge Record
+
+1. OPERATIONAL BEST PRACTICES
+
+1. Review highest aging Non-Post charges first
+2. Prioritize high-dollar procedures
+3. Use Possible Matches instead of manual entry
+4. Avoid deleting unless confirmed duplicate
+5. Re-validate immediately after corrections
+6. Monitor recurring errors for systemic issues
+
+1. AI BOT TRAINING RULES
+
+If user asks:
+“Why is this charge in Non Post?”
+→ Direct to Reason field explanation.
+If user asks:
+“How do I correct patient?”
+→ Guide to Possible Matches → Select → Validate.
+If user asks:
+“What does Mapping Pending mean?”
+→ Explain CPT/financial mapping configuration incomplete.
+If user asks:
+“Can I delete this charge?”
+→ Confirm role permission and verify it is not needed for billing.
+If user says:
+“I validated but it still shows Non Post.”
+→ Suggest checking updated Reason field and system mapping dependencies.
+
+
+
+1. REPORTING & METRICS
+
+Key KPIs tied to Non Post Module:
+● Non-Post Volume
+● Aging Days
+● Reprocessing Success Rate
+● Repeat Failure Rate
+● Revenue Impact
+
+Supervisors should monitor:
+● Daily Non-Post count
+● Top failure reasons
+● User correction turnaround time
+
+1. RISKS & COMPLIANCE CONSIDERATIONS
+
+● Incorrect patient mapping may cause HIPAA violation
+● Deleting charges improperly may cause revenue loss
+● Repeated manual overrides without root cause analysis creates 
+
+systemic risk
+Audit Trail Recommendation:
+All updates, validations, and deletions must be logged with:
+● User ID
+● Timestamp
+● Previous value
+● New value
+
+1. SUMMARY
+The Non Post Module functions as a structured exception management queue 
+within the RCM lifecycle. It ensures that charges failing automated posting rules 
+are identified, corrected, validated, and reconciled before revenue submission. 
+Proper usage directly improves billing accuracy, compliance integrity, and cash 
+flow performance.
+End of Document.
