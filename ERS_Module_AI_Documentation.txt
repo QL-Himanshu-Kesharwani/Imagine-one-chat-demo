@@ -1,0 +1,67 @@
+﻿ERS Module -- AI-Ready Feature Documentation (User-Friendly Edition)
+Product Context: Enterprise Revenue Cycle Management (RCM) Platform
+Module Name: ERS (Electronic Remittance System) Module
+Version: 2.0 -- Enhanced with Functional Explanations
+Generated On: 2026-02-11
+
+1. Module Overview
+The ERS (Electronic Remittance System) Module is the area of the system where electronic payments from insurance companies are processed and posted. When a payer sends an ERA (835 file), this module reads the file, identifies the claims and charges, applies payments and adjustments, and updates patient and insurance balances. It acts as the central engine for insurance payment reconciliation and ensures that Accounts Receivable (AR) remains accurate.
+
+2. Functional Objectives
+This module exists to automate and standardize insurance payment posting. Instead of manually entering payments line by line, the system imports ERA files and automatically applies payments using predefined rules. It reduces posting errors, improves speed, ensures compliance with payer contracts, and provides financial transparency before final posting.
+
+3. User Roles
+The ERS module is typically used by payment posters, ERA analysts, billing supervisors, and RCM managers. Each role may have different access levels. For example, some users can only review and post payments, while supervisors can create rules or override adjustments. Proper role configuration ensures financial security and audit compliance.
+
+4. ERS Workflow Overview
+The ERS workflow follows a structured lifecycle: import ERA → create batch → resolve exceptions → match charges → apply payments and adjustments → reconcile totals → post batch. Each step must be completed before moving forward, ensuring financial accuracy and preventing incorrect postings.
+
+5. Batch Header Section
+The batch header contains high-level information about the ERA file being processed. It identifies the batch number, payer, check/EFT reference, and processing stage. Think of it as the "cover page" of the remittance. This section helps users track payment files and monitor posting progress.
+
+6. Exceptions Panel
+The exceptions panel displays issues detected during ERA import. These may include unmatched charges, missing patients, duplicate payments, or unmapped ANSI reason codes. The system prevents posting until these errors are resolved. This protects AR from incorrect allocations and ensures financial accuracy.
+
+7. Charge Information Section
+This section helps users locate and confirm the correct charge before applying payment. It displays visit-level and charge-level data such as DOS, provider, POS, procedure code, and units. The system attempts automatic matching, but users can manually verify or search when needed.
+
+8. Insurance Information
+Here, users confirm whether the ERA is for primary, secondary, or tertiary insurance. This is critical for coordination of benefits (COB). The system must apply payments in the correct order to avoid overpayments or incorrect patient balances.
+
+9. Payment Information Section
+This is the core posting area. It displays the original charge, allowed amount, payment amount, contractual adjustments, deductible, coinsurance, copay, withholds, and remaining balance. As payments are applied, the system recalculates balances in real time. This ensures transparency before final posting.
+
+10. Rule Info Section
+The Rule Info section automates adjustment posting. When an ANSI reason code is received (e.g., CO45), the system uses predefined rules to determine how to categorize and post the adjustment. This eliminates repetitive manual decision-making and enforces consistent posting logic.
+
+11. ANSI Reason Codes Panel
+This panel shows payer-provided adjustment codes and descriptions. For example, CO45 means "Charge exceeds fee schedule." The system reads these codes and links them to adjustment categories like contractual, patient responsibility, or other adjustments. Accurate mapping ensures proper financial reporting.
+
+12. Payment Allocation Logic
+The system matches payments to charges using ICN, claim number, or patient + DOS + procedure. Once matched, it applies the payment, posts adjustments, and updates the balance. If matching fails, the claim moves to exceptions for review.
+
+13. Adjustment Logic
+Adjustments are classified based on ANSI group codes such as CO (Contractual), PR (Patient Responsibility), and OA (Other Adjustment). The rules engine determines how each adjustment affects AR and whether it reduces insurance balance or transfers responsibility to the patient.
+
+14. Withhold Handling
+Some payers temporarily withhold amounts (e.g., quality programs or recoupments). The system allows posting these separately using either withhold amount or withhold adjustment type. This keeps AR accurate while tracking receivable recoveries.
+
+15. Balance Validation
+Before posting, the system verifies that total payments + adjustments + remaining balance equal the original charge amount. If totals do not reconcile, posting is blocked. This safeguard prevents financial discrepancies.
+
+16. Batch Controls
+Batch controls allow users to review summaries, access rule engines, generate balance reports, and finally post the batch. Once posted, the batch becomes locked to maintain audit integrity.
+
+17. Error & Exception Handling
+Common issues include unmatched charges, duplicate ICNs, invalid reason codes, and overpayments. The system flags these automatically. Users must correct mapping or manually intervene before final posting can occur.
+
+18. Compliance Considerations
+The ERS module follows HIPAA 835 standards and maintains a full audit trail. Every posting action is logged with user and timestamp details. Role-based access ensures financial governance and regulatory compliance.
+
+19. Integration Points
+The ERS module integrates with Practice Management, General Ledger, Clearinghouses, Reporting tools, and Patient Statements. After posting, updated balances flow automatically into downstream systems.
+
+20. Summary
+The ERS Module is the financial control center for insurance payment posting. It combines automation, rule logic, validation safeguards, and audit controls to ensure accurate revenue recognition and AR management. When properly configured, it significantly improves efficiency, compliance, and financial performance.
+
+End of User-Friendly ERS Documentation
