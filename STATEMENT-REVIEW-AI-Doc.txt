@@ -1,0 +1,239 @@
+﻿STATEMENT REVIEW MODULE – AI FEATURE DOCUMENTATION (EXPANDED VERSION)
+1. MODULE OVERVIEW
+
+The Statement Review Module is a specialized patient accounting workspace used within the Revenue Cycle Management (RCM) process to monitor, control, and intervene in the patient statement lifecycle.
+In a typical billing environment, statements are generated automatically based on balance rules, aging criteria, and payer responsibility. However, real-world workflows frequently require human review. This module serves as the operational checkpoint where staff validate whether statements should be sent, suppressed, corrected, or escalated.
+The module is not merely a reporting screen; it is an action-oriented control interface allowing billing teams to influence outbound patient communications and prevent billing errors.
+Core Business Functions:
+• Identify accounts eligible for statement production
+• Review patient balances and aging progression
+• Evaluate patient vs insurance responsibility
+• Prevent inappropriate statement generation
+• Manage temporary or permanent statement suppression
+• Access patient, account, and insurance data
+• Support collections and follow-up workflows
+Typical Operational Users:
+• Patient Account Representatives
+• Self-Pay / Collections Teams
+• Billing Specialists
+• Business Office Staff
+• Supervisors and RCM Analysts
+
+2. FUNCTIONAL PURPOSE
+
+The primary purpose of the Statement Review Module is to centralize statement-related decision-making.
+Without this module, users would need to navigate across multiple screens (patient account, insurance, correspondence history, etc.). This workspace consolidates key decision variables into a grid structure, enabling rapid evaluation and batch actions.
+The module supports the following operational decisions:
+• Should a statement be sent or suppressed?
+• Is the balance truly patient-responsible?
+• Has the account progressed correctly through statement cycles?
+• Is demographic or responsible party data accurate?
+• Does insurance activity justify delaying statements?
+
+3. NAVIGATION & ACCESS
+
+Users access the Statement Review Module from the billing or patient accounting navigation menu.
+This screen is commonly used in the following scenarios:
+• Pre-statement review cycles
+• Returned mail investigations
+• Self-pay balance management
+• Collections preparation
+• Exception handling workflows
+The screen header provides filtering controls, while the grid presents accounts meeting current criteria.
+
+4. GLOBAL FILTERS & TOGGLES
+
+Global filters control which accounts appear in the grid. These filters directly influence workload visibility and operational focus.
+4.1 Positive Balances Only
+Definition:
+When enabled, the system displays only accounts with outstanding balances greater than zero.
+Operational Rationale:
+Zero-balance accounts do not require statements or collection activity. Including them would increase visual noise and reduce efficiency.
+AI Interpretation Notes:
+If a user reports "missing accounts," verify whether this toggle is active.
+Common User Confusion:
+Users sometimes expect recently paid accounts to appear, not realizing they are excluded by this filter.
+
+4.2 True Self Pay Only
+Definition:
+Restricts results to accounts where financial responsibility is fully assigned to the patient or guarantor.
+True Self-Pay does NOT always mean “no insurance on file.” An account may contain insurance records but still be classified as self-pay due to:
+• Coverage termination
+• Benefit exhaustion
+• Denied claims
+• Non-covered services
+• Patient liability transfers
+Operational Rationale:
+Separates collectible patient balances from insurance-pending balances.
+AI Interpretation Notes:
+If insurance is visible but the account appears under self-pay, this is not inherently an error.
+
+5. DATA GRID ARCHITECTURE
+
+The grid is the primary decision surface of the module.
+Each row represents an account or statement entity. Columns expose attributes used for billing, statement progression, and suppression decisions.
+Grid Behavior Characteristics:
+• Rows are selectable and actionable
+• Columns represent decision variables
+• Sorting and scrolling supported
+• Highlighted row indicates active context
+• Actions apply to selected rows
+
+6. ACCOUNT / STATEMENT VIEW – COLUMN LOGIC
+
+6.1 Patient ID
+Represents the system’s unique internal identifier.
+Operational Importance:
+Used for navigation, audit trails, integrations, and reconciliation tasks. It should never be treated as a clinical identifier.
+
+6.2 Patient Name
+Provides visual confirmation of account ownership.
+Operational Importance:
+Critical for preventing misapplied actions, especially in high-volume environments.
+
+6.3 Address Fields (Address / City / State / Zip)
+Represents the statement delivery destination.
+Operational Importance:
+Incorrect address data is one of the most common causes of statement failure, returned mail, and delayed collections.
+AI Diagnostic Hint:
+If payments are delayed and statements appear correct, address accuracy should be evaluated.
+
+6.4 Balance Amount ($)
+Displays the patient-responsible financial liability currently outstanding.
+Operational Importance:
+This is the dominant decision driver for statement workflows. Threshold rules, aging logic, and collection prioritization depend on this value.
+Important Distinction:
+Balance Amount ≠ Original Charges
+Balances reflect payments, adjustments, and transfers already applied.
+
+6.5 Statement Stage
+Indicates the account’s position within the statement cycle strategy.
+Operational Meaning:
+Statement stages represent escalating communication attempts, not claim processing phases.
+Example Interpretation:
+Statement 1 → Initial notification
+Statement 2 → Follow-up reminder
+Statement 3 → Escalation / collections emphasis
+Higher stages typically imply increased aging risk.
+
+6.6 Is Self Pay
+Boolean indicator of patient financial responsibility.
+Operational Meaning:
+True → Balance expected from patient/guarantor
+False → Balance pending insurance resolution
+Critical AI Note:
+Self-pay classification may coexist with insurance records.
+
+6.7 On Hold
+Indicates statement suppression status.
+Operational Meaning:
+Accounts on hold are intentionally prevented from statement generation.
+Reasons for Holds May Include:
+• Active insurance investigation
+• Bankruptcy status
+• Legal restrictions
+• Disputes
+• Payment arrangements
+• Data errors
+AI Interpretation Rule:
+Hold status overrides statement eligibility logic.
+
+7. STATEMENT DETAIL VIEW – COLUMN LOGIC
+
+7.1 Hold Note
+Documents the business justification for suppression.
+Operational Importance:
+Acts as an internal communication and compliance record.
+Poor Practice to Avoid:
+Leaving holds without notes creates audit and workflow risks.
+
+7.2 Hold Expiration Date
+Defines temporary suppression logic.
+Operational Importance:
+Prevents indefinite holds and lost revenue opportunities.
+
+7.3 Billed Amount ($)
+Represents statement-associated charges.
+Operational Use:
+Useful for dispute resolution and reconciliation.
+
+7.4 Created Date
+Indicates when the statement or transaction record was generated.
+Operational Use:
+Supports aging analysis and workflow tracking.
+
+7.5 Location Name
+Identifies service facility or billing entity.
+Operational Importance:
+Critical for multi-location organizations.
+
+7.6 First / Last Date of Service
+Provides service span context for balances.
+Operational Importance:
+Frequently used in timely filing disputes and aging analysis.
+
+7.7 Insurance Columns
+Display payer hierarchy at time of billing.
+Operational Importance:
+Used to evaluate coverage sequencing and responsibility determination.
+
+8. RESPONSIBLE PARTY VIEW – INTERPRETATION
+
+Responsible Party fields determine who receives statements and who is financially liable.
+Key Principle:
+Responsible Party ≠ Always the Patient
+Examples:
+• Minor patients → Parent/Guardian responsible
+• Legal guardianship scenarios
+• Court-assigned responsibility
+Override Responsible Party Flag:
+Indicates deviation from system default rules.
+
+9. CONTACT & ADDRESS VIEW – INTERPRETATION
+
+Contact fields support non-statement collection workflows.
+Operational Importance:
+Incorrect phone data directly affects collections success rates.
+
+10. ACTION BUTTONS – WORKFLOW BEHAVIOR
+
+Refresh → Synchronizes grid with database state
+Thresholds → Controls statement eligibility rules
+View → Opens detailed record context
+Account Inquiry → Navigates to full account
+
+11. ACTION MENU – OPERATIONAL EFFECTS
+
+Instant Print → Immediate statement production
+View Statement → Opens statement rendering
+Hold / Unhold → Controls suppression logic
+Release → Removes hold restrictions
+Reset → Reverts statement cycle state
+Delete → Removes statement record (permission dependent)
+Critical AI Rule:
+These actions modify statement behavior, not underlying charges.
+
+12. HOLD MANAGEMENT LOGIC
+
+Holds are financial communication controls, not account freezes.
+Effects:
+• Statements suppressed
+• Account aging continues
+• Requires release logic
+
+13. AI SUPPORT GUIDELINES
+
+When diagnosing statement issues, AI should evaluate:
+1. Balance presence
+2. Self-pay classification
+3. Hold status
+4. Threshold rules
+5. Statement stage logic
+
+14. COMPLIANCE & DATA SENSITIVITY
+
+Sensitive fields require controlled access and masking per policy.
+
+15. SUMMARY
+
+The Statement Review Module functions as a decision and control hub governing patient statement workflows, suppression logic, and self-pay communication strategy within the revenue cycle.
