@@ -1,0 +1,884 @@
+Claim Review Module - AI-Ready Feature Documentation
+Document Information
+Module Name: Claim Review
+System: ImagineOne Software (Healthcare RCM Platform)
+
+Table of Contents
+1. Module Overview
+2. Primary Functions
+3. User Interface Components
+4. Data Fields & Definitions
+5. Workflow & Actions
+6. Filters & Search Capabilities
+7. Business Rules & Logic
+8. User Personas & Use Cases
+9. Integration Points
+10. Common User Questions & Answers
+
+Module Overview
+Purpose
+The Claim Review module is a central workspace in ImagineOne Software where Revenue Cycle Management
+(RCM) professionals review, analyze, and take action on healthcare insurance claims before submission or after
+payer response. It serves as the primary quality assurance and claim management interface.
+Core Functionality
+Display multiple claims in a filterable, sortable grid view
+Provide detailed charge-level information for each claim
+Enable claim-level and charge-level actions
+Support bulk operations on multiple claims
+
+Integrate with patient demographics, insurance plans, and billing workflows
+Access Point
+Located in the main navigation menu, typically under the "Billing" or "Claims" section of ImagineOne
+Software.
+
+Primary Functions
+1. Claim Listing & Review
+Display all claims meeting filter criteria in a paginated grid
+Show aggregate statistics (e.g., "339 Claims (Total Charge Amount) $250,342.10")
+Enable quick visual scanning of claim status, payer information, and amounts
+
+2. Charge Detail Inspection
+Expand individual claims to view associated charges
+Display procedure codes, diagnosis codes, modifiers, and charge amounts
+Show service dates and place of service codes
+
+3. Claim Actions
+Multiple action categories available:
+Review Actions: Print, View, Edit
+Hold Actions: Place claims on hold, unhold claims, unhold entire insurance plan
+Special Actions: Edit special values
+Release Actions: Release claims, unhold and release
+Removal Actions: Reset, unhold and reset, delete
+
+4. Filtering & Searching
+Filter by insurance plan (default shows "All")
+Paper vs. electronic claim toggle
+Additional advanced filters available
+
+User Interface Components
+Top Navigation
+Home: Return to main dashboard
+Claim Review Tab: Current active module
+Account Inquiry Tab: Patient account lookup (separate module)
+
+Filters Section
+Located at the top of the module:
+Insurance Plan Filter
+Label: "Insurance Plan"
+Default Value: "(All)"
+Functionality: Dropdown selector showing all available insurance plans
+Expandable List: When clicked, displays comprehensive insurance plan list including:
+Plan number and name (e.g., "1009 - Insurance Plan 1009 (15 - OTH)")
+Plan type indicators (COMM, AUTO, MCARE, WCOMP, MCAID)
+Special test plans (e.g., "24 - QA TEST", "30 - Insurance Plan 30 (1 - MCARE)")
+Format: [Plan Number] - [Plan Name] ([Category Code] - [Category])
+
+Paper Claims Toggle
+Type: Toggle switch
+Options: On/Off
+Purpose: Filter between paper and electronic claims
+Default: Typically set to show electronic claims
+
+Payer Button
+Purpose: Additional payer-related filtering or actions
+Location: Top right of filters section
+
+Claims Grid (Primary Table)
+Columns (Left to Right):
+1. Claim ID - Unique internal identifier (e.g., 4313074, 4313088)
+2. Patient ID - Unique patient identifier (e.g., 384641, 1082666)
+3. Patient Name - Full name in LAST, FIRST MI format (e.g., "SEARS, SAMMY S")
+
+4. Patient DOB - Date of birth (format: MM/DD/YYYY)
+5. Insurance Carrier Name - Primary payer description (e.g., "Other Comm.", "CONTRACTS")
+6. Insurance Plan Number - Numeric plan identifier (e.g., 981264, 1009)
+7. Insurance Plan Name - Descriptive name with qualifiers (e.g., "BANKERS FIDELITY", "Insurance
+Plan 1009 (15 - OTH)")
+8. Insurance Policy Number - Member/subscriber ID (e.g., 2171202835, 620020060)
+9. Referring Doctor / LPN - Ordering/referring provider information (e.g., "LANGENBERG, LOYD L /")
+10. On Hold - Status indicator (blank or populated)
+Grid Features:
+Sortable Columns: Click column headers to sort
+Row Selection: Click to select individual claims (highlighted in blue)
+Row Expansion: Selected claims expand to show charge details
+Scrolling: Horizontal and vertical scroll for large datasets
+Visual Indicators: Color coding for selected rows (light blue highlight)
+
+Charge Detail Section
+Appears below selected claim row when claim is expanded.
+Header
+Label: "1 Charge" (or "2 Charges", etc. - shows count)
+Right Icons: Filter and settings icons for charge-level controls
+
+Charge Grid Columns:
+1. Date Of Service - Service date (format: M/D/YYYY, e.g., "3/15/2019")
+2. Procedure - CPT/HCPCS code with description (e.g., "74815 - Positron emission tor")
+3. Modifier - Procedure modifiers (e.g., "26 P1")
+4. Units - Quantity billed (e.g., "1.00")
+5. Diagnosis Codes - ICD-10 codes with descriptions (e.g., "R91.8 - Other nonspecific abn")
+6. Charge Amount - Dollar amount (e.g., "$1,065.00")
+7. POS Code - Place of Service code (e.g., "22")
+8. Charge ID - Internal charge identifier (e.g., "1163358")
+9. Timely Filing Warning - Boolean indicator (True/False)
+10. Appeal Warning - Boolean indicator (True/False)
+
+Data Fields & Definitions
+Claim-Level Fields
+Field Name
+
+Data Type
+
+Description
+
+Business Rules
+
+Example Values
+
+Claim ID
+
+Integer
+
+System-generated
+
+Auto-incremented,
+
+4313074, 4314041
+
+unique identifier for
+
+immutable
+
+claim
+Patient ID
+
+Integer
+
+Unique patient
+
+Links to patient
+
+identifier from master
+
+demographics
+
+384641, 927251
+
+patient index
+Patient Name
+
+String
+
+Patient full name
+
+Last, First Middle
+
+SEARS, SAMMY S
+
+Initial format
+Patient DOB
+
+Date
+
+Patient date of birth
+
+MM/DD/YYYY
+
+01/10/1936
+
+format, validates age
+Insurance
+
+String
+
+Carrier Name
+Insurance
+
+Integer
+
+Plan Number
+Insurance
+
+High-level payer
+
+Maps to payer
+
+Other Comm.,
+
+category
+
+contracts
+
+CONTRACTS
+
+Numeric identifier for
+
+References plan table
+
+981264, 1009, 149367
+
+Descriptive plan name
+
+Includes plan type
+
+BANKERS FIDELITY,
+
+with type
+
+suffix
+
+Insurance Plan 1009 (15 -
+
+insurance plan
+String
+
+Plan Name
+
+OTH)
+Insurance
+
+String/Alphanumeric
+
+Policy
+
+Member or subscriber
+
+Format varies by
+
+ID
+
+payer
+
+Referring or ordering
+
+Last, First / LPN
+
+provider
+
+format
+
+Claim hold status
+
+Blank = not on hold,
+
+2171202835, 620020060
+
+Number
+Referring
+
+String
+
+Doctor / LPN
+On Hold
+
+Boolean/String
+
+value = reason
+
+LANGENBERG, LOYD L /
+
+Blank or populated
+
+Charge-Level Fields
+Field Name
+
+Data
+
+Description
+
+Business Rules
+
+Example Values
+
+Date service was
+
+M/D/YYYY format,
+
+3/15/2019, 1/20/2021
+
+rendered
+
+cannot be future date
+
+CPT/HCPCS code with
+
+5-digit code + truncated
+
+74815 - Positron emission tor,
+
+description
+
+description
+
+71260 - Computed tomograph
+
+CPT modifiers
+
+Space-separated, up to 4
+
+26 P1, blank
+
+Type
+Date Of
+
+Date
+
+Service
+Procedure
+
+Modifier
+
+String
+
+String
+
+modifiers
+Units
+
+Decimal
+
+Quantity of service
+
+Decimal format (e.g.,
+
+1.00
+
+1.00), typically 1-999
+Diagnosis
+
+String
+
+Codes
+Charge
+
+Currency
+
+ICD-10 code with
+
+Code + description
+
+R91.8 - Other nonspecific abn,
+
+description
+
+format
+
+K57.30 - Diverticulosis of larg
+
+Dollar amount billed
+
+USD format with 2
+
+$1,065.00, $753.00, $1,983.00
+
+Amount
+POS Code
+
+decimals
+Integer
+
+Place of Service code
+
+2-digit CMS POS code
+
+22 (On Campus-Outpatient
+Hospital), 11 (Office)
+
+Charge ID
+
+Timely Filing
+
+Integer
+
+Boolean
+
+Warning
+Appeal
+
+Unique charge
+
+System-generated,
+
+1163358, 4410153, 4410152
+
+identifier
+
+immutable
+
+Alerts to potential
+
+True/False
+
+True
+
+True/False
+
+True
+
+timely filing issues
+Boolean
+
+Warning
+
+Alerts to potential
+appeal issues
+
+Insurance Plan Categories
+Common plan type suffixes displayed in plan names:
+
+Code
+
+Full Name
+
+Description
+
+OTH
+
+Other
+
+General commercial or other insurance
+
+COMM
+
+Commercial
+
+Commercial insurance plans
+
+AUTO
+
+Auto
+
+Auto insurance (injury-related)
+
+MCARE
+
+Medicare
+
+Medicare plans
+
+MCAID
+
+Medicaid
+
+Medicaid plans
+
+WCOMP
+
+Workers Compensation
+
+Workers comp insurance
+
+Workflow & Actions
+Accessing the Action Menu
+Trigger Method: Right-click on a claim row or click the "Action" button in the bottom toolbar
+Action Menu Structure: The action menu is organized into distinct categories (as shown in Screenshot 12):
+Review Action
+Instant Print: Generate immediate print output of claim
+View Claim: Open claim in read-only view mode
+Edit Claim: Open claim for editing
+
+Hold Action
+Hold \ Unhold: Toggle hold status on selected claim
+Hold \ Unhold Plan: Apply hold/unhold to entire insurance plan
+Edit Hold Note: Add or modify notes explaining hold reason
+
+Special Action
+Edit Special Values: Modify special fields or override values
+
+Release Action
+Release: Release claim for billing/submission
+Unhold And Release: Remove hold and immediately release
+
+Removal Action
+
+Reset: Reset claim to previous state
+Unhold And Reset: Remove hold and reset claim
+Delete: Permanently remove claim (with appropriate permissions)
+
+Common Workflows
+Workflow 1: Review and Release Claim
+1. Open Claim Review module
+2. Apply filters (if needed) to locate specific claims
+3. Click on claim row to select
+4. Review charge details in expanded section
+5. Verify patient demographics, insurance information, and charge accuracy
+6. Right-click claim row or click "Action" button
+7. Select "Release Action" → "Release"
+8. Claim moves to batch/submission queue
+
+Workflow 2: Place Claim on Hold
+1. Select claim requiring hold
+2. Access action menu
+3. Choose "Hold Action" → "Hold \ Unhold"
+4. Optionally select "Edit Hold Note" to document reason
+5. Claim status updates to "On Hold"
+
+Workflow 3: Edit Claim Details
+1. Locate and select claim
+2. Access action menu
+3. Choose "Review Action" → "Edit Claim"
+4. Claim opens in edit mode
+5. Make necessary corrections
+6. Save changes
+7. Return to Claim Review
+
+Workflow 4: Bulk Insurance Plan Hold
+1. Filter by specific insurance plan using dropdown
+2. Select "Hold Action" → "Hold \ Unhold Plan"
+3. All claims for that plan are placed on hold
+
+4. Used when payer contracts expire or billing issues arise
+
+Filters & Search Capabilities
+Insurance Plan Filter
+Purpose: Narrow claim view to specific insurance plan(s)
+How It Works:
+Dropdown displays all active insurance plans in system
+Plans shown with format: [Plan #] - [Plan Name] ([Type Code] - [Type])
+Selecting a plan filters the claims grid to show only claims for that plan
+Default "(All)" shows claims across all insurance plans
+Example Plan List Values:
+1009 - Insurance Plan 1009 (15 - OTH)
+149040 - Insurance Plan 149040 (67 - AUTO)
+149367 - Insurance Plan 149367 (15 - OTHER)
+149369 - Insurance Plan 149369 (15 - OTHER)
+150070 - Insurance Plan 150070 (15 - OTHER)
+151092 - Insurance Plan 151092 (12 - WCOMP)
+173443 - Insurance Plan 173443 (15 - OTHER)
+173552 - Insurance Plan 173552 (15 - OTHER)
+174508 - Insurance Plan 174508 (9 - COMM)
+176084 - Insurance Plan 176084 (69 - MCARE)
+24 - QA TEST
+28930 - Insurance Plan 28930 (9 - COMM)
+30 - Insurance Plan 30 (1 - MCARE)
+
+Paper Claims Toggle
+Purpose: Separate paper claims from electronic claims
+States:
+On: Show only paper claims
+Off: Show only electronic claims (default)
+Use Case:
+
+Users managing legacy paper claim submissions
+Separating workflows between paper and electronic processing
+Reporting and reconciliation purposes
+
+Payer Button
+Purpose: Quick access to payer-specific filtering or information
+Functionality: Opens additional payer selection or filtering options
+Column Sorting
+How It Works:
+Click any column header to sort ascending
+Click again to sort descending
+Visual indicator (arrow) shows sort direction
+Supports sorting by:
+Claim ID (numeric)
+Patient ID (numeric)
+Patient Name (alphabetic)
+Date of Birth (chronologic)
+Insurance Plan Number (numeric)
+All other displayed columns
+
+Business Rules & Logic
+Claim Display Rules
+1. Claim Count Display:
+Header shows total claim count and aggregate charge amount
+Format: [Count] Claims (Total Charge Amount) $[Amount]
+Example: "339 Claims (Total Charge Amount) $250,342.10"
+Updates dynamically based on active filters
+2. Charge Count Display:
+When claim is expanded, shows number of charges
+Format: [Count] Charge or [Count] Charges
+Example: "1 Charge", "2 Charges"
+3. Row Selection:
+
+Only one claim can be expanded at a time
+Selecting a new claim collapses the previously selected claim
+Selected row highlighted in blue
+Hold Logic
+1. Claim Hold Status:
+Claims on hold cannot be released for billing
+Hold can be applied at claim level or plan level
+Hold notes document reason for hold
+Holds must be manually removed before release
+2. Plan-Level Holds:
+Applying hold to plan affects all claims for that plan
+Used for systemic issues (contract disputes, credential issues, etc.)
+Overrides individual claim release status
+
+Warning Indicators
+1. Timely Filing Warning:
+Appears at charge level
+Boolean flag (True/False)
+True = Approaching or past timely filing deadline
+Requires immediate attention to avoid denial
+2. Appeal Warning:
+Appears at charge level
+Boolean flag (True/False)
+True = Appeal deadline approaching or special handling required
+
+Validation Rules
+1. Date of Service:
+Cannot be future-dated
+Must fall within coverage period
+Should align with patient eligibility dates
+2. Charge Amount:
+Must be greater than $0
+Cannot exceed maximum allowed amount per payer contract
+
+Displayed in USD with 2 decimal places
+3. Procedure Codes:
+Must be valid CPT/HCPCS codes
+Must be active on date of service
+Require appropriate modifiers per coding guidelines
+4. Diagnosis Codes:
+Must be valid ICD-10 codes
+Must be active on date of service
+Should support medical necessity for procedure
+
+User Personas & Use Cases
+Persona 1: Billing Specialist
+Role: Front-line billing professional responsible for claim submission
+Primary Tasks:
+Review claims for accuracy before submission
+Correct coding or demographic errors
+Release clean claims to batch
+Place problematic claims on hold
+Typical Questions:
+"How do I filter claims by insurance plan?"
+"How do I place a claim on hold?"
+"What does the timely filing warning mean?"
+"How do I edit a claim before releasing it?"
+
+Persona 2: RCM Manager
+Role: Supervisor overseeing billing team and claim workflow
+Primary Tasks:
+Monitor claim inventory and aging
+Apply plan-level holds for systemic issues
+Review hold notes and resolve blockers
+Generate reports on claim volume and status
+
+Typical Questions:
+"How many claims are pending review?"
+"How do I hold all claims for a specific insurance plan?"
+"Can I see the total charge amount for displayed claims?"
+"How do I release multiple claims at once?"
+
+Persona 3: Coding/CDM Specialist
+Role: Clinical coding expert ensuring proper code assignment
+Primary Tasks:
+Review charges for coding accuracy
+Verify procedure and diagnosis code pairing
+Ensure modifier usage is appropriate
+Identify and correct coding errors
+Typical Questions:
+"How do I view charge details for a claim?"
+"Where can I see the diagnosis codes assigned?"
+"How do I edit charge information?"
+"What modifiers are appended to this procedure?"
+
+Persona 4: Credentialing/Contracting Specialist
+Role: Manages payer contracts and provider credentials
+Primary Tasks:
+Identify claims affected by contract changes
+Place holds when credentials are pending
+Release claims once contracting issues resolved
+Typical Questions:
+"How do I hold all claims for a specific insurance plan?"
+"Can I add a note explaining why claims are on hold?"
+"How do I bulk release claims after resolving contract issues?"
+
+Integration Points
+Upstream Systems (Data Sources)
+1. Patient Registration/ADT:
+Provides patient demographics (name, DOB, ID)
+Supplies insurance information
+Updates patient contact information
+2. Charge Capture/CDM:
+Sends procedure codes and charges
+Provides diagnosis code assignments
+Includes service dates and locations
+3. Insurance Verification:
+Validates insurance eligibility
+Provides policy numbers and coverage details
+Flags coverage limitations
+4. Provider/Credentialing System:
+Supplies referring provider information
+Validates provider credentials and NPI
+
+Downstream Systems (Data Consumers)
+1. Claim Scrubbing/Edits Engine:
+Receives released claims for validation
+Returns edit failures back to Claim Review
+Ensures clean claim submission
+2. Clearinghouse/EDI:
+Receives electronic claims for transmission
+Processes acknowledgments and rejections
+Routes to appropriate payers
+3. Accounts Receivable:
+Tracks claim submission and status
+Records payments and adjustments
+Manages follow-up workflows
+4. Reporting/Analytics:
+Consumes claim volume data
+
+Tracks days in AR
+Measures clean claim rates and denials
+
+Common User Questions & Answers
+Navigation & Access
+Q: How do I access the Claim Review module? A: From the main ImagineOne Software interface, click on
+the "Claim Review" tab in the top navigation bar, or access it through the "Billing" section of the main menu.
+Q: What does the claim count at the top mean? A: The display "339 Claims (Total Charge Amount)
+$250,342.10" shows the total number of claims currently displayed based on your filters, along with the sum of
+all charge amounts across those claims.
+Filtering & Searching
+Q: How do I filter claims by insurance plan? A: Click the "Insurance Plan" dropdown in the Filters section at
+the top of the screen. Select a specific insurance plan from the list, or leave it set to "(All)" to view claims across
+all plans.
+Q: What is the Paper toggle for? A: The Paper toggle allows you to filter between paper claims and electronic
+claims. Toggle it on to see paper claims, or leave it off to view electronic claims.
+Q: Can I search for a specific patient? A: While the Claim Review module shows a list of claims, you can sort
+by Patient Name or Patient ID by clicking the respective column header. For specific patient searches, use the
+"Account Inquiry" tab.
+Q: How do I sort the claims list? A: Click any column header to sort by that column. Click once for ascending
+order, click again for descending order.
+Viewing Claim Details
+Q: How do I see the charges for a claim? A: Click on the claim row you want to review. The row will expand
+to show the charge details section below, which lists all charges associated with that claim.
+Q: What does "1 Charge" or "2 Charges" mean? A: This indicates how many individual charge lines are
+associated with the selected claim. Each charge represents a billable service or procedure.
+Q: Where can I see the procedure codes? A: After selecting a claim, the charge details section will display the
+"Procedure" column showing the CPT/HCPCS code and description for each charge.
+Q: What do the diagnosis codes tell me? A: The "Diagnosis Codes" column shows the ICD-10 codes assigned
+to each charge, which justify the medical necessity of the service performed.
+Taking Actions
+Q: How do I edit a claim? A: Select the claim by clicking on it, then right-click the claim row or click the
+"Action" button in the bottom toolbar. Choose "Review Action" → "Edit Claim" from the menu.
+
+Q: How do I place a claim on hold? A: Select the claim, access the action menu (right-click or "Action"
+button), and choose "Hold Action" → "Hold \ Unhold". You can add a note explaining the hold reason by
+selecting "Edit Hold Note".
+Q: How do I release a claim for billing? A: Select the claim, open the action menu, and choose "Release
+Action" → "Release". If the claim is on hold, you can select "Unhold And Release" to remove the hold and
+release in one action.
+Q: Can I hold all claims for a specific insurance plan at once? A: Yes. Filter to the specific insurance plan
+using the dropdown, then use the action menu to select "Hold Action" → "Hold \ Unhold Plan". This will hold
+all claims for that plan.
+Q: What is the difference between "Reset" and "Delete"? A: "Reset" returns a claim to a previous state,
+typically reversing recent changes or status updates. "Delete" permanently removes the claim from the system
+(requires appropriate permissions and should be used with caution).
+Warnings & Alerts
+Q: What does "Timely Filing Warning = True" mean? A: This warning indicates the claim is approaching or
+has passed the payer's timely filing deadline. Immediate action is needed to submit the claim before it's denied
+for untimely filing.
+Q: What does "Appeal Warning = True" mean? A: This flag indicates there may be an appeal deadline
+approaching or the claim requires special handling related to an appeal process.
+Q: How do I know if a claim is on hold? A: Check the "On Hold" column in the claims grid. If the field is
+populated, the claim is on hold. If it's blank, the claim is not on hold.
+Insurance & Patient Information
+Q: What is the difference between "Insurance Carrier Name" and "Insurance Plan Name"? A:
+"Insurance Carrier Name" is the high-level payer category (e.g., "CONTRACTS", "Other Comm."), while
+"Insurance Plan Name" is the specific plan with details (e.g., "Insurance Plan 1009 (15 - OTH)").
+Q: What does the number in parentheses mean in the insurance plan name? A: The format is "[Plan
+Number] - [Plan Name] ([Type Code] - [Type])". For example, "Insurance Plan 1009 (15 - OTH)" means plan
+number 1009, type code 15, and type "OTH" (Other).
+Q: What are the insurance plan type codes? A: Common types include:
+COMM = Commercial insurance
+OTH/OTHER = Other insurance types
+MCARE = Medicare
+MCAID = Medicaid
+AUTO = Auto insurance
+WCOMP = Workers Compensation
+
+Charges & Billing
+Q: What is a POS Code? A: POS (Place of Service) Code is a 2-digit code indicating where the service was
+performed. For example, "22" represents On Campus-Outpatient Hospital, "11" represents Office.
+Q: What are modifiers? A: Modifiers are 2-character codes appended to procedure codes to provide additional
+information about the service (e.g., "26" = professional component, "P1" = specific modifier for anesthesia).
+Q: Can I see the total charges for a single claim? A: Yes, when you expand a claim, each charge line shows
+its individual "Charge Amount". Sum these amounts to get the total for the claim.
+Troubleshooting
+Q: Why can't I release a claim? A: Common reasons include:
+Claim is on hold (check "On Hold" column)
+Missing required information (patient demographics, insurance, codes)
+Validation errors (check for warnings or error messages)
+Insufficient user permissions
+Q: I don't see the claim I'm looking for. What should I check? A: Verify:
+Your insurance plan filter isn't limiting the view
+The Paper toggle is set correctly (paper vs. electronic)
+The claim exists in the system (check Account Inquiry)
+You have the correct date range or status filters applied
+Q: How do I print a claim? A: Select the claim, access the action menu, and choose "Review Action" →
+"Instant Print".
+Q: Can I edit charges directly from the Claim Review screen? A: You can view charge details, but editing
+typically requires opening the claim in edit mode via "Review Action" → "Edit Claim".
+
+Technical Notes for AI Interpretation
+Field Name Variations
+Users may refer to fields using different terminology:
+"Claim ID" = "Claim Number", "Claim #"
+"Patient ID" = "Patient Number", "MRN", "Medical Record Number"
+"Patient DOB" = "Date of Birth", "Birthday", "DOB"
+"Insurance Plan" = "Plan", "Payer Plan", "Insurance"
+"Charge Amount" = "Charge", "Billed Amount", "Amount"
+
+"Procedure" = "Procedure Code", "CPT", "HCPCS"
+"Diagnosis Codes" = "Diagnosis", "ICD-10", "Dx"
+Action Terminology
+Users may describe actions differently:
+"Release" = "Submit", "Send", "Bill", "Process"
+"Hold" = "Stop", "Pause", "Suspend", "Flag"
+"Edit" = "Change", "Update", "Modify", "Correct"
+"Delete" = "Remove", "Erase", "Cancel"
+
+Context Clues
+When users ask questions, look for:
+Filtering intent: "for Medicare", "only Plan 1009", "paper claims"
+Action intent: "how do I", "can I", "where do I"
+Information seeking: "what is", "what does mean", "where can I see"
+Troubleshooting: "why can't I", "it's not working", "I don't see"
+
+Response Strategy
+When answering questions:
+1. Confirm understanding: Briefly restate what the user is asking
+2. Provide direct answer: Give the specific steps or information
+3. Add context: Explain why or when this would be used
+4. Offer related information: Suggest related features or next steps
+
+Appendix: Screenshot Reference
+Screenshot 9 (Base View)
+Shows Claims Grid with 339 total claims
+Displays first claim (4313074) expanded with 1 charge visible
+Insurance Plan filter set to "(All)"
+Example data: Patient SEARS, SAMMY S with charge for procedure 74815
+
+Screenshot 10 (Same as Screenshot 9)
+Identical view to Screenshot 9
+
+Confirms consistent interface
+Screenshot 11 (Insurance Plan Filter Expanded)
+Shows dropdown list of all insurance plans
+Displays plan format: [Number] - [Name] ([Type Code] - [Type])
+Examples include plans 1009, 149040, 149367, Medicare, Workers Comp, etc.
+
+Screenshot 12 (Action Menu)
+Shows right-click context menu with all available actions
+Organized into 5 categories: Review, Hold, Special, Release, Removal
+Located on right side of screen as overlay
+
+Screenshot 13 (Different Claim Selected)
+Claim 4313737 selected (Patient: MARTIN, MARIA M)
+Shows "2 Charges" in charge detail section
+Charges dated 1/20/2021 for procedures 74177 and 71260
+Demonstrates multiple charges per claim
+
+Document Control
+Version: 1.0
+Created: February 2026
+Format: Markdown (.md)
+Intended Use: AI Training, User Support, Internal Reference
+Maintenance: Update when module features change or new business rules are implemented
+
+End of Document
+
+
