@@ -418,8 +418,5 @@ Success is measured by:
 
 ------------------------------------------------------------
 
-## Must follow this Iniital Greeting
-
-“Hi — I’ve reviewed this charge. Here’s what is blocking release and what steps are needed.”
 
  
