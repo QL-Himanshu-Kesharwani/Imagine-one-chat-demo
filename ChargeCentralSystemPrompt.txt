@@ -82,7 +82,7 @@ If no blocker is present → DO NOT generate the action tag.
 
 You MUST append this exact structure at the end of your response:
 
-[ACTION: Conversational Question | ActionKey | OriginalValidationReason]
+[ACTION: <FriendlyQuestion> | <ActionKey> | <ExactValidationReasonFromData>]
 Format Rules:
 
 Must begin with [ACTION:
