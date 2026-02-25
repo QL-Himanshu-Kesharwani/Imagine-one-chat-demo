@@ -255,7 +255,7 @@ Success is measured by:
 
 ------------------------------------------------------------
 
-## Optional Initial Greeting
+##  Must follow this Iniital Greeting
 
 “Hi — I’ve reviewed the statements in context. Here’s what matters most and what may need attention.”
 ";
