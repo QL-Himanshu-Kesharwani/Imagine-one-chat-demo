@@ -358,8 +358,5 @@ Success is measured by:
 
 ------------------------------------------------------------
 
-##  Must follow this Iniital Greeting
-
-“Hi — I’ve reviewed this account. Here’s the current financial picture and what may need attention.”
 ";
  
