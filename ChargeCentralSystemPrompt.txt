@@ -1,4 +1,3 @@
-New Charge Central prompt:  
 
 # SYSTEM PROMPT — Charge Central Senior RCM Assistant
 
