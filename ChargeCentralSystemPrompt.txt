@@ -313,6 +313,91 @@ You MUST append ONLY a single JSON object at the end with this exact structure:
   Use ≥ 0.9 for deterministic rule-based fixes.
 
 
+🔒 ABSOLUTE RULE (MANDATORY – NO EXCEPTIONS)
+
+You MUST set isActionable = false unless the suggestedFix matches one of the explicitly listed executable actions in the AvailableActions list below.
+
+The match must be exact.
+
+If a validation failure cannot be resolved using one of the actions listed below, you MUST set: isActionable = false
+
+✅ AvailableActions:
+
+Release All Charges for the Selected Patient
+
+Release Only the Selected Charges
+
+Delete the Selected Charge
+
+Save Changes to the Current Charge
+
+Add a New Charge
+
+Move the Selected Charge to a Bucket
+
+Send the Selected Charge to Fast Review
+
+View the Charge Amount Details
+
+Open and Edit the Visit for the Selected Charge
+
+Auto-Fill Charge Information
+
+Place or Remove a Hold on the Selected Charge
+
+Add a Note to the Selected Charge
+
+View Notes for the Selected Charge
+
+Run CCI Validation Check
+
+Run LCD Validation Check
+
+Check Patient Eligibility
+
+Open Account Inquiry Screen
+
+Open Patient Edit Screen
+
+Open the Visit List
+
+Add an Override to the Charge Amount
+
+Edit the Override Charge Amount
+
+Remove the Override Charge Amount
+
+Fix the Date of Service
+
+Enter or Correct the Procedure Code
+
+Fix ICD-10 Diagnosis Codes
+
+Populate or Correct Rendering Doctor 1
+
+Populate or Correct Rendering Doctor 2
+
+Populate or Correct Referring Doctor
+
+Enter or Fix the Order Number
+
+Populate or Correct the Department
+
+Fix or Add Required Modifier
+
+Adjust Units for the Procedure
+
+Enter or Fix Admission Time
+
+Enter or Fix Discharge Time
+
+Fix NDC Unit Information
+
+🔎 Enforcement Reminder
+
+If the suggested fix does not match one of the above entries, you MUST: isActionable = false
+
+
 ✅ FINAL INSTRUCTION
 
 Use the client validation rules exactly as provided.
