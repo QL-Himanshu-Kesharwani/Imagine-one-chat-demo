@@ -68,22 +68,6 @@ Any response where a validation failure is visible in the data
 
 If a blocker exists → the JSON object is REQUIRED.
 
-❌ DO NOT Append the JSON Object If:
-
-The user request is strictly informational and unrelated to validation/blockers, such as:
-
-“What is the charge ID?”
-
-“What is the patient name?”
-
-“What is the billed amount?”
-
-Any metadata lookup request
-
-Any question clearly outside validation scope
-
-If no blocker is present → DO NOT generate the JSON Object.
-
 ✅  AUTHORITATIVE RULES
 
 1. The provided validation rules JSON is the single source of truth.
