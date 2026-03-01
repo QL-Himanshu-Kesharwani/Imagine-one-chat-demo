@@ -326,41 +326,125 @@ No dynamic values
 
 ✅ AVAILABLE ACTIONS (SEMANTIC MATCH TARGETS)
 
-Release All Charges for the Selected Patient
-Release Only the Selected Charges
-Delete the Selected Charge
-Save Changes to the Current Charge
-Add a New Charge
-Move the Selected Charge to a Bucket
-Send the Selected Charge to Fast Review
-View the Charge Amount Details
-Open and Edit the Visit for the Selected Charge
-Auto-Fill Charge Information
-Place or Remove a Hold on the Selected Charge
-Add a Note to the Selected Charge
-View Notes for the Selected Charge
-Run CCI Validation Check
-Run LCD Validation Check
-Check Patient Eligibility
-Open Account Inquiry Screen
-Open Patient Edit Screen
-Open the Visit List
-Add an Override to the Charge Amount
-Edit the Override Charge Amount
-Remove the Override Charge Amount
-Fix the Date of Service
-Enter or Correct the Procedure Code
-Fix ICD-10 Diagnosis Codes
-Populate or Correct Rendering Doctor 1
-Populate or Correct Rendering Doctor 2
-Populate or Correct Referring Doctor
-Enter or Fix the Order Number
-Populate or Correct the Department
-Fix or Add Required Modifier
-Adjust Units for the Procedure
-Enter or Fix Admission Time
-Enter or Fix Discharge Time
-Fix NDC Unit Information
+🔓 Release Actions
+
+Release all patient charges
+→ Resolves charges that are ready and not blocked by validations
+
+Release selected charges
+→ Resolves posting of selected charges that are not on hold
+
+🗑 Charge Management
+
+Delete selected charge
+→ Resolves incorrect or invalid charges that must be removed
+
+Save current charge
+→ Commits entered or corrected charge information after fixing validations
+
+Add new charge
+→ Creates a missing charge for the selected patient visit
+
+Move charge to bucket
+→ Reassigns a charge for further work or review
+
+🔍 Validation & Review
+
+Send charge to Fast Review
+→ Resolves charges requiring additional system or manual validation
+
+View charge amount details
+→ Reviews calculated charge amounts and fee schedule output
+
+Run CCI validation check
+→ Resolves CCI bundling or coding conflicts
+
+Run LCD validation check
+→ Resolves medical necessity or diagnosis coverage issues
+
+Check patient eligibility
+→ Resolves eligibility-related validation failures
+
+🧭 Navigation & Context
+
+Open visit edit screen
+→ Fixes visit-level validation issues (visit number, visit data)
+
+Open patient edit screen
+→ Fixes demographic or patient-level issues affecting charges
+
+Open visit list
+→ Reviews all visits for the selected patient
+
+Open account inquiry screen
+→ Reviews financial history for investigation
+
+⛔ Hold Management
+
+Place or remove charge hold
+→ Resolves hold-based posting restrictions
+
+📝 Notes
+
+Add charge note
+→ Documents validation decisions or exceptions
+
+View charge notes
+→ Reviews existing documentation
+
+💲 Charge Amount Overrides
+
+Add charge amount override
+→ Resolves incorrect fee schedule calculations
+
+Edit charge amount override
+→ Updates an existing override
+
+Remove charge amount override
+→ Reverts overridden amounts
+
+🛠 Field-Level Validation Fixes (HIGH CONFIDENCE ACTIONABLE)
+
+These actions directly resolve validation failures:
+
+Fix date of service
+→ Resolves missing, invalid, or conflicting service date validations
+
+Enter or correct procedure code
+→ Resolves missing or invalid CPT / HCPCS code validations
+
+Fix ICD-10 diagnosis codes
+→ Resolves missing, invalid, or duplicate ICD-10 validations
+
+Populate or correct Rendering Doctor 1
+→ Resolves missing, invalid, inactive, or contract-restricted Rendering Doctor 1
+
+Populate or correct Rendering Doctor 2
+→ Resolves Rendering Doctor 2–specific validation issues
+
+Populate or correct referring doctor
+→ Resolves missing, invalid, or inactive referring doctor validations
+
+Fix order number
+→ Resolves missing required order number validations
+
+Populate or correct department
+→ Resolves missing or invalid department validations
+
+Fix or add required modifier
+→ Resolves missing or invalid modifier validations
+
+Adjust procedure units
+→ Resolves unit threshold or quantity validations
+
+Fix admission time
+→ Resolves missing admission time validations
+
+Fix discharge time
+→ Resolves missing discharge time validations
+
+Fix NDC unit information
+→ Resolves invalid or missing NDC unit validations
 
 OUTPUT JSON SCHEMA (STRICT)
 
