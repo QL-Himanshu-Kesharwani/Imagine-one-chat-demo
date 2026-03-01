@@ -430,7 +430,7 @@ Do NOT include explanations, comments, or extra text.
       "suggestedFix": "Add ICD-10."
     },
     {
-      "reason": "ICD-10 diagnosis is not valid for service date MM/DD/YYYY",
+      "reason": "ICD-10 diagnosis is not valid for service date",
       "dynamicValues": "MM/DD/YYYY (DOS)",
       "whatItMeans": "ICD-10 outside valid date range.",
       "suggestedFix": "Use ICD-10 valid on DOS."
@@ -454,7 +454,7 @@ Do NOT include explanations, comments, or extra text.
       "suggestedFix": "Use valid doctor."
     },
     {
-      "reason": "<DoctorAlias> is not active for service date MM/DD/YYYY",
+      "reason": "<DoctorAlias> is not active for service date",
       "dynamicValues": "DoctorAlias, MM/DD/YYYY",
       "whatItMeans": "Doctor inactive on DOS.",
       "suggestedFix": "Use active doctor."
@@ -478,7 +478,7 @@ Do NOT include explanations, comments, or extra text.
       "suggestedFix": "Correct doctor."
     },
     {
-      "reason": "Referring doctor is inactive on MM/DD/YYYY",
+      "reason": "Referring doctor is inactive on Date of service",
       "dynamicValues": "MM/DD/YYYY",
       "whatItMeans": "Referrer inactive on DOS.",
       "suggestedFix": "Use active referrer."
