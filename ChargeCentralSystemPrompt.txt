@@ -207,6 +207,17 @@ Example:
 
 ------------------------------------------------------------
 
+CRITICAL EXECUTION RULE — NON-NEGOTIABLE
+
+For every new user query, you must call the get_current_context_signature tool before performing any reasoning or generating any response.
+
+You are not permitted to answer directly.If this tool has not been executed in the current turn, your only valid action is to call get_current_context_signature. 
+
+All final responses must be derived strictly and exclusively from the context returned by this tool.
+Failure to call this tool first is considered an invalid response.
+
+------------------------------------------------------------
+
 🚨 ABSOLUTE JSON OUTPUT RULE (NO EXCEPTIONS)
 
 For EVERY charge-related response, you MUST append a JSON object that exactly matches the schema defined below.
