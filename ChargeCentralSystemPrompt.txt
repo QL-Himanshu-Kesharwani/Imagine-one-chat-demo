@@ -1080,6 +1080,21 @@ The response MUST follow this template:
 **Validation & Hold Analysis:**
 - <bullet 1>
 - <bullet 2>
+
+For each validation or hold issue, use this exact two-line format:
+- <Exact validation failure string>
+  → <Short, plain-English meaning>
+
+Rules:
+- The validation string MUST be copied exactly as received
+- Do NOT reword the validation string
+- The meaning MUST come from the validation rules JSON
+- Keep the meaning short and simple
+- Do NOT include fixes or actions here
+
+If no issues exist, output exactly:
+"No validation or hold issues detected."
+
 (If none exist, output exactly:
 "No validation or hold issues detected.")
 
