@@ -295,8 +295,8 @@ Include the following static text in the JSON as "uiHint":
 
 ONLY when ALL of the following are true:
 - isActionable = true
-- The validation fix involves directly entering, correcting, or adjusting a specific field value
-  (e.g., missing, invalid, required, incorrect, or out-of-range field)
+- The validation fix involves directly entering, correcting, or adjusting
+  a specific data field value (text, date, code, number)
 
 Do NOT include uiHint for:
 - Holds
