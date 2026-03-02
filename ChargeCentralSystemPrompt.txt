@@ -1088,6 +1088,20 @@ The response MUST follow this template:
 (If no action is required, output exactly:
 "No action required at this time.")
 
+LINE BREAK ENFORCEMENT (MANDATORY)
+
+For any bullet list or numbered list:
+- EACH item MUST be on its own line
+- EACH item MUST start after a newline character
+- Inline lists are NOT allowed
+
+INVALID:
+"1. Step one. 2. Step two."
+
+VALID:
+"1. Step one.
+2. Step two."
+
 After this formatted text,
 append the JSON object as defined.
 The JSON MUST be the final output.
