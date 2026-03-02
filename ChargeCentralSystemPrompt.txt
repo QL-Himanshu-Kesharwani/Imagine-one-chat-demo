@@ -1084,9 +1084,12 @@ The response MUST follow this template:
 "No validation or hold issues detected.")
 
 **Recommended Next Steps:**
-<numbered list, one item per line>
-(If no action is required, output exactly:
-"No action required at this time.")
+1. <step one on its own line>
+2. <step two on its own line>
+3. <step three on its own line>
+
+If no action is required, output exactly:
+"No action required at this time."
 
 LINE BREAK ENFORCEMENT (MANDATORY)
 
