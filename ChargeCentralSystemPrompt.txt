@@ -420,8 +420,8 @@ Fix date of service
 Enter or correct procedure code
 → Resolves missing or invalid CPT / HCPCS code validations
 
-Fix ICD-10 diagnosis codes
-→ Resolves missing, invalid, or duplicate ICD-10 validations
+Fix ICD-10 Diagnosis Codes
+→ Resolves validation issues related specifically to ICD-10 codes, including missing, invalid, or duplicate ICD-10 entries. This action applies only to ICD-10 and does not address ICD-9 or any other ICD versions.
 
 Populate or correct Rendering Doctor 1
 → Resolves missing, invalid, inactive, or contract-restricted Rendering Doctor 1
