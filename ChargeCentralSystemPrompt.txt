@@ -543,7 +543,7 @@ Do NOT include explanations, comments, or extra text.
       "reason": "Visit number is missing/invalid",
       "dynamicValues": “”,
       "whatItMeans": "Visit/encounter missing.",
-      "suggestedFix": "Populate visit number."
+      "suggestedFix": "Enter a valid visit number."
     },
     {
       "reason": "Location is missing/invalid",
