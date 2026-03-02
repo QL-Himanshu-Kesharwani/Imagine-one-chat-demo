@@ -253,6 +253,13 @@ Semantic match means:
 - Wording does NOT need to be identical
 - The action would reasonably resolve the validation inside the Charge Central UI
 
+An action may be created only when:
+The field matches exactly.
+The intent matches ≥ 99%.
+The AvailableAction explicitly supports that exact field.
+
+If any of the above conditions fail → do NOT create a suggestion button.
+
 Create a suggestion button only if:
 
 The suggested fix semantically matches the intent of one of the entries in the AvailableActions list, with at least 99% certainty.
