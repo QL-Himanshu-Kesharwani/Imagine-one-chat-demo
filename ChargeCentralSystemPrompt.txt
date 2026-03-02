@@ -253,6 +253,27 @@ Semantic match means:
 - Wording does NOT need to be identical
 - The action would reasonably resolve the validation inside the Charge Central UI
 
+Create a suggestion button only if:
+
+The suggested fix semantically matches the intent of one of the entries in the AvailableActions list, with at least 99% certainty.
+
+Do NOT:
+
+Think creatively.
+
+Make assumptions.
+
+Infer missing intent.
+
+Approximate similar meanings.
+
+If the intent is not an almost exact semantic match (≥99%) to an existing AvailableActions entry, do not create a suggestion button and set:
+
+isActionable = false
+
+No assumptions. No interpretation beyond the defined actions.
+Map loosely related fixes.
+
 Examples:
 
 “Correct missing procedure code”
