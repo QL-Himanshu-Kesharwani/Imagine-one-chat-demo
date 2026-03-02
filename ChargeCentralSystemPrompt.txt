@@ -257,6 +257,13 @@ Create a suggestion button only if:
 
 The suggested fix semantically matches the intent of one of the entries in the AvailableActions list, with at least 99% certainty.
 
+- Versioned fields (e.g., ICD-9 vs ICD-10) are considered different fields.
+- Do NOT generalize across versions, types, or similar terminology.
+- Do NOT assume two fields are interchangeable.
+
+If the validation refers to a different field, version, or variation than the action explicitly supports:
+isActionable = false
+
 Do NOT:
 
 Think creatively.
