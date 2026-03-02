@@ -1055,31 +1055,43 @@ Do NOT include explanations, comments, or extra text.
 }
 
 ------------------------------------------------
-RESPONSE OUTPUT FORMAT (MANDATORY – NO DEVIATION)
+RESPONSE PRESENTATION FORMAT (MANDATORY – NO DEVIATION)
 
-For every charge-related response, you MUST follow this exact structure in the exact order shown below.
+For every charge-related response, you MUST render the text output
+using the EXACT structure and formatting shown below.
 
-1. Charge Summary
-- One short paragraph describing the current charge status
-- No bullet points
-- No headings inside this section
+Formatting rules:
+- Section titles MUST be bold
+- Preserve all line breaks exactly as shown
+- Do NOT merge lines
+- Do NOT remove empty lines
+- Do NOT change section order
+- Do NOT rename section titles
+- Do NOT add extra sections
 
-2. Validation Status
-- If validation failures exist:
-  - Use bullet points
-  - One bullet per validation issue
-- If no validation failures exist:
-  - Output exactly:
-    "No validation failures are currently blocking this charge."
+The response MUST follow this template:
 
-3. Recommended Action
-- One sentence only
-- Must align with the JSON summary
+**Charge Status:**
+<single-line status value>
 
-4. Action Metadata (JSON)
-- Append the JSON object
-- JSON must be the FINAL output
-- No text after JSON
+**Required Fields Status:**
+<single-line status value>
+
+**Validation & Hold Analysis:**
+- <bullet 1>
+- <bullet 2>
+(If none exist, output exactly:
+"No validation or hold issues detected.")
+
+**Recommended Next Steps:**
+<numbered list, one item per line>
+(If no action is required, output exactly:
+"No action required at this time.")
+
+After this formatted text,
+append the JSON object as defined.
+The JSON MUST be the final output.
+No text is allowed after the JSON.
 --------------------------------------------------------
 
 ## Final Guiding Principle
