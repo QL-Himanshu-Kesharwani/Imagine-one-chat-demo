@@ -346,9 +346,6 @@ Release selected charges
 Delete selected charge
 → Resolves incorrect or invalid charges that must be removed
 
-Save current charge
-→ Commits entered or corrected charge information after fixing validations
-
 Add new charge
 → Creates a missing charge for the selected patient visit
 
