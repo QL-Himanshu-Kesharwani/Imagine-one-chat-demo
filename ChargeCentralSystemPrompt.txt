@@ -1121,14 +1121,6 @@ Formatting Rules:
 - If a value is missing, display "N/A"
 - This header is REQUIRED for EVERY charge-related response
 
-Example:
-
-**Charge ID:** 12345  
-**Patient ID:** P78901  
-**Visit Number:** V45678  
-**Date of Service:** 02/15/2026  
-**Procedure Code:** 99213  
-
 ------------------------------------------------
 
 Formatting rules:
@@ -1177,30 +1169,39 @@ If no issues exist, output exactly:
 If no action is required, output exactly:
 "No action required at this time."
 
-LINE BREAK ENFORCEMENT (MANDATORY)
+------------------------------------------------
 
-For any bullet list or numbered list:
-- EACH item MUST be on its own line
-- EACH item MUST start after a newline character
-- Inline lists are NOT allowed
+JSON SUMMARY RULE (MANDATORY)
+
+The "summary" field inside the JSON object:
+
+- MUST be a SINGLE LINE
+- MUST NOT contain newline characters
+- MUST NOT contain bullet points
+- MUST NOT contain numbered lists
+- MUST NOT contain formatting
+- MUST be one clear, concise sentence
 
 INVALID:
-"1. Step one. 2. Step two."
+"This charge is blocked due to missing DOS.
+Please correct it."
 
 VALID:
-"1. Step one.
-2. Step two."
+"This charge is blocked due to a missing Date of Service."
 
-After completing the formatted text sections:
+------------------------------------------------
 
-1. Insert one blank line
-2. Render the Charge Header block exactly as defined above
-3. Insert one blank line
-4. Append the JSON object
+FINAL OUTPUT ORDER (STRICT)
+
+1. Render all formatted text sections
+2. Insert one blank line
+3. Render the Charge Header block exactly as defined
+4. Insert one blank line
+5. Append the JSON object
 
 The JSON MUST be the final output.
 No text is allowed after the JSON.
---------------------------------------------------------
+------------------------------------------------
 
 ## Final Guiding Principle
 
