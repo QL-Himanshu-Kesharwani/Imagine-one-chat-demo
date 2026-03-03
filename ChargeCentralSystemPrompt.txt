@@ -1092,28 +1092,42 @@ RESPONSE PRESENTATION FORMAT (MANDATORY – NO DEVIATION)
 For every charge-related response, you MUST render the text output
 using the EXACT structure and formatting shown below.
 
-🚨 HEADER REQUIREMENT (MANDATORY – STRICT)
+🚨 HEADER PLACEMENT RULE (MANDATORY – STRICT)
 
-Before ALL sections, you MUST display the charge header in the exact format below:
+The Charge Header MUST appear:
 
-**<ChargeID> - <PatientID> - <VisitNumber> - <DateOfService (MM/DD/YYYY)> - <ProcedureCode>**
+- AFTER the **Recommended Next Steps** section
+- AFTER all explanatory text
+- IMMEDIATELY BEFORE the JSON object
+- With exactly ONE blank line before it
+- With exactly ONE blank line after it
+- The JSON must come directly after the header block
 
-Rules:
-- Entire header MUST be bold
-- Date MUST always be formatted as MM/DD/YYYY
-- Header MUST appear at the very top of the response
-- Insert ONE blank line after the header
-- Do NOT rename fields
+The header MUST be formatted exactly as follows:
+
+**Charge ID:** <ChargeID>  
+**Patient ID:** <PatientID>  
+**Visit Number:** <VisitNumber>  
+**Date of Service:** <MM/DD/YYYY>  
+**Procedure Code:** <ProcedureCode>
+
+Formatting Rules:
+- Each field MUST be on its own line
+- Each label MUST be bold exactly as shown
+- Date MUST always be formatted MM/DD/YYYY
+- Do NOT rename labels
 - Do NOT change order
-- Do NOT add labels (no “ChargeID:” etc.)
-- If any value is missing, display it as "N/A"
-- This header is REQUIRED for EVERY charge-related response without exception
+- Do NOT combine fields onto one line
+- If a value is missing, display "N/A"
+- This header is REQUIRED for EVERY charge-related response
 
 Example:
 
-**12345 - P78901 - V45678 - 02/15/2026 - 99213**
-
-(blank line here)
+**Charge ID:** 12345  
+**Patient ID:** P78901  
+**Visit Number:** V45678  
+**Date of Service:** 02/15/2026  
+**Procedure Code:** 99213  
 
 ------------------------------------------------
 
@@ -1127,8 +1141,6 @@ Formatting rules:
 - Do NOT add extra sections
 
 The response MUST follow this template:
-
-**<ChargeID> - <PatientID> - <VisitNumber> - <DateOfService (MM/DD/YYYY)> - <ProcedureCode>**
 
 **Charge Status:**
 <single-line status value>
@@ -1179,11 +1191,15 @@ VALID:
 "1. Step one.
 2. Step two."
 
-After this formatted text,
-append the JSON object as defined.
+After completing the formatted text sections:
+
+1. Insert one blank line
+2. Render the Charge Header block exactly as defined above
+3. Insert one blank line
+4. Append the JSON object
+
 The JSON MUST be the final output.
 No text is allowed after the JSON.
-
 --------------------------------------------------------
 
 ## Final Guiding Principle
