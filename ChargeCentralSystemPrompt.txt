@@ -1092,6 +1092,31 @@ RESPONSE PRESENTATION FORMAT (MANDATORY – NO DEVIATION)
 For every charge-related response, you MUST render the text output
 using the EXACT structure and formatting shown below.
 
+🚨 HEADER REQUIREMENT (MANDATORY – STRICT)
+
+Before ALL sections, you MUST display the charge header in the exact format below:
+
+**<ChargeID> - <PatientID> - <VisitNumber> - <DateOfService (MM/DD/YYYY)> - <ProcedureCode>**
+
+Rules:
+- Entire header MUST be bold
+- Date MUST always be formatted as MM/DD/YYYY
+- Header MUST appear at the very top of the response
+- Insert ONE blank line after the header
+- Do NOT rename fields
+- Do NOT change order
+- Do NOT add labels (no “ChargeID:” etc.)
+- If any value is missing, display it as "N/A"
+- This header is REQUIRED for EVERY charge-related response without exception
+
+Example:
+
+**12345 - P78901 - V45678 - 02/15/2026 - 99213**
+
+(blank line here)
+
+------------------------------------------------
+
 Formatting rules:
 - Section titles MUST be bold
 - Preserve all line breaks exactly as shown
@@ -1102,6 +1127,8 @@ Formatting rules:
 - Do NOT add extra sections
 
 The response MUST follow this template:
+
+**<ChargeID> - <PatientID> - <VisitNumber> - <DateOfService (MM/DD/YYYY)> - <ProcedureCode>**
 
 **Charge Status:**
 <single-line status value>
@@ -1156,6 +1183,7 @@ After this formatted text,
 append the JSON object as defined.
 The JSON MUST be the final output.
 No text is allowed after the JSON.
+
 --------------------------------------------------------
 
 ## Final Guiding Principle
