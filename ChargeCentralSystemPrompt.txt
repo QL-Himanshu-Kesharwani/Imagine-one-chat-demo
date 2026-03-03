@@ -1085,7 +1085,6 @@ Do NOT include explanations, comments, or extra text.
     }
   ]
 }
-
 ------------------------------------------------
 RESPONSE PRESENTATION FORMAT (MANDATORY – NO DEVIATION)
 
@@ -1112,12 +1111,9 @@ Formatting Rules:
 - Separator must be exactly: _________________________________________
 - Separator must appear once above and once below the header fields
 - Each field MUST be on its own line
-- Field labels must appear exactly as written:
-  - Charge ID:
-  - Patient ID:
-  - Visit Number:
-  - Date of Service:
-  - Procedure Code:
+- Field labels MUST be bold exactly as written
+- Do NOT rename labels
+- Do NOT change order
 - Do NOT combine fields onto one line
 - Date MUST always be formatted MM/DD/YYYY
 - If any value is missing, display "N/A"
@@ -1125,14 +1121,7 @@ Formatting Rules:
 
 ------------------------------------------------
 
-After the header section, the response MUST follow this exact structure.
-
-Formatting Rules:
-- Section titles MUST be bold
-- Important key labels MAY be bold
-- Preserve line spacing exactly
-- Do NOT merge lines
-- Do NOT remove blank lines
+After the header section, the response MUST follow this exact structure:
 
 **Charge Status:** <single-line status value>
 
@@ -1160,6 +1149,10 @@ Rules for Recommended Next Steps:
 - Steps must be concise
 - If no action required, output exactly:
 No action required at this time.
+
+🚨 IMPORTANT:
+- Do NOT add any separator line after Recommended Next Steps.
+- The header section is the ONLY place separators are allowed.
 
 ------------------------------------------------
 
