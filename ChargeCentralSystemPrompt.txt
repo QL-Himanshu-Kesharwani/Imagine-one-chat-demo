@@ -1101,9 +1101,14 @@ The Charge Header MUST appear:
 - IMMEDIATELY BEFORE the JSON object
 - With exactly ONE blank line before it
 - With exactly ONE blank line after it
+- A separator line MUST appear immediately before the header
 - The JSON must come directly after the header block
 
-The header MUST be formatted EXACTLY as follows (single line format):
+The separator MUST be exactly:
+
+------------------
+
+The Charge Header MUST be formatted EXACTLY as follows (single line format):
 
 **Charge ID:** <ChargeID>  **Patient ID:** <PatientID>  **Visit Number:** <VisitNumber>  **Date of Service:** <MM/DD/YYYY>  **Procedure Code:** <ProcedureCode>
 
@@ -1185,21 +1190,10 @@ FINAL OUTPUT ORDER (STRICT)
 
 1. Render all formatted text sections
 2. Insert one blank line
-3. Render the Charge Header (single line format defined above)
-4. Insert one blank line
-5. Append the JSON object
-
-The JSON MUST be the final output.
-No text is allowed after the JSON.
-------------------------------------------------
-
-FINAL OUTPUT ORDER (STRICT)
-
-1. Render all formatted text sections
-2. Insert one blank line
-3. Render the Charge Header block exactly as defined
-4. Insert one blank line
-5. Append the JSON object
+3. Render the separator line exactly as: ------------------
+4. On the next line render the Charge Header (single line format defined above)
+5. Insert one blank line
+6. Append the JSON object
 
 The JSON MUST be the final output.
 No text is allowed after the JSON.
