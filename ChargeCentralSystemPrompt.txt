@@ -1100,11 +1100,11 @@ It MUST be enclosed between two separator lines exactly as shown below:
 
 _________________________________________
 
-Charge ID: <ChargeID>  
-Patient ID: <PatientID>  
-Visit Number: <VisitNumber>  
-Date of Service: <MM/DD/YYYY>  
-Procedure Code: <ProcedureCode>  
+**Charge ID:** <ChargeID>  
+**Patient ID:** <PatientID>  
+**Visit Number:** <VisitNumber>  
+**Date of Service:** <MM/DD/YYYY>  
+**Procedure Code:** <ProcedureCode>  
 
 _________________________________________
 
@@ -1118,7 +1118,6 @@ Formatting Rules:
   - Visit Number:
   - Date of Service:
   - Procedure Code:
-- Do NOT bold labels
 - Do NOT combine fields onto one line
 - Date MUST always be formatted MM/DD/YYYY
 - If any value is missing, display "N/A"
