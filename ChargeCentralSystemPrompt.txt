@@ -1126,14 +1126,20 @@ Formatting Rules:
 
 ------------------------------------------------
 
-After the header section, the response MUST follow this exact structure
-(with NO bold formatting for section labels and NO extra line spacing):
+After the header section, the response MUST follow this exact structure.
 
-Charge Status: <single-line status value>
+Formatting Rules:
+- Section titles MUST be bold
+- Important key labels MAY be bold
+- Preserve line spacing exactly
+- Do NOT merge lines
+- Do NOT remove blank lines
 
-Required Fields Status: <single-line status value>
+**Charge Status:** <single-line status value>
 
-Validation & Hold Analysis: 
+**Required Fields Status:** <single-line status value>
+
+**Validation & Hold Analysis:**
 - <Exact validation failure string> → <Short plain-English meaning>
 
 Rules for Validation & Hold Analysis:
@@ -1145,7 +1151,7 @@ Rules for Validation & Hold Analysis:
 - If no issues exist, output exactly:
 No validation or hold issues detected.
 
-Recommended Next Steps: 
+**Recommended Next Steps:**
 1. <step one>
 2. <step two>
 3. <step three>
