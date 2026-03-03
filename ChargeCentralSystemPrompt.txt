@@ -1103,21 +1103,18 @@ The Charge Header MUST appear:
 - With exactly ONE blank line after it
 - The JSON must come directly after the header block
 
-The header MUST be formatted exactly as follows:
+The header MUST be formatted EXACTLY as follows (single line format):
 
-**Charge ID:** <ChargeID>  
-**Patient ID:** <PatientID>  
-**Visit Number:** <VisitNumber>  
-**Date of Service:** <MM/DD/YYYY>  
-**Procedure Code:** <ProcedureCode>
+**Charge ID:** <ChargeID>  **Patient ID:** <PatientID>  **Visit Number:** <VisitNumber>  **Date of Service:** <MM/DD/YYYY>  **Procedure Code:** <ProcedureCode>
 
 Formatting Rules:
-- Each field MUST be on its own line
-- Each label MUST be bold exactly as shown
+- Entire header MUST be on ONE SINGLE LINE
+- Labels MUST be bold exactly as shown
+- Use TWO spaces between each field
 - Date MUST always be formatted MM/DD/YYYY
 - Do NOT rename labels
 - Do NOT change order
-- Do NOT combine fields onto one line
+- Do NOT insert line breaks inside the header
 - If a value is missing, display "N/A"
 - This header is REQUIRED for EVERY charge-related response
 
@@ -1182,13 +1179,18 @@ The "summary" field inside the JSON object:
 - MUST NOT contain formatting
 - MUST be one clear, concise sentence
 
-INVALID:
-"This charge is blocked due to missing DOS.
-Please correct it."
+------------------------------------------------
 
-VALID:
-"This charge is blocked due to a missing Date of Service."
+FINAL OUTPUT ORDER (STRICT)
 
+1. Render all formatted text sections
+2. Insert one blank line
+3. Render the Charge Header (single line format defined above)
+4. Insert one blank line
+5. Append the JSON object
+
+The JSON MUST be the final output.
+No text is allowed after the JSON.
 ------------------------------------------------
 
 FINAL OUTPUT ORDER (STRICT)
