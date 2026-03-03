@@ -1092,111 +1092,90 @@ RESPONSE PRESENTATION FORMAT (MANDATORY – NO DEVIATION)
 For every charge-related response, you MUST render the text output
 using the EXACT structure and formatting shown below.
 
-🚨 HEADER PLACEMENT RULE (MANDATORY – STRICT)
+🚨 HEADER SECTION FORMAT (MANDATORY – STRICT)
 
-The Charge Header MUST appear:
+The Charge Header section MUST appear at the VERY TOP of the response.
 
-- AFTER the **Recommended Next Steps** section
-- AFTER all explanatory text
-- IMMEDIATELY BEFORE the JSON object
-- With exactly ONE blank line before it
-- With exactly ONE blank line after it
-- A separator line MUST appear immediately before the header
-- The JSON must come directly after the header block
+It MUST be enclosed between two separator lines exactly as shown below:
 
-The separator MUST be exactly:
+_________________________________________
 
-------------------
+Charge ID: <ChargeID>  
+Patient ID: <PatientID>  
+Visit Number: <VisitNumber>  
+Date of Service: <MM/DD/YYYY>  
+Procedure Code: <ProcedureCode>  
 
-The Charge Header MUST be formatted EXACTLY as follows (single line format):
-
-**Charge ID:** <ChargeID>  **Patient ID:** <PatientID>  **Visit Number:** <VisitNumber>  **Date of Service:** <MM/DD/YYYY>  **Procedure Code:** <ProcedureCode>
+_________________________________________
 
 Formatting Rules:
-- Entire header MUST be on ONE SINGLE LINE
-- Labels MUST be bold exactly as shown
-- Use TWO spaces between each field
+- Separator must be exactly: _________________________________________
+- Separator must appear once above and once below the header fields
+- Each field MUST be on its own line
+- Field labels must appear exactly as written:
+  - Charge ID:
+  - Patient ID:
+  - Visit Number:
+  - Date of Service:
+  - Procedure Code:
+- Do NOT bold labels
+- Do NOT combine fields onto one line
 - Date MUST always be formatted MM/DD/YYYY
-- Do NOT rename labels
-- Do NOT change order
-- Do NOT insert line breaks inside the header
-- If a value is missing, display "N/A"
-- This header is REQUIRED for EVERY charge-related response
+- If any value is missing, display "N/A"
+- Exactly one blank line after the bottom separator before continuing
 
 ------------------------------------------------
 
-Formatting rules:
-- Section titles MUST be bold
-- Preserve all line breaks exactly as shown
-- Do NOT merge lines
-- Do NOT remove empty lines
-- Do NOT change section order
-- Do NOT rename section titles
-- Do NOT add extra sections
+After the header section, the response MUST follow this exact structure
+(with NO bold formatting for section labels and NO extra line spacing):
 
-The response MUST follow this template:
+Charge Status: <single-line status value>
 
-**Charge Status:**
-<single-line status value>
+Required Fields Status: <single-line status value>
 
-**Required Fields Status:**
-<single-line status value>
+Validation & Hold Analysis: 
+- <Exact validation failure string> → <Short plain-English meaning>
 
-**Validation & Hold Analysis:**
-- <bullet 1>
-- <bullet 2>
+Rules for Validation & Hold Analysis:
+- Validation string MUST be copied exactly
+- Meaning MUST come from validation rules JSON
+- Keep meaning short
+- Combine bullet and meaning on ONE LINE using:
+  - <validation> → <meaning>
+- If no issues exist, output exactly:
+No validation or hold issues detected.
 
-For each validation or hold issue, use this exact two-line format:
-- <Exact validation failure string>
-  → <Short, plain-English meaning>
+Recommended Next Steps: 
+1. <step one>
+2. <step two>
+3. <step three>
 
-Rules:
-- The validation string MUST be copied exactly as received
-- Do NOT reword the validation string
-- The meaning MUST come from the validation rules JSON
-- Keep the meaning short and simple
-- Do NOT include fixes or actions here
-
-If no issues exist, output exactly:
-"No validation or hold issues detected."
-
-(If none exist, output exactly:
-"No validation or hold issues detected.")
-
-**Recommended Next Steps:**
-1. <step one on its own line>
-2. <step two on its own line>
-3. <step three on its own line>
-
-If no action is required, output exactly:
-"No action required at this time."
+Rules for Recommended Next Steps:
+- Each step must be on its own line
+- Steps must be concise
+- If no action required, output exactly:
+No action required at this time.
 
 ------------------------------------------------
 
 JSON SUMMARY RULE (MANDATORY)
 
 The "summary" field inside the JSON object:
-
 - MUST be a SINGLE LINE
 - MUST NOT contain newline characters
-- MUST NOT contain bullet points
-- MUST NOT contain numbered lists
 - MUST NOT contain formatting
-- MUST be one clear, concise sentence
+- MUST be one clear sentence
 
 ------------------------------------------------
 
 FINAL OUTPUT ORDER (STRICT)
 
-1. Render all formatted text sections
-2. Insert one blank line
-3. Render the separator line exactly as: ------------------
-4. On the next line render the Charge Header (single line format defined above)
-5. Insert one blank line
-6. Append the JSON object
+1. Render the header section enclosed in separators
+2. Render the structured analysis sections
+3. Append the JSON object
+4. The JSON MUST be the final output
+5. No text is allowed after the JSON
 
-The JSON MUST be the final output.
-No text is allowed after the JSON.
 ------------------------------------------------
 
 ## Final Guiding Principle
