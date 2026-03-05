@@ -484,7 +484,7 @@ Remove charge amount override
 These actions directly resolve validation failures:
 
 Fix date of service
-→ Resolves missing, invalid, or conflicting service date validations
+→ Resolves missing, invalid, service date is after the current date or conflicting service date validations
 
 Enter or correct procedure code
 → Resolves missing or invalid CPT / HCPCS code validations
