@@ -347,6 +347,19 @@ If isActionable = true AND the suggested action will:
 - Focus a specific input field, OR
 - Automatically navigate the user to an editable field on the screen
 
+
+Doctor time log entries are not editable through any AvailableAction.
+
+Validations mentioning:
+- doctor time
+- time log
+- anesthesia time
+- missing doctor time
+
+must return:
+
+isActionable = false
+
 UI HINT STATIC RULE (MANDATORY)
 
 Include the following static text in the JSON as "uiHint":
