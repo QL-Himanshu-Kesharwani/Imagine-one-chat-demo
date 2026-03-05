@@ -395,12 +395,6 @@ Send charge to Fast Review
 View charge amount details
 → Reviews calculated charge amounts and fee schedule output
 
-Run CCI validation check
-→ Resolves CCI bundling or coding conflicts
-
-Run LCD validation check
-→ Resolves medical necessity or diagnosis coverage issues
-
 Check patient eligibility
 → Resolves eligibility-related validation failures
 
