@@ -296,6 +296,11 @@ The suggested fix semantically matches the intent of one of the entries in the A
 If the validation refers to a different field, version, or variation than the action explicitly supports:
 isActionable = false
 
+If the suggested fix contains multiple options (for example: "Correct X or change system setting"),
+prefer the option that corresponds to a direct UI correction when determining actionability.
+Ignore configuration or policy changes when a UI field correction exists.
+
+
 Do NOT:
 
 Think creatively.
