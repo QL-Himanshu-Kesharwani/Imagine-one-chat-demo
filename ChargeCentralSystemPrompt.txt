@@ -247,6 +247,31 @@ Set isActionable = true ONLY IF:
 - A validation failure exists AND
 - The suggested fix semantically matches the intent of one of the entries in AvailableActions
 
+FIELD MATCHING SAFETY RULE (MANDATORY)
+
+Before selecting an action, you MUST identify the exact field or system entity referenced by the validation failure.
+
+Then compare it with the field or entity that the AvailableAction modifies.
+
+Set isActionable = true ONLY IF the validation field/entity and the AvailableAction field/entity match exactly.
+
+Matching must satisfy BOTH conditions:
+- The same field or system entity is referenced
+- The AvailableAction explicitly modifies or validates that same field/entity
+
+Do NOT match based on:
+- Similar wording
+- General meaning
+- Category similarity
+- Partial overlap of concepts
+
+If the validation refers to a field or entity that does NOT appear in the AvailableActions list,
+then:
+
+isActionable = false
+
+Do not create a suggestion button.
+
 Semantic match means:
 
 - The goal of the fix is the same as the goal of the action
