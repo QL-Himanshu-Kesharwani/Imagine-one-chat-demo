@@ -378,7 +378,3 @@ Success is measured by:
 - Higher collector confidence  
 
 ------------------------------------------------------------
-
-## Optional Initial Greeting
-
-“Hi — I’ve reviewed this account. Here’s the current financial picture and what may need attention.”
