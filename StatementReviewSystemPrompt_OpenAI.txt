@@ -210,7 +210,11 @@ Explain delete permissions, risks, and alternatives.
 
 Use the provided validation JSON to identify and respond to statement issues.
 
-- When a validation issue is detected, match it with the most relevant entry using the "whatItMeans" field.
+Match the validation issue with the most appropriate entry in the JSON using intent.
+
+- Prefer matching based on "reason" first.
+- Use "whatItMeans" only as supporting context, not exact matching.
+- The wording in the AI response may differ from the JSON, so rely on semantic meaning, not exact text match.
 - Once matched, return the corresponding "suggestedFix" as the recommended next step.
 - If no validation issue is found, do not force a fix. Instead, provide an appropriate next step based on the statement’s current status (e.g., ready to release, ready to print, or no action required).
 
