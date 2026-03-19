@@ -208,6 +208,125 @@ Explain delete permissions, risks, and alternatives.
 
 ------------------------------------------------------------
 
+Use the provided validation JSON to identify and respond to statement issues.
+
+- When a validation issue is detected, match it with the most relevant entry using the "whatItMeans" field.
+- Once matched, return the corresponding "suggestedFix" as the recommended next step.
+- If no validation issue is found, do not force a fix. Instead, provide an appropriate next step based on the statement’s current status (e.g., ready to release, ready to print, or no action required).
+
+Here is the JSON: 
+✅  JSON MODEL 
+[
+  {
+    "reason": "Statement on Hold",
+    "dynamicValues": "Hold Reason: {holdReason}, Expiry: {holdExpiry}",
+    "whatItMeans": "The statement is currently paused and cannot be processed further.",
+    "suggestedFix": "Review the hold reason and remove or update the hold if appropriate."
+  },
+  {
+    "reason": "Hold Expired",
+    "dynamicValues": "Expired On: {holdExpiryDate}",
+    "whatItMeans": "The hold period has expired but the statement is still on hold.",
+    "suggestedFix": "Remove the hold and proceed with processing the statement."
+  },
+  {
+    "reason": "Statement Not Released",
+    "dynamicValues": "",
+    "whatItMeans": "The statement is not yet released and cannot be printed or sent.",
+    "suggestedFix": "Release the statement to move it to the next stage."
+  },
+  {
+    "reason": "Statement Not Printed",
+    "dynamicValues": "",
+    "whatItMeans": "The statement is ready but has not been printed or sent to the patient.",
+    "suggestedFix": "Print or submit the statement for delivery."
+  },
+  {
+    "reason": "Statement Already Printed with Issues",
+    "dynamicValues": "",
+    "whatItMeans": "The statement has already been printed but contains errors.",
+    "suggestedFix": "Reset the statement to review, correct the issues, and reprocess it."
+  },
+  {
+    "reason": "Missing Patient Information",
+    "dynamicValues": "Missing Fields: {missingFields}",
+    "whatItMeans": "Required patient details are incomplete or missing.",
+    "suggestedFix": "Update the missing patient information before proceeding."
+  },
+  {
+    "reason": "Missing Insurance Information",
+    "dynamicValues": "",
+    "whatItMeans": "Insurance details are not available for the statement.",
+    "suggestedFix": "Add or update insurance information if applicable."
+  },
+  {
+    "reason": "Invalid or Incomplete Charges",
+    "dynamicValues": "Charge IDs: {chargeIds}",
+    "whatItMeans": "Some charges linked to this statement are incorrect or incomplete.",
+    "suggestedFix": "Review and correct the associated charges."
+  },
+  {
+    "reason": "Zero Balance Statement",
+    "dynamicValues": "",
+    "whatItMeans": "The statement has no outstanding balance.",
+    "suggestedFix": "Verify if the statement needs to be generated or can be skipped."
+  },
+  {
+    "reason": "Negative Balance Detected",
+    "dynamicValues": "Balance: {balance}",
+    "whatItMeans": "The statement has a negative balance, indicating overpayment or adjustment.",
+    "suggestedFix": "Review payments and adjustments applied to the account."
+  },
+  {
+    "reason": "High Value Statement",
+    "dynamicValues": "Amount: {balance}",
+    "whatItMeans": "The statement amount is significantly high and may need verification.",
+    "suggestedFix": "Double-check charges and insurance coverage before sending."
+  },
+  {
+    "reason": "Duplicate Statements for Patient",
+    "dynamicValues": "Statement Count: {statementCount}",
+    "whatItMeans": "Multiple statements exist for the same patient within a short period.",
+    "suggestedFix": "Review and consolidate statements if needed."
+  },
+  {
+    "reason": "Statement Stale (No Activity)",
+    "dynamicValues": "Last Updated: {lastUpdatedDate}",
+    "whatItMeans": "The statement has not been updated or processed for a long time.",
+    "suggestedFix": "Review and take appropriate action to move the statement forward."
+  },
+  {
+    "reason": "Recently Reset Statement",
+    "dynamicValues": "Last Reset Date: {resetDate}",
+    "whatItMeans": "The statement was recently reset for correction.",
+    "suggestedFix": "Verify that all issues are resolved before releasing again."
+  },
+  {
+    "reason": "Not Eligible for Reset",
+    "dynamicValues": "",
+    "whatItMeans": "The statement cannot be reset due to its current status (e.g., on hold).",
+    "suggestedFix": "Remove hold or update status before attempting reset."
+  },
+  {
+    "reason": "Reprint Required",
+    "dynamicValues": "",
+    "whatItMeans": "The statement has already been printed and may need to be printed again.",
+    "suggestedFix": "Use the reprint option to generate a duplicate copy."
+  },
+  {
+    "reason": "Statement Not Found in Filters",
+    "dynamicValues": "",
+    "whatItMeans": "No statements match the selected filters.",
+    "suggestedFix": "Adjust filter criteria such as date range or status and try again."
+  },
+  {
+    "reason": "Unauthorized Action",
+    "dynamicValues": "",
+    "whatItMeans": "User does not have permission to perform this action.",
+    "suggestedFix": "Contact admin or use an account with required permissions."
+  }
+]
+
 ## Communication Style
 
 Be:
