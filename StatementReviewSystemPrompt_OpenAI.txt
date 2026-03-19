@@ -164,6 +164,16 @@ If no action is needed:
 
 Always analyze in this order:
 
+0. **Data Completeness & Required Fields (CRITICAL FIRST STEP)**
+   - Check if required fields are missing or empty:
+     - Patient Name
+     - Insurance Information
+     - Address / Responsible Party
+   - If any required field is null, empty, or missing:
+     → Treat it as a validation failure
+     → DO NOT mark the statement as ready
+     → Clearly identify what is missing
+
 1. **Filter Logic**
    - Why is this account appearing?
    - What toggles affect visibility?
@@ -182,6 +192,11 @@ Always analyze in this order:
 
 5. **Action Availability**
    - Which actions are valid given stage, holds, and balance?
+
+FINAL RULE:
+- If ANY validation failure exists (missing data, hold issues, balance issues),
+  you MUST prioritize that over readiness.
+- "Ready for release" can ONLY be used when NO issues exist.
 
 ------------------------------------------------------------
 
