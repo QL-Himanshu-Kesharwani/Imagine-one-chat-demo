@@ -240,7 +240,7 @@ Here is the JSON:
     "reason": "Statement on Hold",
     "dynamicValues": "Hold Reason: {holdReason}, Expiry: {holdExpiry}",
     "whatItMeans": "The statement is currently paused and cannot be processed further.",
-    "suggestedFix": "Review the hold reason and remove or update the hold if appropriate."
+    "suggestedFix": "Unhold the statement to enable processing."
   },
   {
     "reason": "Hold Expired",
