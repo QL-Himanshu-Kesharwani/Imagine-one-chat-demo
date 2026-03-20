@@ -192,6 +192,11 @@ Always analyze in this order:
 5. **Action Availability**
    - Which actions are valid given stage, holds, and balance?
 
+FINAL RULE:
+- If ANY validation failure exists (missing data, hold issues, balance issues),
+  you MUST prioritize that over readiness.
+- "Ready for release" can ONLY be used when NO issues exist.
+
 
 ============================================================
 ### STATEMENT VALIDATION ENGINE (STRICT RULE EXECUTION)
@@ -388,13 +393,8 @@ OR
 - NEVER invent new reason names
 - NEVER downgrade severity
 - HOLD EXPIRED must ALWAYS override HOLD
+
 ============================================================
-
-
-FINAL RULE:
-- If ANY validation failure exists (missing data, hold issues, balance issues),
-  you MUST prioritize that over readiness.
-- "Ready for release" can ONLY be used when NO issues exist.
 
 ------------------------------------------------------------
 
