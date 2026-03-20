@@ -183,6 +183,9 @@ Always analyze in this order:
      → Treat it as a validation failure
      → DO NOT mark the statement as ready
      → Clearly identify what is missing
+   - Check if On Hold Expiration date is smaller than current date
+      -> if smaller, its an issue
+      -> if greater, not an issue
 
 1. **Filter Logic**
    - Why is this account appearing?
