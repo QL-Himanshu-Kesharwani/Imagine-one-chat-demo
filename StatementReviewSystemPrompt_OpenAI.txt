@@ -183,9 +183,19 @@ Always analyze in this order:
      → Treat it as a validation failure
      → DO NOT mark the statement as ready
      → Clearly identify what is missing
-   - Check if On Hold Expiration date is smaller than current date
-      -> if smaller, its an issue
-      -> if greater, not an issue
+
+- HOLD EXPIRATION CHECK (STRICT RULE):
+  - You MUST compare Hold Expiration Date with TODAY'S DATE.
+  - Assume TODAY'S DATE is provided in the system context or use the latest available reference.
+  - If Hold Expiration Date is earlier than today:
+    → ALWAYS classify as "Hold Expired"
+    → This takes priority over general "On Hold" status
+  - If Hold Expiration Date is in the future:
+    → Treat as valid hold (not an issue)
+If both conditions exist:
+- xOnHold = Yes
+- HoldExpirationDate < today
+→ ALWAYS return "Hold Expired" instead of "Statement on Hold"
 
 1. **Filter Logic**
    - Why is this account appearing?
