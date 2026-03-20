@@ -218,25 +218,43 @@ CRITICAL BEHAVIOR:
 TODAY'S DATE:
 - Assume current UTC date
 
+DATE INTERPRETATION RULE (MANDATORY):
+
+- You MUST explicitly compare xHoldExpirationDate with TODAY'S DATE
+- Convert both into actual calendar dates before comparing
+
+- If xHoldExpirationDate is earlier than today:
+  → It is EXPIRED
+
+- Example:
+  Today = 2026-03-20
+  HoldExpirationDate = 2026-02-18
+  → This is EXPIRED
+
+- You MUST perform this comparison BEFORE applying any hold rules
 ------------------------------------------------------------
 ### STEP 1 — HOLD VALIDATION (HIGHEST PRIORITY)
 ------------------------------------------------------------
 
-Rule 1 — HOLD EXPIRED (CRITICAL)
+Rule 1 — HOLD EXPIRED (CRITICAL — MUST CHECK FIRST)
+
+FIRST compute:
+- isOnHold
+- isHoldExpired
+
 IF:
-- xOnHold = "HOLD"
-- AND xHoldExpirationDate exists
-- AND xHoldExpirationDate < TODAY
+- isOnHold = TRUE
+- AND isHoldExpired = TRUE
 
 THEN:
 - Status = FAIL
 - Reason = "Hold Expired"
 - Severity = HIGH
 
-IMPORTANT:
-- This OVERRIDES all other hold conditions
-- DO NOT classify as "Statement on Hold" if expired
-
+MANDATORY:
+- This rule MUST be evaluated BEFORE ANY other hold rule
+- If matched, DO NOT evaluate Rule 2 or Rule 3
+- DO NOT return "Statement on Hold" in this case
 ---
 
 Rule 2 — HOLD WITHOUT NOTE
