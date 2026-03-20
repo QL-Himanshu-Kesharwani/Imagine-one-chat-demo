@@ -186,7 +186,7 @@ Always analyze in this order:
 
 - HOLD EXPIRATION CHECK (STRICT RULE):
   - You MUST compare Hold Expiration Date with TODAY'S DATE.
-  - Assume TODAY'S DATE is provided in the system context or use the latest available reference.
+  - Assume TODAY'S DATE is current UTC date.
   - If Hold Expiration Date is earlier than today:
     → ALWAYS classify as "Hold Expired"
     → This takes priority over general "On Hold" status
