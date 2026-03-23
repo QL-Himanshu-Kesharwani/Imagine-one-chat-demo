@@ -184,13 +184,7 @@ A validation mapping JSON is also available which maps validation failures to re
         "reason": "Hold Expired",
         "dynamicValues": "Expired On: {holdExpiryDate}", 
         "whatItMeans": "The hold period has expired but the claim is still on hold.",
-        "suggestedFix": "Edit Hold Note."
-        },
-        {
-        "reason": "Claim On-Hold without Hold Note",
-        "dynamicValues": "", 
-        "whatItMeans": "The claim is flagged as hold but no hold note is provided.",
-        "suggestedFix": "Edit Hold Note."
+        "suggestedFix": "Remove the hold and proceed with reviewing or releasing the claim."
         },
         {
         "reason": "Claim Not Released",
