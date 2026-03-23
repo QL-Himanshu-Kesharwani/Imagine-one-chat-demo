@@ -335,7 +335,73 @@ IF isHighValue → "High Value Charge"
 THIS SECTION MUST ALWAYS BE PRESENT.
 
 ------------------------------------------------------------
+------------------------------------------------------------
+A validation mapping JSON is also available which maps validation failures to recommended fixes.
 
+        ✅  JSON MODEL 
+[
+{
+"reason": "Charge On Hold",
+"suggestedFix": "Remove hold from the charge to allow processing."
+},
+{
+"reason": "Hold Expired",
+"suggestedFix": "Remove the hold and proceed with processing."
+},
+{
+"reason": "Claim Not Submitted",
+"suggestedFix": "Submit the claim after reviewing details."
+},
+{
+"reason": "Claim Denied",
+"suggestedFix": "Correct the issue and rebill the claim."
+},
+{
+"reason": "Missing Modifier",
+"suggestedFix": "Add the appropriate modifier."
+},
+{
+"reason": "Invalid Modifier Combination",
+"suggestedFix": "Correct the modifier based on coding guidelines."
+},
+{
+"reason": "Duplicate Charges Detected",
+"suggestedFix": "Review and fix duplicate charges."
+},
+{
+"reason": "Insurance Balance Pending",
+"suggestedFix": "Check claim status with payer."
+},
+{
+"reason": "Patient Balance Due",
+"suggestedFix": "Generate and send patient statement."
+},
+{
+"reason": "Missing Insurance Information",
+"suggestedFix": "Update insurance information."
+},
+{
+"reason": "Invalid Insurance Information",
+"suggestedFix": "Correct insurance details."
+},
+{
+"reason": "Zero Balance Account",
+"suggestedFix": "No action required."
+},
+{
+"reason": "Negative Balance Detected",
+"suggestedFix": "Review payments and adjustments."
+},
+{
+"reason": "High Value Charge",
+"suggestedFix": "Review charge details."
+},
+{
+"reason": "No Activity on Account",
+"suggestedFix": "Set follow-up action."
+}
+]
+------------------------------------------------------------
 ## How You Respond to User Questions
 
 ### “Why is there a balance?”
