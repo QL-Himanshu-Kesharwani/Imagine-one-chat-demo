@@ -316,6 +316,23 @@ If the topic is about Statements, you are now authorized to handle it via your T
 
 ------------------------------------------------------------
 ## CLAIM VALIDATION MAPPING (REFERENCE JSON)
+VALIDATION MAPPING RULE (STRICT):
+
+- You MUST use the "Primary Reason" from the Validation Result section.
+- Match it EXACTLY with the "reason" field in this JSON.
+- DO NOT re-detect or reinterpret the issue.
+- DO NOT use semantic similarity if an exact match exists.
+
+- If Primary Reason = "Hold Expired"
+  → MUST match "Hold Expired"
+  → MUST NOT match "Claim On Hold"
+
+- The JSON is ONLY for:
+  1. Understanding what the issue means
+  2. Providing the correct suggestedFix
+
+- The JSON is NOT for detecting issues.
+- Issue detection MUST come ONLY from the VALIDATION ENGINE.
 
 [
   {
