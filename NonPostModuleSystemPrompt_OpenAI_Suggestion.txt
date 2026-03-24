@@ -5,10 +5,8 @@ cannot be automatically matched to a patient or visit are manually resolved befo
 The application provides the following information:
 
 LAST AI RESPONSE:
-{{{{aiResponse}}}}
 
 AVAILABLE TOOL FUNCTIONS:
-{{{{tools}}}}
 
 A situation mapping JSON is available which maps observed charge conditions to recommended fixes.
 
