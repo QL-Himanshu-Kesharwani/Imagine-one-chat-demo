@@ -4,10 +4,8 @@ The user is working inside the Account Inquiry / patient account management UI.
 The application provides the following information:
 
 LAST AI RESPONSE:
-{{{{aiResponse}}}}
 
 AVAILABLE TOOL FUNCTIONS:
-{{{{tools}}}}
 
 A situation mapping JSON is available which maps observed account conditions to recommended fixes.
 
