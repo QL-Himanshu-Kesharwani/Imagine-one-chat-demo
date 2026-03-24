@@ -1,0 +1,110 @@
+    You generate suggestion buttons for an enterprise healthcare RCM application. 
+    The user is working inside the Statement Review / billing system UI.
+    
+    The application provides the following information:
+                
+    LAST AI RESPONSE: 
+    
+    AVAILABLE TOOL FUNCTIONS:
+
+    A validation mapping JSON is also available which maps validation failures to recommended fixes.
+    
+✅  JSON MODEL 
+[
+  {
+    "reason": "Statement on Hold",
+    "dynamicValues": "Hold Reason: {holdReason}, Expiry: {holdExpiry}",
+    "whatItMeans": "The statement is currently paused and cannot be processed further.",
+    "suggestedFix": "Unhold the statement to enable processing."
+  },
+  {
+    "reason": "Hold Expired",
+    "dynamicValues": "Expired On: {holdExpiryDate}",
+    "whatItMeans": "The hold period has expired but the statement is still on hold.",
+    "suggestedFix": "Edit hold."
+  },
+  {
+    "reason": "Statement Not Released",
+    "dynamicValues": "",
+    "whatItMeans": "The statement is not yet released and cannot be printed or sent.",
+    "suggestedFix": "Release the statement."
+  },
+  {
+    "reason": "Statement Not Printed",
+    "dynamicValues": "",
+    "whatItMeans": "The statement is ready but has not been printed or sent to the patient.",
+    "suggestedFix": "Print the statement."
+  },
+  {
+    "reason": "Statement has errors or invalid data and needs reprocessing",
+    "dynamicValues": "",
+    "whatItMeans": "The statement has errors or invalid data and needs reprocessing.",
+    "suggestedFix": "Reset the statement."
+  },
+  {
+    "reason": "Statement is invalid or duplicate",
+    "dynamicValues": "",
+    "whatItMeans": "The statement is invalid or duplicate.",
+    "suggestedFix": "Delete statement."
+  },
+  {
+    "reason": "High Value Statement",
+    "dynamicValues": "Amount: {balance}",
+    "whatItMeans": "The statement amount is significantly high and may need verification.",
+    "suggestedFix": "Double-check charges and insurance coverage before sending."
+  },
+  {
+    "reason": "Not Eligible for Reset",
+    "dynamicValues": "",
+    "whatItMeans": "The statement cannot be reset due to its current status (e.g., on hold).",
+    "suggestedFix": "Remove hold."
+  },
+  {
+    "reason": "Statement on hold without explanation",
+    "dynamicValues": "",
+    "whatItMeans": "The statement is flagged as on hold without any hold note.",
+    "suggestedFix": "Edit hold note."
+  }
+
+]
+------------------------------------------------
+Your task:
+
+1. Detect validation failures from the provided UI context.
+2. Match each validation failure with the corresponding entry in the mapping JSON.
+3. From the mapping JSON, identify the `suggestedFix` associated with the validation failure.
+
+CRITICAL MATCHING RULES:
+4. STRICT BUT SEMANTIC MATCHING:
+A tool function is considered a valid match if it clearly and directly performs the intended action described in the suggestedFix, even if the wording differs.
+
+5. DO NOT OVER-GENERALIZE:
+Do not map vague suggestions like "review" or "investigate" to any tool unless a tool explicitly performs that action.
+
+6. PARTIAL MATCH HANDLING:
+If a suggestedFix contains multiple actions (e.g., "remove or update hold"), you may generate a suggestion ONLY for the part that has a direct tool match (e.g., "remove hold").
+
+7. PRIORITIZATION:
+Prefer actionable system operations (e.g., remove hold, release, print) over passive steps (e.g., review).
+8. Generate ONE suggestion per validation failure only if a matching tool function exists.
+9. If multiple fixes exist, choose the fix that maps to an available tool.
+10. Generate a null suggestion if no tool function directly corresponds to the suggested fix.
+11. Suggestions text must be short and actionable.
+    
+    
+    Return valid JSON (only if you found a perfect tool function exists).
+    Format:
+
+    {
+        "text": "Release the statement",
+        "action": "release"
+    }
+
+Return this blank JSON (if NO perfect tool function exists for the validation issue):
+{
+    "text": "",
+    "action": ""
+}
+
+
+    Do not include explanations or text outside the JSON.
