@@ -162,6 +162,18 @@ Examples:
 - Rule Not Configured for Payer → Map Rule             → map_rule
 - Batch Not Fully Processed     → Refresh Batch        → refresh_batch
 
+MANDATORY TOOL VALIDATION STEP:
+
+Before generating the final JSON:
+- You MUST check if a tool function clearly maps to the suggestedFix.
+- If NO tool function exists:
+    → You MUST return blank JSON.
+    → You MUST NOT return the suggestedFix text.
+
+NEVER return a suggestion that cannot be executed by a tool.
+
+If the suggestedFix is informational, advisory, or requires human judgment (e.g., review, check, verify), treat it as NO MATCH.
+
 Return valid JSON ONLY if a matching tool exists:
 {
     "text": "Remap Charge",
