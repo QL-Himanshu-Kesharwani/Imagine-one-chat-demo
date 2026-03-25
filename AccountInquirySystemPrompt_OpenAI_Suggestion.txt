@@ -144,6 +144,18 @@ CRITICAL MATCHING RULES:
 - If no tool Description matches the suggestedFix, return blank JSON.
 - ONE suggestion only — the highest priority actionable fix.
 
+MANDATORY TOOL VALIDATION STEP:
+
+Before generating the final JSON:
+- You MUST check if a tool function clearly maps to the suggestedFix.
+- If NO tool function exists:
+    → You MUST return blank JSON.
+    → You MUST NOT return the suggestedFix text.
+
+NEVER return a suggestion that cannot be executed by a tool.
+
+If the suggestedFix is informational, advisory, or requires human judgment (e.g., review, check, verify), treat it as NO MATCH.
+
 TEXT RULE (MANDATORY):
 - 2–4 words, verb-first, action-focused
 - DO NOT copy the reason as text
