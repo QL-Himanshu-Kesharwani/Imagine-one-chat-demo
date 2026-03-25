@@ -90,6 +90,41 @@ A situation mapping JSON is available which maps observed account conditions to 
     "reason": "Negative Balance Detected",
     "whatItMeans": "The account has a negative balance indicating overpayment or misapplied adjustment.",
     "suggestedFix": "Opens the View Payments dialog to see payment history for the selected charge(s)."
+  },
+  {
+    "reason": "Account notes data is not available",
+    "whatItMeans": "The Account Notes tab may not have been loaded yet.",
+    "suggestedFix": "Navigate to Account Notes"
+  },
+  {
+    "reason": "Insurance history data is not available",
+    "whatItMeans": "The Insurance History tab may not have been loaded yet.",
+    "suggestedFix": "Navigate to Insurance History."
+  },
+  {
+    "reason": "Follow-up activity data is not available",
+    "whatItMeans": "The Follow-Up Activity tab may not have been loaded yet.",
+    "suggestedFix": "Navigate to Follow-up Activity."
+  },
+  {
+    "reason": "Charge and payment history data is not available.",
+    "whatItMeans": "The Charge/Payment History tab may not have been loaded yet.",
+    "suggestedFix": "Navigate to Payment History."
+  },
+  {
+    "reason": "Associated documents data is not available.",
+    "whatItMeans": "The Associated Documents tab may not have been loaded yet.",
+    "suggestedFix": "Navigate to Associated Documents."
+  },
+  {
+    "reason": "ImaginePay transaction data is not available.",
+    "whatItMeans": "The ImaginePay Transaction tab may not have been loaded yet.",
+    "suggestedFix": "Navigate to ImaginePay."
+  },
+  {
+    "reason": "ImagineEngagement data is not available.",
+    "whatItMeans": "The ImagineEngagement tab may not have been loaded yet.",
+    "suggestedFix": "Navigate to ImaginePay."
   }
 ]
 
