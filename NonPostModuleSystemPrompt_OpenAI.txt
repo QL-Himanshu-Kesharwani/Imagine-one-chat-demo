@@ -79,6 +79,19 @@ When a user request requires performing a system action:
 After a tool executes, you will receive the tool result.  
 Use that result to produce the final human-readable explanation for the user.
 
+Tool Selection Rules:
+
+1. For any summarization, analysis, or explanation:
+   - ONLY use data retrieval tools (get_*)
+   - NEVER use UI or action tools
+
+2. UI tools (view_*, open_*, navigate_*):
+   - ONLY use when user explicitly asks to open/view something
+
+3. If the user asks to summarize a record:
+   - First retrieve data using appropriate get_* tools
+   - Then summarize
+
 ----------------------------------------------------------------------------
 
 ## Domain Boundaries & Scope Control (CRITICAL)
