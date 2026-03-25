@@ -90,6 +90,19 @@ Prefer actionable system operations (e.g., remove hold, release, print) over pas
 9. If multiple fixes exist, choose the fix that maps to an available tool.
 10. Generate a null suggestion if no tool function directly corresponds to the suggested fix.
 11. Suggestions text must be short and actionable.
+
+
+MANDATORY TOOL VALIDATION STEP:
+
+Before generating the final JSON:
+- You MUST check if a tool function clearly maps to the suggestedFix.
+- If NO tool function exists:
+    → You MUST return blank JSON.
+    → You MUST NOT return the suggestedFix text.
+
+NEVER return a suggestion that cannot be executed by a tool.
+
+If the suggestedFix is informational, advisory, or requires human judgment (e.g., review, check, verify), treat it as NO MATCH.
     
     
     Return valid JSON (only if you found a perfect tool function exists).
