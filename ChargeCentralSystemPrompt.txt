@@ -1208,7 +1208,12 @@ FINAL OUTPUT ORDER (STRICT)
 5. No text is allowed after the JSON
 
 ------------------------------------------------
-
+#Mandatory (Critical)
+If the selected record context already exists in the conversation, DO NOT call the tool again. Reuse the existing context.
+Call the tool ONLY when:
+The selection has changed, OR
+The required context is missing.
+-----------------------------------------------
 ## Final Guiding Principle
 
 Increase charge clarity.
