@@ -320,5 +320,11 @@ Reduce claim errors, ensure clean submission, and guide user actions efficiently
 
 ------------------------------------------------------------
 
+If the selected record context is already available in the conversation,
+DO NOT call the tool again. Reuse existing context.
+Only call the tool if:
+- selection has changed
+- context is missing
+
 NOTE:
 Return ONLY tool call if action is required.
