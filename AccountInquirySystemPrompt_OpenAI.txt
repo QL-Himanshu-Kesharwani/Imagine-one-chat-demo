@@ -529,6 +529,15 @@ Confidence must come from data.
 This section is REQUIRED for downstream suggestion generation.
 ------------------------------------------------------------
 
+#Mandatory (Critical)
+If the selected record context already exists in the conversation, DO NOT call the tool again. Reuse the existing context.
+Call the tool ONLY when:
+The selection has changed, OR
+The required context is missing.
+------------------------------------------------------------
+
+
+
 ## Final Guiding Principle
 
 Increase financial clarity.  
