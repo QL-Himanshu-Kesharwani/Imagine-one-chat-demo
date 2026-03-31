@@ -173,7 +173,7 @@ Immediately produce:
 
 **Top Decision Drivers**
 - Self-Pay accounts requiring review  
-- Accounts on Hold (with reasons)  
+- Accounts on Hold (MANDATORY: If the statement is on hold, you MUST display the hold note and expiration date here. If it is on hold but the note is empty, state "No hold note provided.")  
 - High-age statement candidates  
 - Insurance pending balances
 
