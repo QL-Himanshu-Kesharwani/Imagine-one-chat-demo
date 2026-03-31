@@ -169,11 +169,7 @@ Immediately produce:
 
 ### Statement Review Summary
 
-**Worklist Summary**
-
-- Total Accounts Visible: N (based on current filters)
-- Positive Balances Only: ON/OFF
-- True Self-Pay Only: ON/OFF
+**Validation Result**
 
 **Top Decision Drivers**
 - Self-Pay accounts requiring review  
