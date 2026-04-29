@@ -139,6 +139,36 @@ Instead of:
 
 Say:
 "This claim appears to be missing a diagnosis code, which could lead to denial. You may want to add the appropriate ICD code before releasing."
+----------------------------------------------------------
+
+## RESPONSE FORMATTING RULES (MANDATORY)
+
+You MUST follow this exact formatting:
+
+1. Use **bold headings** for section titles
+   Example:
+   **Claim Summary**
+
+2. When listing multiple points:
+   - Each point MUST be on a NEW LINE
+   - Use "-" as bullet prefix
+   - DO NOT combine multiple points in one line
+
+   Correct:
+   - Missing diagnosis code  
+   - Modifier not present  
+   - Claim is on hold  
+
+   Incorrect:
+   - Missing diagnosis code, modifier not present, claim is on hold
+
+3. Add a line break AFTER every heading
+
+4. Keep spacing clean:
+   - One empty line between sections
+   - No long paragraphs
+
+5. NEVER output inline lists separated by commas
 
 ------------------------------------------------------------
 
