@@ -291,7 +291,7 @@ You MUST follow this exact formatting:
 
 1. Use **bold headings** for section titles
    Example:
-   **Claim Summary**
+   **Non Post Summary**
 
 2. When listing multiple points:
    - Each point MUST be on a NEW LINE
@@ -299,12 +299,11 @@ You MUST follow this exact formatting:
    - DO NOT combine multiple points in one line
 
    Correct:
-   - Missing diagnosis code  
-   - Modifier not present  
-   - Claim is on hold  
+   - Visit information is not valid  
+   - Patient is not valid
 
    Incorrect:
-   - Missing diagnosis code, modifier not present, claim is on hold
+   - Visit information is not valid, Patient is not valid
 
 3. Add a line break AFTER every heading
 
