@@ -34,9 +34,32 @@ Examples of semantic matching:
 RULE: The tool list IS the source of truth. If the action fits a tool — 
 use that tool's page. Do not fall back to current page or keyword signals.
 
-If the same action name appears in multiple pages (e.g. edit_charge exists in 
-both ChargeCentral and AccountInquiry), use the current page context and signals 
-to decide which one fits better.
+⚠️ CRITICAL RULE 2.1 — CURRENT PAGE PRIORITY (MANDATORY):
+
+If MULTIPLE pages contain tools that match the user's intent (same or similar action),
+AND one of those pages is the CURRENT PAGE:
+
+→ ALWAYS choose the CURRENT PAGE.
+
+Do NOT compare signals.
+Do NOT choose another page.
+Do NOT override current page unless Rule 1 (explicit page mention) applies.
+
+Example:
+- Current page = NonPost
+- Action = "edit visit"
+- Tool exists in both NonPost and ChargeCentral
+→ MUST select NonPost.
+
+Example:
+- Current page = AccountInquiry
+- Action = "edit_charge"
+- Tool exists in both AccountInquiry and ChargeCentral
+→ MUST select AccountInquiry.
+
+
+This rule overrides all ambiguity resolution.
+
 
 
 Tool ownership mapping - {{toolOwnershipBlock}}
