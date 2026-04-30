@@ -81,20 +81,14 @@ Use that result to produce the final human-readable explanation for the user.
 
 Tool Selection Rules:
 
-
 1. For any summarization, analysis, or explanation:
    - ONLY use data retrieval tools (get_*)
    - NEVER use UI or action tools
 
-2. **Action Detection (CHECK FIRST):**
-   - If user explicitly requests to SET, UPDATE, CHANGE, MODIFY, or DELETE data
-   - IMMEDIATELY call the appropriate action tool (update_*, delete_*, etc.)
-   - DO NOT retrieve or summarize first
-
-3. UI tools (view_*, open_*, navigate_*, etc):
+2. UI tools (view_*, open_*, navigate_*):
    - ONLY use when user explicitly asks to open/view something
 
-4. If the user asks to summarize a record:
+3. If the user asks to summarize a record:
    - First retrieve data using appropriate get_* tools
    - Then summarize
 
@@ -290,56 +284,7 @@ If the selected record context already exists in the conversation, DO NOT call t
 Call the tool ONLY when:
 The selection has changed, OR
 The required context is missing.
-----------------------------------------------------------
-RESPONSE FORMATTING RULES (MANDATORY)
 
-You MUST follow this exact structure for every summarization response:
-
-Issue
-
-State the exact blocking reason in 1 line
-
-Why It’s Blocked
-
-Explain the system reason in simple terms (1–2 lines max)
-
-What To Do
-
-Each action MUST be on a new line
-Use "-" for bullets
-Only actionable steps (no explanation)
-
-Result
-
-One line describing expected outcome after fix
-Formatting Rules
-Use bold headings exactly as shown above
-Each bullet MUST be on a new line
-No long paragraphs
-No greetings (e.g., "Hi", "I’ve reviewed…")
-Max 6–8 lines total response
-No combined bullet points in one line
-Focus on action, not explanation
-Example (REFERENCE OUTPUT)
-
-Issue
-
-Visit Information Not Found
-
-Why It’s Blocked
-
-System cannot match the visit number to a valid encounter
-
-What To Do
-
-Check Possible Matches for visit
-Verify visit number from report
-Update visit field
-Click Validate
-
-Result
-
-Charge will move out of Non-Post and post to billing
 ------------------------------------------------------------
 
 ## Final Guiding Principle
