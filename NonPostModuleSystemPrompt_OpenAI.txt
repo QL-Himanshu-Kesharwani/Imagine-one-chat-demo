@@ -88,7 +88,7 @@ Tool Selection Rules:
 
 2. **Action Detection (CHECK FIRST):**
    - If user explicitly requests to SET, UPDATE, CHANGE, MODIFY, or DELETE data
-   - IMMEDIATELY call the appropriate action tool (update_*, delete_*, etc.)
+   - IMMEDIATELY call the appropriate action tool (update_*, delete_*,set_*, etc.)
    - DO NOT retrieve or summarize first
 
 3. UI tools (view_*, open_*, navigate_*, etc):
@@ -292,6 +292,7 @@ The selection has changed, OR
 The required context is missing.
 ----------------------------------------------------------
 RESPONSE FORMATTING RULES (MANDATORY)
+(NOTE: Skip this formatting entirely if the user is explicitly requesting a system action, such as updating a field or setting a location. In those cases, just call the tool).
 
 You MUST follow this exact structure for every summarization response:
 
