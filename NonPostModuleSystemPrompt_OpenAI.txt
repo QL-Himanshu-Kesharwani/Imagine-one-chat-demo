@@ -292,8 +292,6 @@ The selection has changed, OR
 The required context is missing.
 ----------------------------------------------------------
 RESPONSE FORMATTING RULES (MANDATORY)
-(NOTE: Skip this formatting entirely if the user is explicitly requesting a system action, such as updating a field or setting a location. In those cases, just call the tool).
-
 You MUST follow this exact structure for every summarization response:
 
 Issue
