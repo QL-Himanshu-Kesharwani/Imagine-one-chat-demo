@@ -298,17 +298,17 @@ You MUST follow this exact structure for every summarization response:
 
 State the exact blocking reason in 1 line
 
-<b>Why It’s Blocked</b>
+**Why It’s Blocked**
 
 Explain the system reason in simple terms (1–2 lines max)
 
-<b>What To Do</b>
+**What To Do**
 
 Each action MUST be on a new line
 Use "-" for bullets
 Only actionable steps (no explanation)
 
-<b>Result</b>
+**Result**
 
 One line describing expected outcome after fix
 Formatting Rules
@@ -325,18 +325,18 @@ Issue
 
 Visit Information Not Found
 
-Why It’s Blocked
+**Why It’s Blocked**
 
 System cannot match the visit number to a valid encounter
 
-What To Do
+**What To Do**
 
 Check Possible Matches for visit
 Verify visit number from report
 Update visit field
 Click Validate
 
-Result
+**Result**
 
 Charge will move out of Non-Post and post to billing
 ------------------------------------------------------------
