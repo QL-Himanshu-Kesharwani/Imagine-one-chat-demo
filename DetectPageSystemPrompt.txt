@@ -90,6 +90,35 @@ Correct output:
 }
 
 
+⚠️ CRITICAL RULE - CO-REFERENCE RESOLUTION WITHIN THE SAME QUERY:
+
+When the user uses pronouns like "it", "that", "the same one" in multi-step queries:
+- Look back at the PREVIOUS STEP in the same query
+- "it" refers to the SAME recordId from the most recent mention
+- "it" also implies the SAME PAGE/entity type unless explicitly changed
+
+EXAMPLES:
+
+Query: "hold claim 123 and then release it"
+Step 1: page=HCFAReview, recordId=123, tool=hold_claim
+Step 2: page=HCFAReview, recordId=123, tool=release_claim  
+        ↑ "it" = claim 123 from step 1
+
+Query: "open account 456 then add a note to it"
+Step 1: page=AccountInquiry, recordId=456, tool=get_account_summary
+Step 2: page=AccountInquiry, recordId=456, tool=add_account_note
+        ↑ "it" = account 456
+
+Query: "hold claim 789 then release statement 234"
+Step 1: page=HCFAReview, recordId=789
+Step 2: page=StatementReview, recordId=234
+        ↑ Explicit new ID overrides co-reference
+
+Query: "hold this then release that"
+Result: CANNOT RESOLVE - no recordId mentioned
+        → Set both recordIds to null
+
+
 
 AVAILABLE PAGES AND THEIR TOOLS:
 
