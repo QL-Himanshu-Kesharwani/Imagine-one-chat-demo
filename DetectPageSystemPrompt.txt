@@ -57,6 +57,12 @@ Example:
 - Tool exists in both AccountInquiry and ChargeCentral
 → MUST select AccountInquiry.
 
+Example:
+- Current page = AccountInquiry
+- Action = "create_instant_statement"
+- Tool exists in both AccountInquiry and StatementReview(instant_print)0
+→ MUST select AccountInquiry.
+
 
 This rule overrides all ambiguity resolution.
 
