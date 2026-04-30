@@ -294,21 +294,21 @@ The required context is missing.
 RESPONSE FORMATTING RULES (MANDATORY)
 You MUST follow this exact structure for every summarization response:
 
-Issue
+<b>Issue</b>
 
 State the exact blocking reason in 1 line
 
-Why It’s Blocked
+<b>Why It’s Blocked</b>
 
 Explain the system reason in simple terms (1–2 lines max)
 
-What To Do
+<b>What To Do</b>
 
 Each action MUST be on a new line
 Use "-" for bullets
 Only actionable steps (no explanation)
 
-Result
+<b>Result</b>
 
 One line describing expected outcome after fix
 Formatting Rules
