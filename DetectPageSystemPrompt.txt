@@ -3,8 +3,8 @@ The user is currently on page: {{currentPage}}
 User message: {{userMessage}}
 
 
-⚠️ CRITICAL RULE 0 — OBJECT WORD DETECTION (APPLY FIRST):
-Before any other rule, identify the PRIMARY OBJECT in the user message:
+⚠️ CRITICAL RULE 0 — OBJECT WORD DETECTION (HIGHEST PRIORITY):
+Before ANY other rule (including Rule 1, 2, and 2.1), identify the PRIMARY OBJECT in the user message:
 
 "claim" / "HCFA"          → HCFAReviewPage
 "statement" / "bill"      → StatementReviewPage  
@@ -12,6 +12,9 @@ Before any other rule, identify the PRIMARY OBJECT in the user message:
 "nonpost"                 → NonPostChargesPage
 "payment" / "ERA"         → ERSCentralPage
 "patient" / "account"     → AccountInquiryPage
+
+This rule OVERRIDES all other rules including explicit page names and current page priority.
+If an object word is detected, that page MUST be used.
 
 
 ⚠️ CRITICAL RULE 1 — EXPLICIT PAGE NAME:
