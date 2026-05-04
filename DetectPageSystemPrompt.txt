@@ -6,11 +6,12 @@ User message: {{userMessage}}
 ⚠️ CRITICAL RULE 0 — OBJECT WORD DETECTION (APPLY FIRST):
 Before any other rule, identify the PRIMARY OBJECT in the user message:
 
-"claim" / "HCFA"          → HCFAReview
-"statement" / "bill"      → StatementReview  
-"charge"                  → ChargeCentral or AccountInquiry
-"payment" / "ERA"         → ERSCentral
-"patient" / "account"     → AccountInquiry
+"claim" / "HCFA"          → HCFAReviewPage
+"statement" / "bill"      → StatementReviewPage  
+"charge"                  → ChargeCentralPage
+"nonpost"                 → NonPostChargesPage
+"payment" / "ERA"         → ERSCentralPage
+"patient" / "account"     → AccountInquiryPage
 
 
 ⚠️ CRITICAL RULE 1 — EXPLICIT PAGE NAME:
@@ -122,14 +123,14 @@ Result: CANNOT RESOLVE - no recordId mentioned
 
 AVAILABLE PAGES AND THEIR TOOLS:
 
-1) ChargeCentral
+1) ChargeCentralPage
    PURPOSE: Holding + review station for charges before posting to patient account.
    USE FOR: Missing info, duplicate charges, manual review, validate/edit charge before billing.
    NOT FOR: Claim validation, payment posting, patient statements.
    SIGNALS: "charge", "edit charge", "validate charge", "hold charge", "post charge"
    TOOLS: {ChargeCentralTools}
 
-2) HCFAReview
+2) HCFAReviewPage
    PURPOSE: Review and manage claims before sending to insurance.
    ALIASES: "HCFA Review", "Claim Review", "HCFA", "Claim"
    USE FOR: Validate coding (CPT, ICD, modifiers), fix claim-level issues, release/hold/edit claims.
@@ -137,14 +138,14 @@ AVAILABLE PAGES AND THEIR TOOLS:
    SIGNALS: "claim", "review claim", "release claim", "coding issue", "CPT ICD", "modifier", "hold claim", "summarize claim, "claim summary", "explain claim", 'claim overview"
    TOOLS: {HCFAReviewTools}
 
-3) NonPost
+3) NonPostChargesPage
    PURPOSE: Manage charges that failed to post.
    USE FOR: Match charges to patient visits, fix mapping errors, validate and delete invalid charges.
    NOT FOR: Claim validation, detailed charge fixing, payment posting.
    SIGNALS: "charge not posted", "visit not found", "patient not found", "mapping issue", "interface error"
    TOOLS: {NonPostTools}
 
-4) StatementReview
+4) StatementReviewPage
    PURPOSE: Review and manage patient statements before sending.
     ALIASES: "statement review", "statementreview", "statement"
     RECORD ID TYPE: Patient ID (statements are looked up by patient ID)
@@ -155,7 +156,7 @@ AVAILABLE PAGES AND THEIR TOOLS:
 "summarize statement", "statement summary", "explain statement", "statement overview",
    TOOLS: {StatementReviewTools}
 
-5) AccountInquiry
+5) AccountInquiryPage
    PURPOSE: Track claim and payment status after submission.
     ALIASES: "account inquiry", "AccountInquiry", "account inq"
    USE FOR: Check balances, handle denials, rebill claims, follow up with payer.
@@ -163,7 +164,7 @@ AVAILABLE PAGES AND THEIR TOOLS:
    SIGNALS: "payment pending", "claim denied", "patient balance", "follow up", "rebill",  "summarize patient information, "summarize patient account"
    TOOLS: {AccountInquiryTools}
 
-6) ERSCentral
+6) ERSCentralPage
    PURPOSE: Handle insurance payments that failed to auto-post.
    USE FOR: ERA/EOB mapping issues, payment not linked to charge/patient, adjustments.
    NOT FOR: Charge creation, claim validation.
