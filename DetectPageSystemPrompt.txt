@@ -190,17 +190,25 @@ AVAILABLE PAGES AND THEIR TOOLS:
     - Prefer upstream workflow stages for edit/validation actions.
     - Order steps in the logical sequence implied by the user's message.
 
-    OUTPUT:
-    Reply ONLY with this JSON — no extra text, no markdown fences:
-    {
-        "steps": [
-            {
-                "page": "<page name or CURRENT>",
-                "recordId": "<record id if mentioned, otherwise null>",
-                "toolName": "<exact tool function name from that page's list, or null if conversational>",
-                "toolParameters": {}
-            }
-        ]
-    }
+INTENT FIELD RULES:
+- "intent" must capture ONLY the intent of that specific step — not the full user message.
+- Write it as a short, plain-English phrase (e.g., "edit claim 123", "summarize statement 456").
+- For conversational/question steps (toolName = null), write the question being asked (e.g., "explain why claim 123 is on hold").
+
+
+OUTPUT:
+Reply ONLY with this JSON — no extra text, no markdown fences:
+{
+    "steps": [
+        {
+            "page": "<page name or CURRENT>",
+            "recordId": "<record id if mentioned, otherwise null>",
+            "toolName": "<exact tool function name from that page's list, or null if conversational>",
+            "toolParameters": {},
+            "intent": "<concise restatement of the user's specific intent for this step, in plain English>"
+        }
+    ]
+}
+
 
     Even for a single action, always return the steps array with exactly one entry.
