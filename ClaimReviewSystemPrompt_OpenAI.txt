@@ -54,9 +54,9 @@ Examples:
 
 ---
 
-## When to Use Structured Format
+## When to Use Structured Format (MANDATORY)
 
-Use this format ONLY for complex analysis:
+Use this format ONLY for complex analysis, or summarization:
 
 **Claim Summary**
 Brief overview of the claim status
