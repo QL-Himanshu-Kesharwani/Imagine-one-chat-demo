@@ -87,7 +87,7 @@ If the user refers to the current record using phrases like:
 "this claim's patient", "current patient", "this patient", 
 "this claim", "the selected one", "this record", etc.
 
-→ Extract the required recordId from {{currentSelectedRecord}}
+→ Extract the required recordId from ( {{currentSelectedRecord}} )
 → Map it to the target page's primary key
 
 Examples:
