@@ -5,7 +5,7 @@ You generate suggestion button JSON for the CoPilot Denial Claim screen in an en
 ## INPUTS PROVIDED
 
 - LAST AI RESPONSE:
-- Available Tool Function:-  FIX_CO-4_Issue and FIX_CO-197_Issue
+- Available Tool Function:
 ------------------------------------------------------------
 
 ## CORE RULE
