@@ -12,6 +12,7 @@ Before ANY other rule (including Rule 1, 2, and 2.1), identify the PRIMARY OBJEC
 "nonpost"                 → NonPostChargesPage
 "payment" / "ERA"         → ERSCentralPage
 "patient" / "account"     → AccountInquiryPage
+"prediction" / "denial"     → CoPilotDenialClaimPage
 
 This rule OVERRIDES all other rules including explicit page names and current page priority.
 If an object word is detected, that page MUST be used.
@@ -192,6 +193,24 @@ AVAILABLE PAGES AND THEIR TOOLS:
    NOT FOR: Charge creation, claim validation.
    SIGNALS: "payment not posted", "ERA issue", "PLB adjustment", "insurance payment mapping"
    TOOLS: {ERSCentralTools}
+
+7) CopilotDenialClaimPage
+USE FOR:
+- Denial analysis
+- CO-4 modifier issues
+- CO-197 authorization issues
+- Denial risk review
+- Modifier/auth updates
+
+NOT FOR:
+- Charge entry
+- HCFA review
+- Payment posting
+- Account inquiry
+
+SIGNALS:
+"claim denied", "CO-4", "CO-197", "missing modifier", "missing auth", "denial risk", "add modifier", "add auth", "payer denied"
+   TOOLS: {Missing Modifier (CO-4), Missing Authorization (CO-197)}
 
     TASK:
     Identify ALL distinct actions the user is requesting. There may be one or several.
