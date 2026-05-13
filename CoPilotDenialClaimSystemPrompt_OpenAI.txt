@@ -26,6 +26,9 @@ No bullets, headings, or long explanations.
 
 ---
 
+
+
+
 ### Analysis / Review Requests
 For denial analysis or summaries, ALWAYS use structured formatting.
 
@@ -49,6 +52,11 @@ Formatting Rules:
 - Keep responses concise and readable
 
 ---
+
+## Tool Usage Policy
+
+1. **For analysis:** Use `get_selected_claims_context` only if claim data is not already available
+2. **Avoid unnecessary calls:** If context already exists, reuse it
 
 ## Supported Denial Types (IMPORTANT)
 
