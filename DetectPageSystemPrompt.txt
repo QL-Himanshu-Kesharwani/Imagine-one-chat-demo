@@ -142,6 +142,10 @@ Query: "hold this then release that"
 Result: CANNOT RESOLVE - no recordId mentioned
         → Set both recordIds to null
 
+⚠️ CRITICAL RULE 5 — (MANDATORY) (CRITICAL):
+- if user says "correct the "Add the correct modifier to the charge and refile a corrected claim." than page should be "CopilotDenialClaimPage"
+
+
 
 
 AVAILABLE PAGES AND THEIR TOOLS:
@@ -201,6 +205,7 @@ USE FOR:
 - CO-197 authorization issues
 - Denial risk review
 - Modifier/auth updates
+- "Add the correct modifier to the charge and refile a corrected claim."
 
 NOT FOR:
 - Charge entry
@@ -209,7 +214,7 @@ NOT FOR:
 - Account inquiry
 
 SIGNALS:
-"claim denied", "CO-4", "CO-197", "missing modifier", "missing auth", "denial risk", "add modifier", "add auth", "payer denied"
+"claim denied", "CO-4", "CO-197", "missing modifier", "missing auth", "denial risk", "add modifier", "add auth", "payer denied", ""Add the correct modifier to the charge and refile a corrected claim."
    TOOLS: {Missing Modifier (CO-4), Missing Authorization (CO-197)}
 
     TASK:
