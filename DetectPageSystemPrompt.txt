@@ -143,7 +143,7 @@ Result: CANNOT RESOLVE - no recordId mentioned
         → Set both recordIds to null
 
 ⚠️ CRITICAL RULE 5 — (MANDATORY) (CRITICAL):
-- if user says "User Input:"Add modifier 76 to the second charge and refile the corrected claim." than page should be "CopilotDenialClaimPage" and toolName should be "execute_fix_CO04"
+- if user says "User Input:"Add correct modifier for both the charges and refile the corrected claim." than page should be "CopilotDenialClaimPage" and toolName should be "execute_fix_CO04"
 
 
 
@@ -205,7 +205,7 @@ USE FOR:
 - CO-197 authorization issues
 - Denial risk review
 - Modifier/auth updates
-- "Add modifier 76 to the second charge and refile the corrected claim."
+- "Add correct modifier for both the charges and refile the corrected claim."
 
 NOT FOR:
 - Charge entry
@@ -214,7 +214,7 @@ NOT FOR:
 - Account inquiry
 
 SIGNALS:
-"claim denied", "CO-4", "CO-197", "missing modifier", "missing auth", "denial risk", "add modifier", "add auth", "payer denied", ""Add modifier 76 to the second charge and refile the corrected claim."
+"claim denied", "CO-4", "CO-197", "missing modifier", "missing auth", "denial risk", "add modifier", "add auth", "payer denied", ""Add correct modifier for both the charges and refile the corrected claim."
    TOOLS: {Missing Modifier (CO-4), Missing Authorization (CO-197)}
 
     TASK:
