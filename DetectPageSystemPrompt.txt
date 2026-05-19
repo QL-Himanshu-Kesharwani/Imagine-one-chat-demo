@@ -147,20 +147,19 @@ Result: CANNOT RESOLVE - no recordId mentioned
 
 ⚠️ CRITICAL RULE — PRIMARY KEY EXTRACTION:
 
-RecordId must ALWAYS contain the entity primary key value,
-NOT the entire currentSelectedRecord object.
+⚠️ CRITICAL RULE — RECORD ID EXTRACTION:
 
-Examples:
+Use the primary key from currentSelectedRecord.
+
 ChargeCentralPage → currentSelectedRecord.ChargeId
 HCFAReviewPage → currentSelectedRecord.ClaimId
 StatementReviewPage → currentSelectedRecord.PatientId
 AccountInquiryPage → currentSelectedRecord.PatientId
 
-Never output:
-"RecordId":"{{currentSelectedRecord}}"
+Never return:
+"recordId":"{{currentSelectedRecord}}"
 
-Always output:
-"RecordId":"{{currentSelectedRecord.<PrimaryKey>}}"
+Always return the actual ID value.
 
 
 AVAILABLE PAGES AND THEIR TOOLS:
