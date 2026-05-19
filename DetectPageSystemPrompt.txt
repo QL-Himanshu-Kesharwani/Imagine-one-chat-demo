@@ -145,7 +145,22 @@ Result: CANNOT RESOLVE - no recordId mentioned
 ⚠️ CRITICAL RULE 5 — (MANDATORY) (CRITICAL):
 - if user says "User Input:"Add correct modifier for both the charges and refile the corrected claim." than page should be "CopilotDenialClaimPage" and toolName should be "execute_fix_CO04"
 
+⚠️ CRITICAL RULE — PRIMARY KEY EXTRACTION:
 
+RecordId must ALWAYS contain the entity primary key value,
+NOT the entire currentSelectedRecord object.
+
+Examples:
+ChargeCentralPage → currentSelectedRecord.ChargeId
+HCFAReviewPage → currentSelectedRecord.ClaimId
+StatementReviewPage → currentSelectedRecord.PatientId
+AccountInquiryPage → currentSelectedRecord.PatientId
+
+Never output:
+"RecordId":"{{currentSelectedRecord}}"
+
+Always output:
+"RecordId":"{{currentSelectedRecord.<PrimaryKey>}}"
 
 
 AVAILABLE PAGES AND THEIR TOOLS:
