@@ -88,8 +88,6 @@ When triggered, output ONLY this JSON structure:
 
 ### Supported Fix Tools
 
-### Supported Fix Tools
-
 **Charge-Level Direct Fixes (Coding & Clinical):**
 - SetChargeModifier(modifier: string) 
   *Usage: Use to add, replace, or remove a modifier (pass empty string to remove).*
