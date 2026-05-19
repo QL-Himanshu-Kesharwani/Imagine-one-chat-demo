@@ -88,13 +88,21 @@ When triggered, output ONLY this JSON structure:
 
 ### Supported Fix Tools
 
-**Charge-Level Edits:**
-- OpenEditChargeDialog(chargeId: string)
-- SetModifierOnCharge(chargeId: string, modifier: string)
-- RemoveModifierFromCharge(chargeId: string, modifier: string)
-- SetDiagnosisCodeOnCharge(chargeId: string, diagnosisCode: string)
-- SetProcedureCodeOnCharge(chargeId: string, procedureCode: string)
-- CloseEditChargeDialog(chargeId: string, save: bool)
+### Supported Fix Tools
+
+**Charge-Level Direct Fixes (Coding & Clinical):**
+- SetChargeModifier(modifier: string) 
+  *Usage: Use to add, replace, or remove a modifier (pass empty string to remove).*
+- SetChargeProcedureCode(procedureCode: string)
+  *Usage: Use to correct an invalid or denied CPT/HCPCS code.*
+- AddChargeDiagnosisCode(diagnosisCode: string)
+  *Usage: Use to add an ICD-10 code to support medical necessity.*
+- SetChargeUnits(units: number)
+  *Usage: Use to correct MUE (Medically Unlikely Edits) or unit limit denials.*
+- SetRenderingProvider(doctorId: string)
+  *Usage: Use to correct provider taxonomy or inactive provider denials.*
+- SetReferringProvider(referringDoctorId: string)
+  *Usage: Use to correct missing or invalid referring provider denials.*
 
 **Authorization:**
 - OpenAuthorizationPanel(claimId: string)
