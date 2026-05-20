@@ -71,13 +71,13 @@ If the denial is **Non-Fixable**, output the JSON with an empty `steps` array an
 
 | Denial Category            | CARC Code(s)       | Fixable In-System? | Fix Tool(s)                                      |
 |----------------------------|--------------------|--------------------|--------------------------------------------------|
-| Missing Modifier           | CO-4               | ✅ Yes             | SetChargeModifier                                |
-| Incorrect Procedure Code   | CO-4, CO-11        | ✅ Yes             | SetChargeProcedureCode                           |
-| MUE / Unit Limit Exceeded  | CO-4, CO-97        | ✅ Yes             | SetChargeUnits                                   |
-| Missing Diagnosis Code     | CO-4, CO-11        | ✅ Yes             | AddChargeDiagnosisCode                           |
+| Missing Modifier           | CO-4               | ✅ Yes             | set_modifier_for_charge                                |
+| Incorrect Procedure Code   | CO-4, CO-11        | ✅ Yes             | set_procedure_for_charge                           |
+| MUE / Unit Limit Exceeded  | CO-4, CO-97        | ✅ Yes             | set_units_for_charge                                   |
+| Missing Diagnosis Code     | CO-4, CO-11        | ✅ Yes             | set_diagnosis_for_charge                           |
 | Missing Authorization      | CO-15, CO-197      | ✅ Yes             | SetAuthorizationNumber                           |
-| Missing/Invalid Referring  | CO-4               | ✅ Yes             | SetReferringProvider                             |
-| Invalid Rendering Provider | CO-4, CO-22        | ✅ Yes             | SetRenderingProvider                             |
+| Missing/Invalid Referring  | CO-4               | ✅ Yes             | set_referring_doctor_for_charge                             |
+| Invalid Rendering Provider | CO-4, CO-22        | ✅ Yes             | set_rendering_doctor_for_charge                             |
 | Duplicate Claim            | CO-97              | ✅ Yes             | SetClaimFrequencyCode (use 7 = Replacement)      |
 | Bundling / Incidental      | CO-97, CO-B9       | ⚠️ Partial         | SetChargeProcedureCode (unbundle) or manual      |
 | Timely Filing              | CO-29              | ❌ No              | Manual — submit appeal with proof of timely filing|
@@ -154,12 +154,12 @@ Reason through these steps internally before writing any JSON:
 
 | Tool                        | Signature                              | When to Use                                              |
 |-----------------------------|----------------------------------------|----------------------------------------------------------|
-| `SetChargeModifier`         | `(modifier: string)`                   | Add, replace, or remove a modifier (pass "" to remove)   |
-| `SetChargeProcedureCode`    | `(procedureCode: string)`              | Correct an invalid or denied CPT/HCPCS code              |
-| `AddChargeDiagnosisCode`    | `(diagnosisCode: string)`              | Add an ICD-10 code to support medical necessity          |
-| `SetChargeUnits`            | `(units: number)`                      | Correct MUE or unit limit denials                        |
-| `SetRenderingProvider`      | `(doctorId: string)`                   | Correct provider taxonomy or inactive provider denials   |
-| `SetReferringProvider`      | `(referringDoctorId: string)`          | Correct missing or invalid referring provider            |
+| `set_modifier_for_charge`         | `(charge_id:string, modifier: string)`                   | Add, replace, or remove a modifier (pass "" to remove)   |
+| `set_procedure_for_charge`    | `(charge_id:string, procedure: string)`              | Correct an invalid or denied CPT/HCPCS code              |
+| `set_diagnosis_for_charge`    | `(charge_id:string,diagnosis: string)`              | Add an ICD-10 code to support medical necessity          |
+| `set_units_for_charge`            | `(charge_id:string,units: number)`                      | Correct MUE or unit limit denials                        |
+| `set_rendering_doctor_for_charge`      | `(charge_id:string,rendering_doctor: string)`                   | Correct provider taxonomy or inactive provider denials   |
+| `set_referring_doctor_for_charge`      | `(charge_id:string,referring_doctor: string)`          | Correct missing or invalid referring provider            |
 
 **Authorization:**
 
@@ -174,7 +174,7 @@ Reason through these steps internally before writing any JSON:
 | Tool                        | Signature                                       | When to Use                          |
 |-----------------------------|-------------------------------------------------|--------------------------------------|
 | `SetClaimFrequencyCode`     | `(claimId: string, frequencyCode: string)`      | Set frequency code (e.g. 7 = replacement for duplicate) |
-| `ResubmitClaim`             | `(claimId: string)`                             | Always the final step                |
+| `release_claim`             | `(claim_id: string)`                             | Always the final step                |
 
 ---
 
@@ -194,8 +194,8 @@ satisfy payer requirements. Add LT to CHG-001 and RT to CHG-002.
   "denial_category": "Missing Modifier (CO-4)",
   "reasoning": "Both charges are billed with identical modifier 26 for a bilateral procedure, which the payer flags as a duplicate-service risk. Standard billing practice requires laterality modifiers LT and RT to distinguish left and right services. Adding LT to CHG-001 and RT to CHG-002 before resubmitting.",
   "steps": [
-    { "thought": "Selecting charge CHG-001 for editing...", "tool": "SetChargeModifier", "args": { "modifier": "LT" } },
-    { "thought": "Selecting charge CHG-002 for editing...", "tool": "SetChargeModifier", "args": { "modifier": "RT" } },
+    { "thought": "Selecting charge CHG-001 for editing...", "tool": "SetChargeModifier", "args": { "charge_id": "123", "modifier": "LT" } },
+    { "thought": "Selecting charge CHG-002 for editing...", "tool": "SetChargeModifier", "args": {"charge_id": "123",  "modifier": "RT" } },
     { "thought": "Resubmitting claim CLM-001...", "tool": "ResubmitClaim", "args": { "claimId": "CLM-001" } }
   ]
 }
