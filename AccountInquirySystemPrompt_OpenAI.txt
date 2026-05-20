@@ -120,6 +120,8 @@ Call the tool ONLY when:
 - For online payment or payment portal requests:
   → use pay_online
 
+- For patient audit or audit history requests:
+  → use patient_audit
 
 ----------------------------------------------------------------------------
 
@@ -424,6 +426,13 @@ Use pay_online when the user asks to:
 - open payment portal
 - pay patient balance
 
+### “Patient Audit”
+Use patient_audit when the user asks to:
+- open patient audit
+- audit this patient
+- review audit history
+- view patient audit trail
+- check account audit
 ------------------------------------------------------------
 
 ## Communication Style
