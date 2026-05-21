@@ -99,6 +99,176 @@ explanation, no markdown fences.
 "fix it", "go ahead", "apply the fix", "correct and refile", "fix and resubmit", "do it"
 
 ---
+----------------------------------------------------------------------------------------------------------------------------
+
+## Denial-Specific Reasoning Chains
+
+Before building any fix plan, work through the reasoning chain for the identified denial
+category. These chains replace pattern-matching with structured clinical and billing logic.
+
+---
+
+### CO-4 — Procedure/Modifier Mismatch
+
+Step 1: How many charges are on this claim?
+  - One charge → the fix lives entirely on that single charge
+  - Multiple charges → determine if each charge needs individual attention
+
+Step 2: What is the current modifier state on the flagged charge?
+  - No modifier present → determine what modifier is required
+  - Modifier present but wrong → determine correct replacement
+  - Modifier present but not allowed on this CPT → remove it entirely (pass "")
+
+Step 3: What is the nature of the procedure?
+  - Bilateral procedure billed on ONE charge → add modifier 50
+  - Bilateral procedure split across TWO charges → add LT to one, RT to the other
+  - Professional component only → modifier 26
+  - Technical component only → modifier TC
+  - Distinct procedural service → modifier 59
+  - Surgical procedure with E&M same day → modifier 25 on the E&M, not the surgery
+
+Step 4: Do units need to change?
+  - If modifier 50 is added to a single bilateral charge, units must be 1 (not 2)
+  - If split into LT/RT charges, each charge should have units = 1
+
+Tool selection: set_modifier_for_charge, set_units_for_charge (if units also wrong)
+
+---
+
+### CO-97 — Duplicate Claim / MUE Exceeded
+
+Step 1: What does the prediction say — duplicate submission or MUE unit violation?
+  - Duplicate submission → the same claim was already paid or adjudicated
+  - MUE exceeded → units billed exceed Medicare's Medically Unlikely Edit limit for this CPT
+
+Step 2: If duplicate submission:
+  - The claim needs to be resubmitted as a replacement, not a new claim
+  - Set frequency code to 7 (Replacement of Prior Claim)
+  - Tool: SetClaimFrequencyCode
+
+Step 3: If MUE unit violation:
+  - What is the MUE limit for this CPT code? Use your RCM knowledge.
+  - What units are currently billed?
+  - Reduce units to the allowed MUE limit
+  - Tool: set_units_for_charge
+
+Step 4: Can the excess units be split across dates of service?
+  - If yes, flag in reasoning that manual charge splitting may be needed after system fix
+  - Still set units to the MUE limit and resubmit
+
+---
+
+### CO-4 / CO-11 — Incorrect Procedure Code
+
+Step 1: Why is the procedure code wrong?
+  - Retired or deleted CPT → replace with the current valid code
+  - Upcoded or downcoded → correct to the code that matches the service rendered
+  - CPT does not match the place of service → select the POS-appropriate code
+  - Wrong code family entirely → select the correct category
+
+Step 2: Is there a direct replacement code, or does it require unbundling?
+  - Direct replacement → use set_procedure_for_charge with the correct CPT
+  - Unbundling → this crosses into partial/manual territory; flag in reasoning
+
+Step 3: Will the diagnosis codes still support the new CPT?
+  - If yes → proceed with code change
+  - If no → also call set_diagnosis_for_charge with a supporting ICD-10
+
+Tool selection: set_procedure_for_charge, optionally set_diagnosis_for_charge
+
+---
+
+### CO-4 / CO-11 — Missing Diagnosis Code
+
+Step 1: What diagnosis is currently on the charge?
+Step 2: What does the prediction say is missing or mismatched?
+  - No diagnosis linked to this charge → add the correct ICD-10
+  - Diagnosis present but does not support the CPT → replace with one that does
+  - Diagnosis too vague (e.g. Z code) when a specific clinical code is required → replace
+
+Step 3: Do NOT invent or assume a diagnosis code.
+  - The correct ICD-10 must come from the claim context (Visit diagnosis fields,
+    PatDiagnosis1, PatDiagnosis2, etc.)
+  - If the correct code is visible in the context → use it
+  - If no supporting diagnosis exists in the context → output empty steps and explain
+    in reasoning that a clinical decision is required outside the system
+
+Tool selection: set_diagnosis_for_charge
+
+---
+
+### CO-15 / CO-197 — Missing Authorization
+
+Step 1: Is an authorization number visible anywhere in the claim context?
+  - Auth number present in context → use it directly
+  - Auth number not present → output empty steps; explain that the auth number must
+    be obtained from the payer before the system can be updated
+
+Step 2: If auth number is available:
+  - Open the authorization panel
+  - Set the authorization number
+  - Close and save the panel
+  - Always follow this three-tool sequence in order — never skip OpenAuthorizationPanel
+
+Step 3: Does the auth number apply to the whole claim or a specific charge?
+  - Authorization in this system is claim-level → use the claim ID, not the charge ID
+
+Tool selection: OpenAuthorizationPanel → SetAuthorizationNumber → CloseAuthorizationPanel
+
+---
+
+### CO-4 / CO-22 — Invalid Rendering Provider
+
+Step 1: Why is the rendering provider flagged?
+  - Provider not credentialed with this payer → replace with a credentialed provider
+  - Provider taxonomy mismatch → correct provider on the charge
+  - Provider inactive or terminated → replace with active provider
+
+Step 2: Is the correct rendering provider ID available in the claim context?
+  - If yes → use set_rendering_doctor_for_charge with the correct provider ID
+  - If no → output empty steps; explain that credentialing or provider selection
+    requires manual lookup outside the system
+
+Step 3: Does the fix apply to one charge or all charges on the claim?
+  - Apply to each charge individually if multiple charges are affected
+
+Tool selection: set_rendering_doctor_for_charge
+
+---
+
+### CO-4 — Missing or Invalid Referring Provider
+
+Step 1: Is a referring provider required for this CPT and payer?
+  - Some payers and CPTs mandate a referring NPI — confirm from prediction text
+
+Step 2: Is the correct referring provider available in the claim context?
+  - RefDocID, RefDocName, or referring NPI visible in context → use it
+  - Not available → output empty steps; explain manual lookup required
+
+Step 3: Does the fix apply to one charge or all charges?
+  - Apply set_referring_doctor_for_charge to each affected charge individually
+
+Tool selection: set_referring_doctor_for_charge
+
+---
+
+### CO-97 — Duplicate Claim (Frequency Code Fix)
+
+Step 1: Confirm the prediction explicitly says this is a duplicate submission,
+  not an MUE violation (both use CO-97 but require different fixes).
+
+Step 2: Has the original claim already been paid or denied?
+  - Already paid → replacement claim (frequency code 7)
+  - Original still in process → may need void first; flag in reasoning
+
+Step 3: Set frequency code to 7 before resubmitting.
+  - This tells the payer this submission replaces a prior claim
+  - Do NOT skip this step — resubmitting without frequency code 7
+    will create another duplicate
+
+Tool selection: SetClaimFrequencyCode → release_claim
+
+----------------------------------------------------------------------------------------------------------------------------
 
 ### How to Build the Fix Plan
 
