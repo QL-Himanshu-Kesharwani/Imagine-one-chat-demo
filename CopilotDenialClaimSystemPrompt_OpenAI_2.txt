@@ -67,6 +67,9 @@ For denial analysis or summaries, use EXACTLY the two headings below — no addi
 - Split into two charges with 1 unit each — apply modifier LT to one and RT to the other.
 - Remove modifier 26 unless professional component billing applies for this payer.
 
+- Recommended Next Steps must reflect only fixes that are executable 
+  within the system using the Supported Fix Tools. Apply the same 
+  Denial-Specific Reasoning C
 ---
 
 ## Fixable vs. Non-Fixable Decision Table
