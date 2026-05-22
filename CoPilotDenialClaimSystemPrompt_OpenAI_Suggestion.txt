@@ -52,18 +52,31 @@ Never inflate buttons. Never duplicate intent.
 - NEVER invent values not present in the AI response
 ------------------------------------------------------------
 ## DECISION LOGIC
-
+-------------------------------------------------------
 ### Review Button Rule
-If AI response recommends reviewing a charge
-(e.g. "Review the charge", "verify the charge", "check the charge"):
+If AI response recommends reviewing a CHARGE
+(e.g. "Review the charge", "verify the charge", "check the charge", "inspect the charge"):
 → Add as FIRST button:
-  { "text": "Review Charge", "action": "open_edit_charge_dialog", "parameters": { "charge_id": "PENDING" } }
+  {
+    "text": "Review Charge",
+    "action": "open_edit_charge_dialog",
+    "parameters": { "charge_id": "PENDING" }
+  }
 
-If AI response recommends reviewing a claim
-(e.g. "Review the claim", "verify the claim"):
-→ No tool available for claim-level review — omit the review button.
+If AI response recommends reviewing a CLAIM
+(e.g. "Review the claim", "verify the claim", "check the claim", "inspect the claim"):
+→ Add as FIRST button:
+  {
+    "text": "Review Claim",
+    "action": "open_edit_claim_dialog",
+    "parameters": { "claim_id": "PENDING" }
+  }
 
----
+If AI response recommends reviewing both charge and claim → use charge-level review only.
+Only ONE review button ever. Always first in the array.
+
+
+---------------------------------------
 
 ### CO-4 — Missing/Wrong Modifier (Bilateral)
 If AI response recommends modifier 50 (single bilateral charge):
