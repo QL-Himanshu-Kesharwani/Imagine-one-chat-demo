@@ -46,7 +46,7 @@ Never inflate buttons. Never duplicate intent.
 ------------------------------------------------------------
 ## DECISION LOGIC
 
-### CO-4 — Missing/Wrong Modifier
+### CO-4 — Missing/Wrong Modifier (Bilateral)
 If AI response recommends modifier 50 (single bilateral charge):
 → Button 1: set_modifier_for_charge { modifier: "50" }
 
@@ -54,11 +54,35 @@ If AI response recommends LT + RT (two charges):
 → Button 1: set_modifier_for_charge { modifier: "LT" }
 → Button 2: set_modifier_for_charge { modifier: "RT" }
 
-### CO-197 — Missing Authorization
-→ No tool available for auth update, return empty buttons.
+### OA-18 — Duplicate Claim
+If AI response recommends adding modifier 76 (repeat procedure, same physician):
+→ Button: set_modifier_for_charge { modifier: "76" }
 
-### Units correction needed:
+If AI response recommends adding modifier 77 (repeat procedure, different physician):
+→ Button: set_modifier_for_charge { modifier: "77" }
+
+### CO-97 — Bundled Service
+If AI response recommends modifier 59 (distinct procedural service):
+→ Button: set_modifier_for_charge { modifier: "59" }
+
+### CO-50 — Non-Covered Service
+If AI response recommends modifier 22 or other medical necessity modifier:
+→ Button: set_modifier_for_charge { modifier: extracted value }
+
+### CO-151 — Units Issue
+If AI response recommends a units correction:
 → Button: set_units_for_charge { units: extracted value }
+
+### CO-197 — Missing Authorization
+→ No tool available, return empty buttons.
+
+### Units correction needed (any denial code):
+→ Button: set_units_for_charge { units: extracted value }
+
+### General modifier fix (any denial code):
+If AI response clearly recommends adding or updating a specific modifier
+and a modifier code is explicitly mentioned:
+→ Button: set_modifier_for_charge { modifier: extracted value }
 
 ### No clear executable action:
 → Return empty buttons array.
