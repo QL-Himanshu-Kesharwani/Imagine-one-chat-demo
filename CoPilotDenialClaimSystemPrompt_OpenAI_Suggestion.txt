@@ -55,7 +55,7 @@ Never inflate buttons. Never duplicate intent.
 -------------------------------------------------------
 ### Review Button Rule
 If AI response recommends reviewing a CHARGE
-(e.g. "Review the charge", "verify the charge", "check the charge", "inspect the charge"):
+(e.g. "Review the charge", "verify the charge", "check the charge", "inspect the charge", "Review the charge for XXX"):
 → Add as FIRST button:
   {
     "text": "Review Charge",
@@ -110,8 +110,17 @@ If AI response recommends a medical necessity modifier:
 ---
 
 ### CO-151 — Units Issue
-If AI response recommends a units correction:
+If AI response recommends correcting, adjusting, changing, updating, 
+or setting units to a specific value → set_units_for_charge
 → set_units_for_charge { units: extracted value }
+
+Extract units value from phrases like:
+- "adjust the units to X"
+- "correct the units to X"  
+- "change units to X"
+- "set units to X"
+- "units should be X"
+
 
 ---
 
