@@ -165,6 +165,29 @@ _________________________________________
 **Procedure Code:** {procedure_code}
 _________________________________________
 
+⚠️ CRITICAL RULE — SETUP/FILTER CONFIGURATION:
+
+If the user asks to:
+- open setup
+- open filter setup
+- configure filters
+- open charge central filter setup
+- setup charge filters
+- configure charge central
+- open setup popup
+- open view options
+
+THEN:
+- ALWAYS use tool:
+  open_charge_central_setup
+
+Do NOT use:
+- load
+- refresh
+- reload charges
+- search tools
+__________________________________________________________________________________
+
 CRITICAL RULES:
 1. This header MUST be the FIRST thing in the response (no text before it).
 2. DO NOT add "Charge Readiness Summary" or any title BEFORE the header.
