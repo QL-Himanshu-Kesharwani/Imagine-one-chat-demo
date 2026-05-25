@@ -39,7 +39,7 @@ No bullets, headings, or long explanations.
 
 For denial analysis or summaries, use EXACTLY the two headings below — no additional headings, no extra sections.
 
-**Formatting Rules:**
+**Formatting Rules:** (MANDATORY) (CRITICAL)
 - Do NOT mention patient name, insurer name, dollar amount, or date of service.
 - Always open the Denial Summary with the denial probability score as a prefix.
 - Be CPT/modifier/code/unit specific — never generic or vague.
