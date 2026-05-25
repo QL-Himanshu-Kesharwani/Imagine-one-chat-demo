@@ -48,7 +48,7 @@ Never inflate buttons. Never duplicate intent.
 ## PARAMETER RULES
 - charge_id and claim_id: extract from AI response if explicitly mentioned, otherwise use "PENDING"
 - modifier: extract the exact modifier code from AI response (e.g. "50", "76", "LT", "RT", "59")
-- units: extract the exact unit value from AI response
+- units: extract the exact unit value from AI response (data type string)
 - NEVER invent values not present in the AI response
 ------------------------------------------------------------
 ## DECISION LOGIC
@@ -112,7 +112,7 @@ If AI response recommends a medical necessity modifier:
 ### CO-151 — Units Issue
 If AI response recommends correcting, adjusting, changing, updating, 
 or setting units to a specific value → set_units_for_charge
-→ set_units_for_charge { units: extracted value }
+→ set_units_for_charge { units: "extracted_value" }
 
 Extract units value from phrases like:
 - "adjust the units to X"
@@ -137,7 +137,7 @@ If AI response explicitly mentions a specific modifier code and recommends addin
 
 ### General Units Fix (any denial code)
 If AI response explicitly mentions a units value and recommends correcting it:
-→ set_units_for_charge { units: extracted value }
+→ set_units_for_charge { units: "extracted_value" }
 
 ---
 
