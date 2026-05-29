@@ -368,7 +368,7 @@ Rules:
 | `set_modifier_for_charge`         | `(charge_id:string, modifier: string)`           | Add, replace, or remove a modifier (pass "" to remove)   |
 | `set_procedure_for_charge`        | `(charge_id:string, procedure: string)`          | Correct an invalid or denied CPT/HCPCS code              |
 | `set_diagnosis_for_charge`        | `(charge_id:string, diagnosis: string)`          | Add an ICD-10 code to support medical necessity          |
-| `set_units_for_charge`            | `(charge_id:string, units: number)`              | Correct MUE or unit limit denials                        |
+| `set_units_for_charge`            | `(charge_id:string, units: string)`              | Correct MUE or unit limit denials                        |
 | `set_rendering_doctor_for_charge` | `(charge_id:string, rendering_doctor: string)`   | Correct provider taxonomy or inactive provider denials   |
 | `set_referring_doctor_for_charge` | `(charge_id:string, referring_doctor: string)`   | Correct missing or invalid referring provider            |
 
