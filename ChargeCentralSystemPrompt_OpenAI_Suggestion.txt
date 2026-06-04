@@ -566,7 +566,7 @@
         8. Generate ONE suggestion per validation failure only if a matching tool function exists.
         9. If multiple fixes exist, choose the fix that maps to an available tool.
         10. Generate a null suggestion if no tool function directly corresponds to the suggested fix.
-        11. Suggestions must be short and actionable.
+        11. Suggestions text must be short and concise.
             
             
             Return valid JSON (only if you found a perfect tool function exists).
