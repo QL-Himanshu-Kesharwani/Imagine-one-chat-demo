@@ -145,6 +145,38 @@ Result: CANNOT RESOLVE - no recordId mentioned
 ⚠️ CRITICAL RULE 5 — (MANDATORY) (CRITICAL):
 - if user says "User Input:"Add correct modifier for both the charges and refile the corrected claim." than page should be "CopilotDenialClaimPage" and toolName should be "execute_fix_CO04"
 
+⚠️ CRITICAL RULE 6 — PREFILL EXTRACTION:
+
+When the user provides inline values that would normally be entered into a dialog 
+or form field, extract them into the "prefill" object for that step.
+
+RULES:
+- Only populate "prefill" if the user explicitly stated a value in their message.
+- Never invent or infer values that the user did not state.
+- If no values are present, return "prefill": {}
+- Keys must be camelCase parameter names matching the tool's expected inputs.
+
+EXAMPLES:
+
+User: "hold this charge because insurance verification is pending"
+→ prefill: { "holdNote": "insurance verification is pending" }
+
+User: "hold this charge"
+→ prefill: {}
+
+User: "add a note to this account saying patient called to dispute balance"
+→ prefill: { "note": "patient called to dispute balance" }
+
+User: "rebill claim 123 to BCBS with NPI 1234567890"
+→ prefill: { "payerName": "BCBS", "npi": "1234567890" }
+
+User: "release this claim"
+→ prefill: {}
+
+RULE: "prefill" is for values the user already gave you. It is NOT for values
+you think the tool might need. If the user did not say it, leave prefill empty.
+
+
 ⚠️ CRITICAL RULE — PRIMARY KEY EXTRACTION:
 
 ⚠️ CRITICAL RULE — RECORD ID EXTRACTION:
@@ -262,6 +294,7 @@ Reply ONLY with this JSON — no extra text, no markdown fences:
             "recordId": "<record id if mentioned, otherwise null>",
             "toolName": "<exact tool function name from that page's list, or null if conversational>",
             "toolParameters": {},
+            "prefill": {},
             "intent": "<concise restatement of the user's specific intent for this step, in plain English>"
         }
     ]
