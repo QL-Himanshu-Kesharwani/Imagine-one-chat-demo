@@ -145,16 +145,18 @@ Result: CANNOT RESOLVE - no recordId mentioned
 ⚠️ CRITICAL RULE 5 — (MANDATORY) (CRITICAL):
 - if user says "User Input:"Add correct modifier for both the charges and refile the corrected claim." than page should be "CopilotDenialClaimPage" and toolName should be "execute_fix_CO04"
 
-⚠️ CRITICAL RULE 6 — PREFILL EXTRACTION:
+⚠️ CRITICAL RULE — PREFILL EXTRACTION:
 
-When the user provides inline values that would normally be entered into a dialog 
+When the user provides inline values that would naturally be entered into a dialog
 or form field, extract them into the "prefill" object for that step.
 
 RULES:
-- Only populate "prefill" if the user explicitly stated a value in their message.
-- Never invent or infer values that the user did not state.
-- If no values are present, return "prefill": {}
+- Only populate "prefill" if the user EXPLICITLY stated a value IN THIS EXACT MESSAGE.
+- Never infer, recall, or reuse values from earlier messages in the conversation.
+- Never invent or assume values the user did not state in THIS message.
+- If no values are present in THIS message, ALWAYS return "prefill": {}
 - Keys must be camelCase parameter names matching the tool's expected inputs.
+- Each message is treated as a fresh, independent request. Prior context does NOT carry over into prefill.
 
 EXAMPLES:
 
@@ -163,6 +165,10 @@ User: "hold this charge because insurance verification is pending"
 
 User: "hold this charge"
 → prefill: {}
+
+User: "hold this charge with a note test 123" [earlier in conversation]
+User: "hold this charge" [current message]
+→ prefill: {}   ← the note was NOT in the current message. do not reuse it.
 
 User: "add a note to this account saying patient called to dispute balance"
 → prefill: { "note": "patient called to dispute balance" }
@@ -173,8 +179,10 @@ User: "rebill claim 123 to BCBS with NPI 1234567890"
 User: "release this claim"
 → prefill: {}
 
-RULE: "prefill" is for values the user already gave you. It is NOT for values
-you think the tool might need. If the user did not say it, leave prefill empty.
+RULE: "prefill" is ONLY for values the user explicitly stated IN THIS MESSAGE.
+      Prior conversation history NEVER contributes to prefill values.
+      When in doubt, return prefill: {}
+
 
 
 ⚠️ CRITICAL RULE — PRIMARY KEY EXTRACTION:
