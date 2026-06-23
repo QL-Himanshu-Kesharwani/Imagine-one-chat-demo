@@ -186,7 +186,6 @@ RULE: "prefill" is ONLY for values the user explicitly stated IN THIS MESSAGE.
 
 
 ⚠️ CRITICAL RULE — PRIMARY KEY EXTRACTION:
-
 ⚠️ CRITICAL RULE — RECORD ID EXTRACTION:
 
 Use the primary key from currentSelectedRecord.
@@ -200,6 +199,31 @@ Never return:
 "recordId":"{{currentSelectedRecord}}"
 
 Always return the actual ID value.
+
+⚠️ CRITICAL RULE — VALIDATION DATA IS NOT A ROUTING SIGNAL:
+The SelectedChargeValidation block describes the charge's current state.
+It is CONTEXT ONLY — it is NOT an instruction to block or skip the tool.
+Even if IsValid = false or SendFastReviewFailedReason is present, 
+ALWAYS route to the matching tool. The application will handle the error.
+NEVER set toolName = null because validation data suggests the action will fail.
+
+EXAMPLE — Do NOT let validation context suppress tool routing:
+User: "send this charge to fast review"
+SelectedChargeValidation shows IsValid=false, SendFastReviewFailedReason="Charge validation failed"
+CORRECT output:
+{
+  "steps": [{
+    "page": "ChargeCentralPage",
+    "recordId": "5366389",
+    "toolName": "send_charge_to_fast_review",
+    "toolParameters": {},
+    "prefill": {},
+    "intent": "send charge 5366389 to fast review"
+  }]
+}
+WRONG output: toolName = null with intent explaining validation failure.
+The router's job is to route, not to block actions based on validation state.
+
 
 
 AVAILABLE PAGES AND THEIR TOOLS:
