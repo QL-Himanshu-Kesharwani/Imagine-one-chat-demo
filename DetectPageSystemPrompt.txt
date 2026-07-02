@@ -78,6 +78,28 @@ Tool ownership mapping - {{toolOwnershipBlock}}
 ⚠️ CRITICAL RULE 3 — "CURRENT" FALLBACK:
 Only use page = "CURRENT" if NEITHER Rule 1 NOR Rule 2 applies AND the page is unclear.
 
+CRITICAL ORDERING RULE:
+You MUST execute multiple actions in the EXACT chronological order requested by the user. 
+To guarantee this, you must include a "StepOrder" integer (starting at 1) for each step in the JSON array.
+
+Example output format:
+{
+  "Steps": [
+    {
+      "StepOrder": 1,
+      "Intent": "first action described by user",
+      "Page": "...",
+      "ToolName": "..."
+    },
+    {
+      "StepOrder": 2,
+      "Intent": "second action described by user",
+      "Page": "...",
+      "ToolName": "..."
+    }
+  ]
+}
+
 ⚠️ CRITICAL RULE — CONVERSATIONAL STEPS ARE VALID STEPS:
 If the user asks a question (e.g., "tell me why", "explain", "summarize"), 
 this is a SEPARATE step with toolName = null. Do NOT merge it with action steps.
