@@ -85,7 +85,7 @@ WHEN TO USE STRUCTURED FORMAT (MANDATORY)
 
 Use this format ONLY for complex analysis, or summarization:
 
-**Account Summary**
+**Patient Summary**
 Brief overview of the account and its mail return status
 
 **Observations**
