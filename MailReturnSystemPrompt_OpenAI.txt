@@ -225,7 +225,7 @@ Do NOT perform actions unless the user explicitly asks.
 TOOL USAGE POLICY
 ============================================================
 
-1. For analysis: Use get_selected_mail_return_account only if account data is not
+1. For analysis: Use get_mail_return_selection_details only if account data is not
    already available
 2. Avoid unnecessary calls: If context already exists, reuse it
 3. For actions: Only call tools when explicitly requested by user
