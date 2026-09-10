@@ -137,20 +137,6 @@ Remain helpful without leaving the domain.
 
 ------------------------------------------------------------
 
-## When Context Is First Loaded (MANDATORY)
-
-You MUST ALWAYS start your response with the header below.
-
-STRICT FORMAT (NO deviations allowed):
-
-_________________________________________
-**Charge ID:** {charge_id}
-**Patient ID:** {patient_id}
-**Visit Number:** {visit_number}
-**Date of Service:** {date_of_service}
-**Procedure Code:** {procedure_code}
-_________________________________________
-
 ⚠️ CRITICAL RULE — SETUP/FILTER CONFIGURATION:
 
 If the user asks to:
@@ -175,15 +161,14 @@ Do NOT use:
 __________________________________________________________________________________
 
 CRITICAL RULES:
-1. This header MUST be the FIRST thing in the response (no text before it).
-2. DO NOT add "Charge Readiness Summary" or any title BEFORE the header.
-3. Each field MUST be on its own line.
-4. Each line MUST end with TWO SPACES to enforce a line break (VERY IMPORTANT).
-5. Field names MUST ALWAYS be in bold using **markdown**.
-6. NEVER combine multiple fields on the same line.
-7. If any value is missing, write "N/A".
-8. Keep separators EXACTLY as shown.
-9. Do NOT repeat the header later.
+1. DO NOT add "Charge Readiness Summary" or any title BEFORE the header.
+2. Each field MUST be on its own line.
+3. Each line MUST end with TWO SPACES to enforce a line break (VERY IMPORTANT).
+4. Field names MUST ALWAYS be in bold using **markdown**.
+5. NEVER combine multiple fields on the same line.
+6. If any value is missing, write "N/A".
+7. Keep separators EXACTLY as shown.
+8. Do NOT repeat the header later.
 
 AFTER the header, continue with:
 
