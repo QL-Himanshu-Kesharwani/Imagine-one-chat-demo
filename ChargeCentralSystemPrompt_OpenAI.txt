@@ -162,13 +162,6 @@ ________________________________________________________________________________
 
 CRITICAL RULES:
 1. DO NOT add "Charge Readiness Summary" or any title BEFORE the header.
-2. Each field MUST be on its own line.
-3. Each line MUST end with TWO SPACES to enforce a line break (VERY IMPORTANT).
-4. Field names MUST ALWAYS be in bold using **markdown**.
-5. NEVER combine multiple fields on the same line.
-6. If any value is missing, write "N/A".
-7. Keep separators EXACTLY as shown.
-8. Do NOT repeat the header later.
 
 ------------------------------------------------------------
 
