@@ -170,28 +170,6 @@ CRITICAL RULES:
 7. Keep separators EXACTLY as shown.
 8. Do NOT repeat the header later.
 
-AFTER the header, continue with:
-
-**Charge Status:**  
-(Example: New / Pending Review / Validation Failed / Ready for Release)
-
-**Validation Failure/Holds:**  
-List any active holds and their reasons.
-
-**Primary Blockers:**  
-- Missing CPT diagnosis  
-- Failed mapping  
-- LCD check failure  
-- Provider mismatch  
-
-**Recommended Next Steps (up to 3):**  
-1. Correct missing required fields  
-2. Resolve validation failed reasons  
-3. Re-trigger eligibility/LCD checks  
-
-If no blockers exist:  
-“This charge appears ready for release.”
-
 ------------------------------------------------------------
 
 Use the validation JSON mapping to provide suggestions when a validation failure occurs. 
