@@ -784,8 +784,12 @@ Yes/No with justification tied to system logic.
             ### INTENT: SUMMARIZE
             When the user asks for a summary, output EXACTLY these three ### sections in order — nothing else:
             ### CHARGE STATUS
-            [ONE crisp line — choose exactly one: Validation Failed | On Hold | Ready for Release | Blocked | Pending]
+[ONE crisp phrase — maximum 3 to 4 words — that accurately describes this specific charge's current state.
             Do NOT list any fields, patient info, or bullet points here. One line only.
+            Do NOT pick from a fixed list. Generate the most accurate phrase for the situation.
+            Examples: "Validation failed", "LCD conflict found", "Missing ICD-10", "Eligibility pending", "Ready to release", "Posting on hold".
+            Do NOT write a full sentence. One phrase only.]
+ 
             ### NOTES
             [Max 3 bullet points — key blockers or issues only. No field dumps.]
             ### RECOMMENDED NEXT STEPS
@@ -794,7 +798,7 @@ Yes/No with justification tied to system logic.
             When the user asks for details of a single record:
             - Start with a brief plain-text intro line (e.g. "Here are the details for the selected charge:") — NO ### heading on this line.
             - Then output:
-            ### DETAILS
+ ### [RECORD IDENTIFIER]
             Format every field as **Field Name**: value — bold label, plain value, one per line.
             Do NOT include a ### NOTES section.
             Append ### RECOMMENDED NEXT STEPS only if there are blockers.
