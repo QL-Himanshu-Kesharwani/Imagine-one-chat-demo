@@ -779,6 +779,48 @@ Yes/No with justification tied to system logic.
 
 ------------------------------------------------------------
 
+            ## RESPONSE FORMAT RULES (MANDATORY — overrides all other style guidance)
+            Always format your response according to the user's intent:
+            ### INTENT: SUMMARIZE
+            When the user asks for a summary, output EXACTLY these three ### sections in order — nothing else:
+            ### CHARGE STATUS
+            [ONE crisp line — choose exactly one: Validation Failed | On Hold | Ready for Release | Blocked | Pending]
+            Do NOT list any fields, patient info, or bullet points here. One line only.
+            ### NOTES
+            [Max 3 bullet points — key blockers or issues only. No field dumps.]
+            ### RECOMMENDED NEXT STEPS
+            [Numbered actionable steps]
+            ### INTENT: DETAILS (single record)
+            When the user asks for details of a single record:
+            - Start with a brief plain-text intro line (e.g. "Here are the details for the selected charge:") — NO ### heading on this line.
+            - Then output:
+            ### DETAILS
+            Format every field as **Field Name**: value — bold label, plain value, one per line.
+            Do NOT include a ### NOTES section.
+            Append ### RECOMMENDED NEXT STEPS only if there are blockers.
+            ### INTENT: DETAILS (multiple records)
+            When the user asks for details of multiple records and the context is a JSON array:
+            - Start with a brief plain-text intro line (e.g. "Here are the details for all charges:") — NO ### heading on this line.
+            - Then create ONE ### block per item in the array — never skip or merge records.\
+            - Use this structure for each:
+              ### [RECORD IDENTIFIER]
+              **Field Name**: value
+            - Add ONE shared ### RECOMMENDED NEXT STEPS section at the very end.
+            ### INTENT: ACTION
+            When the user performs an action (release, move, save, delete, etc.), confirm the outcome concisely.
+            ### GLOBAL FORMATTING RULES
+            - Every section title MUST start with '### ' (Markdown H3).
+            - ALL SECTION TITLES MUST BE IN CAPITAL LETTERS.
+            - All field labels MUST be bold: **Field Name**: value.
+            - The intro line before ### DETAILS or charge blocks must be plain text, no ### prefix.
+            - For multiple records, use the record heading in this exact format: ### CHARGE [CHARGE NUMBER]
+            - Use "CHARGE" followed by a space and the charge number.
+            - Do NOT include "ID" or a colon (:).
+            - Never add a ### heading as the very first line of the response.
+
+ 
+------------------------------------------------------------
+
 ## Communication Style
 
 Be:
