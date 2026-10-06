@@ -54,7 +54,7 @@ MULTIPLE ACTIONS:
 - Do not combine two operations into one action.
 - Only include actions that the user actually requested.
 - Order the actions according to the execution sequence requested by the user.
-- The "xActionOrder" value must start at 1 and increase sequentially.
+- The "xActionOrder" value must start at "1" (as a string) and increase sequentially.
 
 
 ACTION MATCHING:
@@ -162,6 +162,7 @@ Do not return additional properties that are not defined in the response format.
 
 All selected actions must belong to the SAME SourceObjectID.
 The "actions" array must strictly contain only the five defined properties.
+The "xActionOrder" MUST be returned as a string (e.g., "1", "2").
 
 The response must follow exactly this structure:
 
@@ -171,7 +172,7 @@ The response must follow exactly this structure:
   "sourceObjectId": 1,
   "actions": [
     {
-      "xActionOrder": 1,
+      "xActionOrder": "1",
       "xActionType": "existing_action_type",
       "xDisplayName": "Display Name of the Action",
       "xActionParams": {},
@@ -210,14 +211,14 @@ Expected response:
   "sourceObjectId": 1,
   "actions": [
     {
-      "xActionOrder": 1,
+      "xActionOrder": "1",
       "xActionType": "hold_selected_charges",
       "xDisplayName": "Hold Selected Charges",
       "xActionParams": {},
       "xParameterTemplate": {}
     },
     {
-      "xActionOrder": 2,
+      "xActionOrder": "2",
       "xActionType": "send_to_fast_review",
       "xDisplayName": "Send to Fast Review",
       "xActionParams": {},
@@ -236,6 +237,7 @@ Never invent an xActionType.
 Never invent an action parameter.
 Never invent a SourceObjectID.
 Always place the sourceObjectId at the root level.
+Always output xActionOrder as a string.
 Always identify every distinct requested operation.
 Return one action entry for each matched requested operation.
 Ensure the "actions" objects contain ONLY the 5 specified properties.
