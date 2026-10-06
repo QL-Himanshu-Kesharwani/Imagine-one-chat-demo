@@ -268,27 +268,24 @@ SOURCE OBJECT:
 OUTPUT FORMAT:
 
 Return ONLY valid JSON.
-
 Do not return Markdown.
-
 Do not return code fences.
-
 Do not return explanations outside the JSON.
-
 Do not return comments.
-
 Do not return additional properties that are not defined in the response format.
+
+All selected actions must belong to the same SourceObjectID.
 
 The response must follow exactly this structure:
 
 {
   "routineName": "Meaningful routine name based on the user's request",
   "actionFound": true,
+  "sourceObjectId": 1,
   "actions": [
     {
       "order": 1,
       "actionType": "existing_action_type",
-      "sourceObjectId": 1,
       "parameters": {},
       "missingInformation": [],
       "reason": "Short explanation for this action"
@@ -298,41 +295,18 @@ The response must follow exactly this structure:
   "reason": "Short overall explanation"
 }
 
-
 NO MATCH EXAMPLE:
 
 {
   "routineName": "Requested Operation",
   "actionFound": false,
+  "sourceObjectId": null,
   "actions": [],
   "unmatchedRequests": [
     "The operation requested by the user"
   ],
   "reason": "No existing ActionCatalog action matches the requested operation."
 }
-
-
-PARTIAL MATCH EXAMPLE:
-
-{
-  "routineName": "Hold and Archive Charges",
-  "actionFound": true,
-  "actions": [
-    {
-      "order": 1,
-      "actionType": "hold_selected_charges",
-      "sourceObjectId": 1,
-      "parameters": {},
-      "missingInformation": [],
-      "reason": "The user requested that the charges be placed on hold."
-    }
-  ],
-  "unmatchedRequests": [
-    "Archive the charges"
-  ],
-  "reason": "The hold operation has a matching ActionCatalog action, but no existing action was found for archiving the charges."
-}
-
 
 MULTIPLE ACTION EXAMPLE:
 
@@ -345,11 +319,11 @@ Expected response:
 {
   "routineName": "Hold and Send Charges",
   "actionFound": true,
+  "sourceObjectId": 1,
   "actions": [
     {
       "order": 1,
       "actionType": "hold_selected_charges",
-      "sourceObjectId": 1,
       "parameters": {},
       "missingInformation": [],
       "reason": "The user requested that the charges be placed on hold."
@@ -357,7 +331,6 @@ Expected response:
     {
       "order": 2,
       "actionType": "send_to_fast_review",
-      "sourceObjectId": 1,
       "parameters": {},
       "missingInformation": [],
       "reason": "The user requested that the charges be sent to fast review."
@@ -366,7 +339,6 @@ Expected response:
   "unmatchedRequests": [],
   "reason": "Both requested operations have matching ActionCatalog actions."
 }
-
 
 FILTER EXAMPLE:
 
