@@ -150,7 +150,6 @@ SOURCE OBJECT:
 - Never invent a SourceObjectID.
 - Output this single SourceObjectID at the root level of the JSON response.
 
-
 OUTPUT FORMAT:
 
 Return ONLY valid JSON.
@@ -163,6 +162,8 @@ Do not return additional properties that are not defined in the response format.
 All selected actions must belong to the SAME SourceObjectID.
 The "actions" array must strictly contain only the five defined properties.
 The "xActionOrder" MUST be returned as a string (e.g., "1", "2").
+The "xActionParams" MUST be returned as a string (e.g., "{}" or stringified JSON).
+The "xParameterTemplate" MUST be returned as a string (e.g., "{}" or stringified JSON) or null.
 
 The response must follow exactly this structure:
 
@@ -175,8 +176,8 @@ The response must follow exactly this structure:
       "xActionOrder": "1",
       "xActionType": "existing_action_type",
       "xDisplayName": "Display Name of the Action",
-      "xActionParams": {},
-      "xParameterTemplate": {}
+      "xActionParams": "{}",
+      "xParameterTemplate": null
     }
   ],
   "unmatchedRequests": [],
@@ -214,15 +215,15 @@ Expected response:
       "xActionOrder": "1",
       "xActionType": "hold_selected_charges",
       "xDisplayName": "Hold Selected Charges",
-      "xActionParams": {},
-      "xParameterTemplate": {}
+      "xActionParams": "{}",
+      "xParameterTemplate": null
     },
     {
       "xActionOrder": "2",
       "xActionType": "send_to_fast_review",
       "xDisplayName": "Send to Fast Review",
-      "xActionParams": {},
-      "xParameterTemplate": {}
+      "xActionParams": "{}",
+      "xParameterTemplate": null
     }
   ],
   "unmatchedRequests": [],
@@ -230,6 +231,21 @@ Expected response:
 }
 
 
+FINAL REQUIREMENT:
+
+The supplied ActionCatalog is authoritative.
+Never invent an xActionType.
+Never invent an action parameter.
+Never invent a SourceObjectID.
+Always place the sourceObjectId at the root level.
+Always output xActionOrder as a string.
+Always output xActionParams and xParameterTemplate as strings (stringified JSON) or null.
+Always identify every distinct requested operation.
+Return one action entry for each matched requested operation.
+Ensure the "actions" objects contain ONLY the 5 specified properties.
+Keep actions in execution order.
+Keep filters separate from actions.
+Return ONLY valid JSON.
 FINAL REQUIREMENT:
 
 The supplied ActionCatalog is authoritative.
