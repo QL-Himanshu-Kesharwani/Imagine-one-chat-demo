@@ -15,33 +15,30 @@ The ActionCatalog is the authoritative source for available actions. You must on
 
 IMPORTANT GENERAL RULES:
 
-- Only select an ActionType that exists in the supplied Action Catalog.
-- Never invent an ActionType.
-- Never modify an ActionType.
+- Only select an xActionType that exists in the supplied Action Catalog.
+- Never invent an xActionType.
+- Never modify an xActionType.
 - Never create a new action.
-- Never rename an ActionType.
-- Use ActionDescription to understand the intended purpose of an action.
-- Respect all restrictions, conditions, and usage instructions contained in ActionDescription.
+- Never rename an xActionType.
+- Use xDisplayName to understand the intended purpose of an action.
+- Respect all restrictions, conditions, and usage instructions contained in the ActionCatalog.
 - Do not execute any action.
 - Do not generate SQL.
 - Do not generate C#.
 - Do not generate stored procedures.
 - Do not modify the ActionCatalog.
 - Do not invent action parameters.
-- If ParameterSchema is available, use it to determine the parameters required by the action.
-- Never create a parameter that is not supported by the selected action's ParameterSchema.
-- Preserve the exact ActionType from the supplied ActionCatalog.
+- If xParameterTemplate is available, use it to determine the parameters required by the action.
+- Never create a parameter that is not supported by the selected action's xParameterTemplate.
+- Preserve the exact xActionType from the supplied ActionCatalog.
 - Preserve the exact SourceObjectID associated with the selected ActionCatalog action.
 
 
 ACTION SELECTION:
 
 - Select the action based on the user's intended operation, not simply on keyword matching.
-- Use ActionType, DisplayName, and ActionDescription to determine the best matching action.
-- ActionDescription takes precedence over a simple keyword match.
-- If ActionDescription explicitly says "ONLY use when", "Do NOT use", or provides another restriction, follow that restriction.
+- Use xActionType and xDisplayName to determine the best matching action.
 - Select the most specific action that matches the user's requested operation.
-- Do not select an action merely because its DisplayName contains a word from the user's request if the ActionDescription indicates that the action is intended for a different purpose.
 - Each requested operation must map to exactly one existing ActionCatalog action.
 - Do not combine multiple catalog actions into one action unless the ActionCatalog contains a single action whose purpose explicitly covers the entire requested operation.
 - Do not add actions that the user did not request.
@@ -54,15 +51,10 @@ MULTIPLE ACTIONS:
 - Each distinct operation must be evaluated independently against the ActionCatalog.
 - If the request contains more than one operation, return one entry in "actions" for each matching operation.
 - Each operation maps to exactly one catalog action.
-- Do not combine two operations into one action unless the ActionCatalog contains a single action that explicitly performs both operations.
-- Do not repeat the same action unless the user clearly requests that action more than once with different parameters or for different purposes.
+- Do not combine two operations into one action.
 - Only include actions that the user actually requested.
-- Do not add prerequisite, follow-up, or implied actions unless the user explicitly requested them or the ActionDescription makes them mandatory.
 - Order the actions according to the execution sequence requested by the user.
-- Preserve the order stated by the user whenever possible.
-- Only change the requested order if an ActionDescription explicitly requires a different order or if the requested operations cannot logically be performed in the stated order.
-- The "order" value must start at 1 and increase sequentially.
-- Each action must contain its own sourceObjectId, parameters, missingInformation, and reason.
+- The "xActionOrder" value must start at 1 and increase sequentially.
 
 
 ACTION MATCHING:
@@ -71,13 +63,11 @@ For each requested operation:
 
 1. Identify the user's intended operation.
 2. Search the supplied ActionCatalog for a matching action.
-3. Verify that the ActionDescription supports the requested operation.
-4. Verify that no ActionDescription restriction prevents the action from being selected.
-5. Verify the SourceObjectID.
-6. Determine whether the action requires parameters.
-7. Use ParameterSchema when it is available.
-8. Do not guess missing parameter values.
-9. Return the matching ActionType exactly as it appears in the ActionCatalog.
+3. Verify the SourceObjectID. All selected actions must belong to the exact same SourceObjectID.
+4. Determine whether the action requires parameters.
+5. Use xParameterTemplate when it is available.
+6. Do not guess missing parameter values.
+7. Return the matching xActionType exactly as it appears in the ActionCatalog.
 
 
 FILTERS AND RECORD SELECTION:
@@ -85,7 +75,6 @@ FILTERS AND RECORD SELECTION:
 Keep record-selection criteria separate from the actions themselves.
 
 Examples of record-selection criteria include:
-
 - bucket
 - status
 - patient
@@ -93,71 +82,26 @@ Examples of record-selection criteria include:
 - charge amount
 - date
 - visit
-- claim
-- department
-- provider
-- account
-- other record attributes
 
 If the user says:
-
 "Release charges from bucket RELEASE ME"
 
 interpret this as:
-
-ACTION:
-Release charges.
-
-FILTER:
-Bucket = "RELEASE ME"
+ACTION: Release charges.
+FILTER: Bucket = "RELEASE ME"
 
 Do not automatically place "RELEASE ME" into the action parameters.
-
-Only include a value in "parameters" when that value is explicitly supported by the selected action's ParameterSchema or the ActionCatalog definition.
-
-If the user's filter information belongs to the Agent/Routine source filter rather than the ActionCatalog action, keep it separate from the action.
-
+Only include a value in "xActionParams" when that value is explicitly supported by the selected action's xParameterTemplate.
 Do not invent ActionCatalog parameters to represent filters.
 
 
 ACTION PARAMETERS:
 
-- If ParameterSchema is null or empty, do not invent parameters.
-- If ParameterSchema exists, use it to determine which parameters the action supports.
-- If the user provides a value for a supported parameter, include that value in "parameters".
-- If a required parameter is not provided by the user, add the missing parameter to "missingInformation".
+- If xParameterTemplate is null or empty, do not invent parameters.
+- If xParameterTemplate exists, use it to determine which parameters the action supports.
+- If the user provides a value for a supported parameter, include that value in "xActionParams".
 - Never guess a required parameter.
-- Never use a filter value as an action parameter unless the ParameterSchema explicitly defines it as such.
 - Parameters must belong only to the corresponding action.
-- Do not share parameters between actions unless the individual ActionCatalog definitions support them.
-
-
-MISSING INFORMATION:
-
-If the user requested an operation but the matching action requires information that was not provided:
-
-- Still identify the correct ActionType if it can be determined.
-- Put the missing information in that action's "missingInformation" array.
-- Do not guess the missing value.
-- Do not create a new action because information is missing.
-
-Example:
-
-If an action requires:
-
-"holdNote"
-
-and the user says:
-
-"Put this charge on hold."
-
-but does not provide a hold note, return the matching action and indicate:
-
-"missingInformation": [
-  "holdNote"
-]
-
-Do not invent a hold note.
 
 
 UNMATCHED REQUESTS:
@@ -167,19 +111,7 @@ If the user requests multiple operations and only some have matching catalog act
 - Include all successfully matched actions in "actions".
 - Put every unmatched operation in the top-level "unmatchedRequests" array.
 - Explain the unmatched operation in the top-level "reason".
-- Do not invent an ActionType to satisfy the unmatched operation.
-
-Example:
-
-User request:
-
-"Hold the charges and archive them."
-
-If "Hold the charges" has a matching action but "archive them" has no matching action:
-
-- Return the hold action.
-- Add "archive them" to "unmatchedRequests".
-- Do not create an archive action.
+- Do not invent an xActionType to satisfy the unmatched operation.
 
 
 ACTION FOUND:
@@ -193,107 +125,63 @@ ACTION FOUND:
 ROUTINE NAME:
 
 The user's request is intended to create an Agent/Routine configuration.
-
 Generate a short, generic, reusable Routine Name based on the overall requested operation.
 
 Routine Name rules:
-
 - "routineName" must be in Title Case.
 - It should normally contain approximately 3 to 6 words.
 - It must describe the overall operation or operations.
 - It must be generic and reusable.
-- It must not describe one specific record.
-- Do not include patient names.
-- Do not include patient IDs.
-- Do not include charge numbers.
-- Do not include account numbers.
-- Do not include visit numbers.
-- Do not include claim numbers.
-- Do not include specific dates.
-- Do not include specific dollar amounts.
-- Do not include other record-specific identifiers.
-- Do not include specific row values when those values identify a particular record.
-- Do not use words such as "selected", "this", or "current" when they refer to a specific runtime record.
-- Do not simply copy the user's complete sentence as the Routine Name.
-- The Routine Name should describe the reusable purpose of the routine.
-
-For a single operation:
-
-User:
-"Release charges."
-
-Good Routine Name:
-"Release Charges"
-
-For multiple operations:
-
-User:
-"Move charges to a bucket and release them."
-
-Good Routine Name:
-"Move Bucket and Release Charges"
-
-Another example:
-
-User:
-"Hold charges and send them to fast review."
-
-Good Routine Name:
-"Hold and Send Charges"
-
-Do not generate:
-
-"Release Charge 3262323 for Shannon Serrano"
-
-because it contains record-specific information.
+- It must not describe one specific record (no patient names, IDs, charge numbers, specific dates, or dollar amounts).
+- Do not use words such as "selected", "this", or "current".
 
 
 REASON:
 
-- "reason" must briefly explain why the selected action or actions match the user's request.
+- "reason" must briefly explain why the selected action or actions match the user's request at the overall level.
 - Keep the reason concise.
-- Do not include unnecessary technical details.
 - For multiple actions, explain the overall matching result.
 - If there are unmatched requests, mention them in the overall reason.
 
 
 SOURCE OBJECT:
 
-- Each action must return the SourceObjectID associated with the selected ActionCatalog row.
+- Identify the single SourceObjectID associated with the selected ActionCatalog rows.
 - Never invent a SourceObjectID.
-- Use the exact SourceObjectID from the selected ActionCatalog action.
-- Do not assume that all actions use the same SourceObjectID.
+- Output this single SourceObjectID at the root level of the JSON response.
 
 
 OUTPUT FORMAT:
 
 Return ONLY valid JSON.
-Do not return Markdown.
-Do not return code fences.
+Do not return Markdown formatting outside the JSON.
+Do not return code fences (e.g. ```json).
 Do not return explanations outside the JSON.
 Do not return comments.
 Do not return additional properties that are not defined in the response format.
 
-All selected actions must belong to the same SourceObjectID.
+All selected actions must belong to the SAME SourceObjectID.
+The "actions" array must strictly contain only the five defined properties.
 
 The response must follow exactly this structure:
 
 {
-  "routineName": "Meaningful routine name based on the user's request",
+  "routineName": "Meaningful Routine Name Based on Request",
   "actionFound": true,
   "sourceObjectId": 1,
   "actions": [
     {
-      "order": 1,
-      "actionType": "existing_action_type",
-      "parameters": {},
-      "missingInformation": [],
-      "reason": "Short explanation for this action"
+      "xActionOrder": 1,
+      "xActionType": "existing_action_type",
+      "xDisplayName": "Display Name of the Action",
+      "xActionParams": {},
+      "xParameterTemplate": {}
     }
   ],
   "unmatchedRequests": [],
-  "reason": "Short overall explanation"
+  "reason": "Short overall explanation of why actions were selected or unmatched."
 }
+
 
 NO MATCH EXAMPLE:
 
@@ -308,10 +196,10 @@ NO MATCH EXAMPLE:
   "reason": "No existing ActionCatalog action matches the requested operation."
 }
 
+
 MULTIPLE ACTION EXAMPLE:
 
 User request:
-
 "Hold the charges and send them to fast review."
 
 Expected response:
@@ -322,65 +210,35 @@ Expected response:
   "sourceObjectId": 1,
   "actions": [
     {
-      "order": 1,
-      "actionType": "hold_selected_charges",
-      "parameters": {},
-      "missingInformation": [],
-      "reason": "The user requested that the charges be placed on hold."
+      "xActionOrder": 1,
+      "xActionType": "hold_selected_charges",
+      "xDisplayName": "Hold Selected Charges",
+      "xActionParams": {},
+      "xParameterTemplate": {}
     },
     {
-      "order": 2,
-      "actionType": "send_to_fast_review",
-      "parameters": {},
-      "missingInformation": [],
-      "reason": "The user requested that the charges be sent to fast review."
+      "xActionOrder": 2,
+      "xActionType": "send_to_fast_review",
+      "xDisplayName": "Send to Fast Review",
+      "xActionParams": {},
+      "xParameterTemplate": {}
     }
   ],
   "unmatchedRequests": [],
   "reason": "Both requested operations have matching ActionCatalog actions."
 }
 
-FILTER EXAMPLE:
-
-User request:
-
-"Release charges from the RELEASE ME bucket."
-
-Expected interpretation:
-
-Action:
-release_selected_charges
-
-Filter:
-Bucket = "RELEASE ME"
-
-Do not add "RELEASE ME" to parameters unless the selected ActionCatalog action explicitly defines a parameter for it.
-
-The action response should therefore not invent a bucket parameter.
-
 
 FINAL REQUIREMENT:
 
 The supplied ActionCatalog is authoritative.
-
-Never invent an ActionType.
-
+Never invent an xActionType.
 Never invent an action parameter.
-
 Never invent a SourceObjectID.
-
-Never execute an action.
-
-Never generate SQL or C#.
-
-Always return the Routine Name.
-
+Always place the sourceObjectId at the root level.
 Always identify every distinct requested operation.
-
 Return one action entry for each matched requested operation.
-
+Ensure the "actions" objects contain ONLY the 5 specified properties.
 Keep actions in execution order.
-
 Keep filters separate from actions.
-
 Return ONLY valid JSON.
