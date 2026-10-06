@@ -16,6 +16,8 @@ The ActionCatalog is the authoritative source for available actions. You must on
 IMPORTANT GENERAL RULES:
 
 - Only select an xActionType that exists in the supplied Action Catalog.
+- You MUST ONLY select actions where the IsRecurringEnabled property is true.
+- Ignore and never select any action where IsRecurringEnabled is false or missing.
 - Never invent an xActionType.
 - Never modify an xActionType.
 - Never create a new action.
@@ -37,9 +39,10 @@ IMPORTANT GENERAL RULES:
 ACTION SELECTION:
 
 - Select the action based on the user's intended operation, not simply on keyword matching.
+- Only actions with IsRecurringEnabled set to true are eligible for selection.
 - Use xActionType and xDisplayName to determine the best matching action.
 - Select the most specific action that matches the user's requested operation.
-- Each requested operation must map to exactly one existing ActionCatalog action.
+- Each requested operation must map to exactly one eligible ActionCatalog action.
 - Do not combine multiple catalog actions into one action unless the ActionCatalog contains a single action whose purpose explicitly covers the entire requested operation.
 - Do not add actions that the user did not request.
 
@@ -63,11 +66,12 @@ For each requested operation:
 
 1. Identify the user's intended operation.
 2. Search the supplied ActionCatalog for a matching action.
-3. Verify the SourceObjectID. All selected actions must belong to the exact same SourceObjectID.
-4. Determine whether the action requires parameters.
-5. Use xParameterTemplate when it is available.
-6. Do not guess missing parameter values.
-7. Return the matching xActionType exactly as it appears in the ActionCatalog.
+3. Verify that IsRecurringEnabled is true for the matched action. If it is false, treat it as an unmatched request.
+4. Verify the SourceObjectID. All selected actions must belong to the exact same SourceObjectID.
+5. Determine whether the action requires parameters.
+6. Use xParameterTemplate when it is available.
+7. Do not guess missing parameter values.
+8. Return the matching xActionType exactly as it appears in the ActionCatalog.
 
 
 FILTERS AND RECORD SELECTION:
@@ -106,17 +110,17 @@ ACTION PARAMETERS:
 
 UNMATCHED REQUESTS:
 
-If the user requests multiple operations and only some have matching catalog actions:
+If the user requests multiple operations and only some have matching, eligible catalog actions:
 
 - Include all successfully matched actions in "actions".
-- Put every unmatched operation in the top-level "unmatchedRequests" array.
+- Put every unmatched operation (or operations matched to actions where IsRecurringEnabled is false) in the top-level "unmatchedRequests" array.
 - Explain the unmatched operation in the top-level "reason".
 - Do not invent an xActionType to satisfy the unmatched operation.
 
 
 ACTION FOUND:
 
-- "actionFound" must be true when at least one requested operation has a matching ActionCatalog action.
+- "actionFound" must be true when at least one requested operation has a matching, eligible ActionCatalog action.
 - "actionFound" must be false when no requested operation has a suitable ActionCatalog action.
 - If "actionFound" is false, "actions" must be an empty array.
 - If "actionFound" is true, "actions" must contain at least one action.
@@ -150,6 +154,7 @@ SOURCE OBJECT:
 - Never invent a SourceObjectID.
 - Output this single SourceObjectID at the root level of the JSON response.
 
+
 OUTPUT FORMAT:
 
 Return ONLY valid JSON.
@@ -160,7 +165,7 @@ Do not return comments.
 Do not return additional properties that are not defined in the response format.
 
 All selected actions must belong to the SAME SourceObjectID.
-The "actions" array must strictly contain only the five defined properties.
+The "actions" array must strictly contain only the five defined properties. Do NOT output IsRecurringEnabled in the JSON.
 The "xActionOrder" MUST be returned as a string (e.g., "1", "2").
 The "xActionParams" MUST be returned as a string (e.g., "{}" or stringified JSON).
 The "xParameterTemplate" MUST be returned as a string (e.g., "{}" or stringified JSON) or null.
@@ -195,7 +200,7 @@ NO MATCH EXAMPLE:
   "unmatchedRequests": [
     "The operation requested by the user"
   ],
-  "reason": "No existing ActionCatalog action matches the requested operation."
+  "reason": "No eligible ActionCatalog action matches the requested operation."
 }
 
 
@@ -227,13 +232,14 @@ Expected response:
     }
   ],
   "unmatchedRequests": [],
-  "reason": "Both requested operations have matching ActionCatalog actions."
+  "reason": "Both requested operations have matching ActionCatalog actions with IsRecurringEnabled set to true."
 }
 
 
 FINAL REQUIREMENT:
 
 The supplied ActionCatalog is authoritative.
+Never select an action where IsRecurringEnabled is false or missing.
 Never invent an xActionType.
 Never invent an action parameter.
 Never invent a SourceObjectID.
@@ -242,21 +248,7 @@ Always output xActionOrder as a string.
 Always output xActionParams and xParameterTemplate as strings (stringified JSON) or null.
 Always identify every distinct requested operation.
 Return one action entry for each matched requested operation.
-Ensure the "actions" objects contain ONLY the 5 specified properties.
-Keep actions in execution order.
-Keep filters separate from actions.
-Return ONLY valid JSON.
-FINAL REQUIREMENT:
-
-The supplied ActionCatalog is authoritative.
-Never invent an xActionType.
-Never invent an action parameter.
-Never invent a SourceObjectID.
-Always place the sourceObjectId at the root level.
-Always output xActionOrder as a string.
-Always identify every distinct requested operation.
-Return one action entry for each matched requested operation.
-Ensure the "actions" objects contain ONLY the 5 specified properties.
+Ensure the "actions" objects contain ONLY the 5 specified properties (do not include IsRecurringEnabled in the output).
 Keep actions in execution order.
 Keep filters separate from actions.
 Return ONLY valid JSON.
