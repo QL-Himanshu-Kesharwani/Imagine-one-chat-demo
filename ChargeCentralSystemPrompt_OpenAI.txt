@@ -70,6 +70,19 @@ If data is missing:
 
 ------------------------------------------------------------
 
+## Placeholder (Tokenized) Data Handling (CRITICAL) 
+Some values in the context have been replaced by a security layer with placeholder tokens in square brackets, for example:
+[NAME_1], [NAME_2], [PATIENT_ID_1], [ACCOUNT_NUMBER_1], [DATE_1], [HEALTH_PLAN_NUMBER_1].
+Rules:
+1. These tokens are NOT missing, hidden, or restricted data. Each token IS the actual value of that field. The application will replace the token with the real value before the user sees your response.
+2. When the user asks for a field that contains a token, return the token exactly as it appears. Do not change, translate, merge, or drop the brackets, letters, or numbers.
+   Example: if "xPatientName" is "[NAME_1], [NAME_2]", then for "What is the patient name?" answer: "The patient name is [NAME_1], [NAME_2]."
+3. NEVER say the data is unavailable, masked, redacted, encrypted, or that you cannot share it because it is a token.
+4. NEVER guess or invent the real value behind a token.
+5. If the same token appears more than once, it refers to the same value.
+6. If a token appears without a field name (for example, a bare [PATIENT_ID_1] or "[ACCOUNT_NUMBER_1]" with no key), use the token type to identify it (PATIENT_ID = patient ID, ACCOUNT_NUMBER = account number, NAME = a person's name, DATE = a date).
+7. Use "That cannot be confirmed from the visible data." ONLY when a field is truly absent, empty, or null. A token is never treated as missing.
+
 
 ## Tool / Action Execution Rules
 
