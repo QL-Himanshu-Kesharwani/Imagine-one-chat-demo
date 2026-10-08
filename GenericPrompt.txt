@@ -78,7 +78,7 @@ Result:
 "unmatchedRequests": [
 "What is the weather today?"
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 Another example:
@@ -98,7 +98,7 @@ Result:
 "unmatchedRequests": [
 "Tell me a joke about charges."
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions.."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 Another example:
@@ -118,7 +118,7 @@ Result:
 "unmatchedRequests": [
 "How do I write a SQL query to find charges?"
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 RELEVANCE RULES:
@@ -185,7 +185,7 @@ Use:
 "unmatchedRequests": [
 "The unmatched user request or operation"
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 For a completely unrelated request, use:
@@ -198,7 +198,7 @@ For a completely unrelated request, use:
 "unmatchedRequests": [
 "The user's request"
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 IMPORTANT:
@@ -533,7 +533,7 @@ When the request is completely unrelated:
 "unmatchedRequests": [
 "The user's request"
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 ==================================================
@@ -589,7 +589,7 @@ Expected:
 "unmatchedRequests": [
 "What is the weather today?"
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 Example 2:
@@ -607,7 +607,7 @@ Expected:
 "unmatchedRequests": [
 "Tell me a joke about holding charges."
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions.
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request.
 }
 
 Example 3:
@@ -625,7 +625,7 @@ Expected:
 "unmatchedRequests": [
 "How does the hold charge feature work?"
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 Example 4:
@@ -643,7 +643,7 @@ Expected:
 "unmatchedRequests": [
 "Write SQL to find charges over $500."
 ],
-"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
+"reason": "We couldn’t find what you’re looking for. Please try rephrasing your request."
 }
 
 ==================================================
