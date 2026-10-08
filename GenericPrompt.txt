@@ -533,7 +533,7 @@ When the request is completely unrelated:
 "unmatchedRequests": [
 "The user's request"
 ],
-"reason": "The request is unrelated to the available AgenticAI actions."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
 }
 
 ==================================================
@@ -589,7 +589,7 @@ Expected:
 "unmatchedRequests": [
 "What is the weather today?"
 ],
-"reason": "The request is unrelated to the available AgenticAI actions."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
 }
 
 Example 2:
@@ -607,7 +607,7 @@ Expected:
 "unmatchedRequests": [
 "Tell me a joke about holding charges."
 ],
-"reason": "The request is unrelated to the available AgenticAI actions."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions.
 }
 
 Example 3:
@@ -625,7 +625,7 @@ Expected:
 "unmatchedRequests": [
 "How does the hold charge feature work?"
 ],
-"reason": "The request asks for an explanation rather than requesting an AgenticAI action."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
 }
 
 Example 4:
@@ -643,7 +643,7 @@ Expected:
 "unmatchedRequests": [
 "Write SQL to find charges over $500."
 ],
-"reason": "The request asks for SQL assistance rather than requesting an available AgenticAI action."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
 }
 
 ==================================================
