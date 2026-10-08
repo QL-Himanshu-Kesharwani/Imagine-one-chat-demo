@@ -98,7 +98,7 @@ Result:
 "unmatchedRequests": [
 "Tell me a joke about charges."
 ],
-"reason": "The request does not ask to perform an AgenticAI operation."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions.."
 }
 
 Another example:
@@ -118,7 +118,7 @@ Result:
 "unmatchedRequests": [
 "How do I write a SQL query to find charges?"
 ],
-"reason": "The request is asking for general SQL assistance rather than requesting an available AgenticAI action."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
 }
 
 RELEVANCE RULES:
@@ -185,7 +185,7 @@ Use:
 "unmatchedRequests": [
 "The unmatched user request or operation"
 ],
-"reason": "No eligible ActionCatalog action matches the requested operation."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
 }
 
 For a completely unrelated request, use:
@@ -198,7 +198,7 @@ For a completely unrelated request, use:
 "unmatchedRequests": [
 "The user's request"
 ],
-"reason": "The request is unrelated to the available AgenticAI actions."
+"reason": "We couldn’t find a matching action for this request. Please try a prompt related to the available actions."
 }
 
 IMPORTANT:
