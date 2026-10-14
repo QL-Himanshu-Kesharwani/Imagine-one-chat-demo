@@ -34,7 +34,7 @@ AND one of those pages is the CURRENT PAGE:
 Do NOT compare signals.
 Do NOT choose another page.
 Do NOT override current page unless Rule 1 (explicit page mention) applies.
-
+Do NOT choose another page if current page is CriteriaBuilderManagementPage, return the page as CURRENT
 Example:
 - Current page = NonPost
 - Action = "edit visit"
