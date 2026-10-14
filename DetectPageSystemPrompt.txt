@@ -3,17 +3,6 @@ The user is currently on page: {{currentPage}}
 User message: {{userMessage}}
 Currently selected record on this page: {{currentSelectedRecord}}
 
-⚠️ CRITICAL RULE 0 — OBJECT WORD DETECTION (HIGHEST PRIORITY):
-Before ANY other rule (including Rule 1, 2, and 2.1), identify the PRIMARY OBJECT in the user message:
-
-"claim" / "HCFA"          → HCFAReviewPage
-"statement" / "bill"      → StatementReviewPage  
-"charge"                  → ChargeCentralPage
-"nonpost"                 → NonPostChargesPage
-"payment" / "ERA"         → ERSCentralPage
-"patient" / "account"     → AccountInquiryPage
-"prediction" / "denial"     → CoPilotDenialClaimPage
-
 ⚠️ CRITICAL RULE 1 — EXPLICIT PAGE NAME:
 If the user explicitly mentions a page name, that page MUST be used. Overrides everything.
 
