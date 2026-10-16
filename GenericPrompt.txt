@@ -798,6 +798,11 @@ IsActive.
 
 2. A user message "SOURCE OBJECT ID: <id>".
 
+The user message also supplies two caller-provided values, written as:
+
+XFIELDTYPE: <value>
+XGLOBALTABLENAME: <value>
+
 3. The user's natural-language request.
 
 ==================================================
@@ -866,6 +871,35 @@ If the user mentions a criterion that has no matching active, filterable column:
 
 * Do NOT create a condition.
 * Mention the skipped criterion in "reason".
+
+==================================================
+CALLER-PROVIDED FIELDS - xFieldType AND xGlobalTableName
+========================================================
+
+Every condition contains two additional string properties:
+
+"xFieldType"
+
+"xGlobalTableName"
+
+Their values are NOT derived from SOURCE COLUMNS or from the user's natural-language request.
+
+They are supplied by the caller in the user message, on lines written as:
+
+XFIELDTYPE: <value>
+XGLOBALTABLENAME: <value>
+
+Rules:
+
+* Copy the XFIELDTYPE value exactly, character for character, into "xFieldType" of EVERY condition.
+* Copy the XGLOBALTABLENAME value exactly, character for character, into "xGlobalTableName" of EVERY condition.
+* The same two values apply to all conditions in the response.
+* Never infer, modify, trim, translate, or invent these values.
+* Do not treat these two lines as part of the natural-language request.
+* Do not treat them as record-selection criteria.
+* Both values are always output as strings.
+* If a value was not provided, output "" (empty string) for that property.
+* These two properties never affect whether a condition is valid, and never change any other property of the condition.
 
 ==================================================
 DATA TYPE FAMILIES
@@ -1258,7 +1292,11 @@ filterValueJson
 
 xLogicPrefix
 
-Structure:
+xFieldType
+
+xGlobalTableName
+
+Structure (in the examples below, the placeholders "<XFIELDTYPE value from request>" and "<XGLOBALTABLENAME value from request>" stand for the exact values supplied by the caller):
 
 {
 "conditionsFound": true,
@@ -1277,7 +1315,9 @@ Structure:
 "filterValue": "500",
 "filterValue2": null,
 "filterValueJson": null,
-"xLogicPrefix": ""
+"xLogicPrefix": "",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 }
 ]
 }
@@ -1309,7 +1349,9 @@ Expected:
 "filterValue": "500",
 "filterValue2": null,
 "filterValueJson": null,
-"xLogicPrefix": ""
+"xLogicPrefix": "",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 },
 {
 "conditionOrder": 2,
@@ -1323,7 +1365,9 @@ Expected:
 "filterValue": "Smith",
 "filterValue2": null,
 "filterValueJson": null,
-"xLogicPrefix": "AND"
+"xLogicPrefix": "AND",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 },
 {
 "conditionOrder": 3,
@@ -1337,7 +1381,9 @@ Expected:
 "filterValue": null,
 "filterValue2": null,
 "filterValueJson": "["99213","99214"]",
-"xLogicPrefix": "AND"
+"xLogicPrefix": "AND",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 }
 ]
 }
@@ -1369,7 +1415,9 @@ Expected:
 "filterValue": "2026-01-01",
 "filterValue2": "2026-03-31",
 "filterValueJson": null,
-"xLogicPrefix": ""
+"xLogicPrefix": "",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 },
 {
 "conditionOrder": 2,
@@ -1383,7 +1431,9 @@ Expected:
 "filterValue": "1",
 "filterValue2": null,
 "filterValueJson": null,
-"xLogicPrefix": "AND"
+"xLogicPrefix": "AND",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 }
 ]
 }
@@ -1415,7 +1465,9 @@ Expected:
 "filterValue": "-30",
 "filterValue2": null,
 "filterValueJson": null,
-"xLogicPrefix": ""
+"xLogicPrefix": "",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 },
 {
 "conditionOrder": 2,
@@ -1429,7 +1481,9 @@ Expected:
 "filterValue": "200",
 "filterValue2": null,
 "filterValueJson": null,
-"xLogicPrefix": "AND"
+"xLogicPrefix": "AND",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 }
 ]
 }
@@ -1461,7 +1515,9 @@ Expected:
 "filterValue": "%Patel%",
 "filterValue2": null,
 "filterValueJson": null,
-"xLogicPrefix": ""
+"xLogicPrefix": "",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 },
 {
 "conditionOrder": 2,
@@ -1475,7 +1531,9 @@ Expected:
 "filterValue": null,
 "filterValue2": null,
 "filterValueJson": null,
-"xLogicPrefix": "OR"
+"xLogicPrefix": "OR",
+"xFieldType": "<XFIELDTYPE value from request>",
+"xGlobalTableName": "<XGLOBALTABLENAME value from request>"
 }
 ]
 }
@@ -1556,6 +1614,8 @@ If any check fails, fix the condition or drop it and explain the issue in reason
 
 17. The output contains no properties other than those defined by the FILTER CONDITION MODE contract.
 
+18. Every condition contains xFieldType and xGlobalTableName as strings, copied exactly from the XFIELDTYPE and XGLOBALTABLENAME values supplied in the request.
+
 ==================================================
 FINAL REQUIREMENT - FILTER CONDITION MODE
 =========================================
@@ -1579,6 +1639,8 @@ Never output an invalid condition.
 Omit invalid or unsupported conditions and explain them in reason.
 
 All value fields are strings or null.
+
+Include xFieldType and xGlobalTableName in every condition, copied exactly from the caller-provided XFIELDTYPE and XGLOBALTABLENAME values.
 
 Do not output action-selection properties.
 
